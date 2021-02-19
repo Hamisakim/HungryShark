@@ -9,7 +9,6 @@ function init() {
   const cellCount = width * width
   const cells = []
 
-
   console.log('CELLS-COUNT',cellCount)
   console.log('CELLS',cells)
 
@@ -17,6 +16,7 @@ function init() {
   const bruceStartPosition = 0
   let bruceCurrentPosition = 0
 
+  //! Make a grid
   function createGrid(bruceStartPosition) {
     console.log('CREATING GRID')
 
@@ -26,10 +26,16 @@ function init() {
       grid.appendChild(cell)
       cells.push(cell)
     }
-    //addbruce(bruceStartPosition)
+    addBruce(bruceStartPosition) //line 24
   }
 
-  createGrid(bruceStartPosition) 
+  //! Add bruce
+  function addBruce(position) { 
+    cells[position].classList.add(bruceClass) 
+  }
+
+
+  createGrid(bruceStartPosition) //line 62 
 
 
 //? BRACKET MUST BE YELLOW BELOW /////
