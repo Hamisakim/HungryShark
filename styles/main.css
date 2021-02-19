@@ -12,11 +12,11 @@ body {
 
 }
 
- .starter-page{
+ /* .starter-page{
    z-index: 10;
   size: 100vh;
   background-image: url('https://i.pinimg.com/originals/1d/15/d8/1d15d8da8b3b6f3a895828ba2663f409.gif');
-} 
+}  */
 
 .header {
   height: 30%;
@@ -83,6 +83,9 @@ h3 {
   display: flex;
   justify-content: center;
 }
+.straight { 
+  transform: rotate(0deg);
+}
 
 .game-grid div {
   border: 1px solid lightcoral;
@@ -92,9 +95,7 @@ h3 {
   text-align: center;
 }
 
-body {
 
-}
 
 .game-grid div.bruce {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark gif.gif');

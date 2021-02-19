@@ -1,20 +1,21 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 function init() {
-  console.log('LIVE')
   //* All variables here for global scope
+  let score = 0
+
 
   //* Grid variables
-  const grid = document.querySelector('.game-grid') //this is the DOM for our grid
+  const grid = document.querySelector('.game-grid') //this is the DOM for our grid contains cell
   const width = 10
   const cellCount = width * width
   const cells = []
 
-  const foodClass = ''  
+  const foodClass = 'food'
 
-  console.log(cells)
-  console.log('CELLS-COUNT', cellCount)
-  console.log('CELLS', cells)
+  // console.log(cells)
+  // console.log('CELLS-COUNT', cellCount)
+  // console.log('CELLS', cells)
 
   //* Bruce Variables
   const bruceClass = 'bruce' //class containing bruce image
@@ -33,41 +34,43 @@ function init() {
     //console.log('CREATING GRID')
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div') //creating div 
-      cell.textContent = i 
+      cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
     }
     //.innerHTML = '&#x25cf'
     addBruce(bruceStartPosition) //line 24
     moveEnemy()
-
   }
 
 
 
-
-  //! Add Bruce
   function addBruce(position) {
     cells[position].classList.add(bruceClass)
   }
-  //! Remove bruce
+
   function removeBruce(position) {
     cells[position].classList.remove(bruceClass)
   }
 
-  //!Add Enemy
+
   function addEnemy(position) {
     cells[position].classList.add(shamuClass)
   }
-  //! Remove Enemy
+
   function removeEnemy(position) {
     cells[position].classList.remove(shamuClass)
   }
 
-
-  //! Move Bruce with keydown
   function moveBruce(event) {
-    removeBruce(bruceCurrentPosition) //Remove from current position
+    console.log('BRUCE CURRENT',bruceCurrentPosition)
+
+    cells[bruceCurrentPosition].classList.add('straight')
+
+
+
+    removeBruce(bruceCurrentPosition)
+    //Remove from current position
     const key = event.keyCode
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
       bruceCurrentPosition++
@@ -86,42 +89,24 @@ function init() {
     }
     addBruce(bruceCurrentPosition) // add to the position after added§
     console.log('BRUCE CURRENT POSITION', bruceCurrentPosition)
-
-
   }
 
+  //! Shamu moving randomly
   function moveEnemy() {
     console.log('SHAMU MOVE FN')
-    console.log('SHAMU POSITION->', shamuCurrentPosition)
-
     const enemyTimer = setInterval(() => {
       removeEnemy(shamuStartPosition)
       removeEnemy(shamuCurrentPosition)
-      //console.log('SHAMU POSITION',shamuCurrentPosition)
-      //4 possible random moves right left up down
-      //right = 0
-      //left = 1
-      //up = 2
-      //down = 3
-
       const randomIndex = Math.floor(Math.random() * 4)
-      console.log('RANDOM INDEX', randomIndex)
-
       if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
         shamuCurrentPosition++
       } else if (randomIndex === 1 && shamuCurrentPosition % width !== 0) { //LEFT
         shamuCurrentPosition--
-        console.log('LEFT')
       } else if (randomIndex === 2 && shamuCurrentPosition >= width) {  //UP
         shamuCurrentPosition -= width
-        console.log('UP')
       } else if (randomIndex === 3 && shamuCurrentPosition + width <= width * width - 1) { //DOWN
         shamuCurrentPosition += width
-        console.log('DOWN')
-      } else {
-        console.log('INVALID KEY')
       }
-
       addEnemy(shamuCurrentPosition)
 
     }, 500)

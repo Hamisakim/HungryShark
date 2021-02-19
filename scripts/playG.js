@@ -1,15 +1,17 @@
+//! Swim direction function 
+  
+  
+  // function swimDirection(event) {
+  //   //cells[bruceCurrentPosition].className('')
+  //   const key = event.keyCode
+  //   if (key === 39) {     //RIGHT
+  //     cells[bruceCurrentPosition].classList.add('swim-right') // flips right, but whole div
+  //   } else if (key === 37) { //LEFT
+  //     cells[bruceCurrentPosition].classList.remove('swim-right')
+  //   } else if (key === 38) {
+  //     cells[bruceCurrentPosition].classList.add('swim-up')//UP
+  //   } else if (key === 40) { //DOWN
+  //     cells[bruceCurrentPosition].classList.add('swim-down')
+  //   }
+  // }
 
-const bruce = {
-  class: 'bruce',
-  startPosition: 0,
-  currentPosition: 0
-}
-
-//! Add bruce
-function addBruce(position) {
-  cells[position].classList.add(bruceClass)
-}
-//! remove bruce
-function removeBruce(position) {
-  cells[position].classList.remove(bruceClass)
-}
