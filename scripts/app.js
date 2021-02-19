@@ -6,12 +6,12 @@ function init() {
   let score = 0
 
 
+
   //* Grid variables
   const grid = document.querySelector('.game-grid') //this is the DOM for our grid contains cell
   const width = 10
   const cellCount = width * width
   const cells = []
-
   const foodClass = 'food'
 
   // console.log(cells)
@@ -25,8 +25,8 @@ function init() {
 
   //* Enemy variables
   const shamuClass = 'shamu'
-  const shamuStartPosition = 26
-  let shamuCurrentPosition = 26
+  const shamuStartPosition = 54
+  let shamuCurrentPosition = 54
 
   //? ***********************************
 
@@ -65,16 +65,12 @@ function init() {
 
   function straightenCells() {
     cells[bruceCurrentPosition].classList.add('straight')
-
     cells[bruceCurrentPosition].classList.remove('swim-right')
     cells[bruceCurrentPosition].classList.remove('swim-left')
     cells[bruceCurrentPosition].classList.remove('swim-up')
     cells[bruceCurrentPosition].classList.remove('swim-down')
+  }
 
-  }
-  function removeStraight(number) {
-    cells[number].classList.remove('straight')
-  }
 
 
   function swimDirection(event) {
@@ -112,14 +108,11 @@ function init() {
     const key = event.keyCode
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
       straightenCells()
-
       bruceCurrentPosition++
       //console.log('AFTER MOVE POSITION',bruceCurrentPosition)
-      cells[bruceCurrentPosition].classList.remove(shamuClass)
+      //cells[bruceCurrentPosition].classList.remove(shamuClass)
       // removeStraight(bruceCurrentPosition)
       console.log('RIGHT')
-
-
     } else if (key === 37 && bruceCurrentPosition % width !== 0) { //LEFT
       straightenCells()
       bruceCurrentPosition--
@@ -140,24 +133,48 @@ function init() {
   }
 
 
-  // function moveEnemy() { // moving random every 500ms
-  //   console.log('SHAMU MOVE FN')
-  //   const enemyTimer = setInterval(() => {
-  //     removeEnemy(shamuStartPosition)
-  //     removeEnemy(shamuCurrentPosition)
-  //     const randomIndex = Math.floor(Math.random() * 4)
-  //     if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
-  //       shamuCurrentPosition++
-  //     } else if (randomIndex === 1 && shamuCurrentPosition % width !== 0) { //LEFT
-  //       shamuCurrentPosition--
-  //     } else if (randomIndex === 2 && shamuCurrentPosition >= width) {  //UP
-  //       shamuCurrentPosition -= width
-  //     } else if (randomIndex === 3 && shamuCurrentPosition + width <= width * width - 1) { //DOWN
-  //       shamuCurrentPosition += width
-  //     }
-  //     addEnemy(shamuCurrentPosition)
-  //   }, 500)
-  // }
+  function moveEnemy() { // moving random every 500ms
+    console.log('SHAMU MOVE FN')
+    const enemyTimer = setInterval(() => {
+       removeEnemy(shamuStartPosition)
+      removeEnemy(shamuCurrentPosition)
+
+      const randomIndex = 2   //Math.floor(Math.random() * 4)
+      
+      if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
+        console.log('RIGHT')
+        cells[shamuCurrentPosition + 1].classList.add('swim-left')
+        cells[shamuCurrentPosition].classList.remove('swim-right')
+        cells[shamuCurrentPosition].classList.remove('swim-up')
+        cells[shamuCurrentPosition].classList.remove('swim-down')
+        shamuCurrentPosition++
+       } else if (randomIndex === 1 && shamuCurrentPosition % width !== 0) { //LEFT
+        console.log('LEFT')
+        cells[shamuCurrentPosition - 1].classList.add('swim-right')
+        cells[shamuCurrentPosition].classList.remove('swim-left')
+        cells[shamuCurrentPosition].classList.remove('swim-up')
+        cells[shamuCurrentPosition].classList.remove('swim-down')
+        shamuCurrentPosition--
+      } else if (randomIndex === 2 && shamuCurrentPosition >= width) {  //UP
+        console.log('UP', 'CURRENT',shamuCurrentPosition, '+width',shamuCurrentPosition - width)
+        cells[shamuCurrentPosition - width].classList.add('swim-down')
+        cells[shamuCurrentPosition].classList.remove('swim-left')
+        cells[shamuCurrentPosition].classList.remove('swim-up')
+        cells[shamuCurrentPosition].classList.remove('swim-right')
+        let y = shamuCurrentPosition -= width
+        console.log(y)
+
+      } else if (randomIndex === 3 && shamuCurrentPosition + width <= width * width - 1) { //DOWN
+        cells[shamuCurrentPosition + width].classList.add('swim-up')
+        cells[shamuCurrentPosition].classList.remove('swim-left')
+        cells[shamuCurrentPosition].classList.remove('swim-down')
+        cells[shamuCurrentPosition].classList.remove('swim-right')
+        shamuCurrentPosition += width
+        cells[shamuCurrentPosition - width].classList.remove('swim-up')
+      }
+      addEnemy(shamuCurrentPosition)
+    }, 1500)
+  }
 
 
   // ! Event listeners
