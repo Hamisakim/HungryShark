@@ -1,45 +1,61 @@
-body{
+body {
   height: 100vh;
   font-family: 'Reggae One', cursive;
 }
 
-.header{
+.header {
   height: 30%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.image{
+.image {
   height: 50%;
 }
 
-#title{
+#title {
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  text-align: center ;
+  text-align: center;
 }
 
-.game-container{
+.game-container {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-grid {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  height: 600px;
+  width: 900px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: stretch;
+}
+
+h3 {
   display: flex;
   justify-content: center;
 }
-.game-grid{
-  width: 85%;
-  height: 60vh;
-  paff  ;
+
+.game-grid div {
+  border: 1px solid lightcoral;
+  flex-grow: 1;
+  height: 9%;
+  width: 9%;
 }
 
-
-h3{
-  display:flex;
-  justify-content: center;
+body {
+  background-color: gray;
 }
 
-
- *{
+ * {
   border: black solid 1px;
-  
 }

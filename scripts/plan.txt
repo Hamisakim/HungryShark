@@ -17,11 +17,14 @@ score for every dot eaten score + x
 for every time caught lives--
 
 For walls:
-Certain grids will be out of bounds. Like cat example but inside grid. 
+Certain grids will be out of bounds. Like bruce example but inside grid. 
 or if classList.contains(not accesible)
 
 * The player should be able to clear at least one board
 * The player's score should be displayed at the end of the game
+
+* each grid div needs a class of food or eaten 
+
 
 
 MVP:

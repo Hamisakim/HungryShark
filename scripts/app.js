@@ -1,37 +1,37 @@
-function init(){
+/* eslint-disable prefer-const */
+/* eslint-disable no-unused-vars */
+function init() {
+  console.log('LIVE')
+  //* All variables here for global scope
 
-  console.log('jas connected')
-
-  const grid = document.querySelector('.grid')
-  
+  const grid = document.querySelector('.game-grid') //this is the DOM for our grid
   const width = 10
   const cellCount = width * width
   const cells = []
 
-  const catClass = 'cat'
-  const catStartPosition = 0
-  let catCurrentPosition = 0
 
+  console.log('CELLS-COUNT',cellCount)
+  console.log('CELLS',cells)
 
-  // * Make a grid
-  function createGrid(catStartPosition) {
+  const bruceClass = 'bruce'
+  const bruceStartPosition = 0
+  let bruceCurrentPosition = 0
+
+  function createGrid(bruceStartPosition) {
+    console.log('CREATING GRID')
+
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
     }
-    addCat(catStartPosition)
+    //addbruce(bruceStartPosition)
   }
 
+  createGrid(bruceStartPosition) 
 
 
-
-
-
-
-
-
-//? BRACKET MUST BE YELLOW BELOW 
+//? BRACKET MUST BE YELLOW BELOW /////
 }
-window.addEventListener('DOMcontentLoaded',init)
+window.addEventListener('DOMContentLoaded', init)
