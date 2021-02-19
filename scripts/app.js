@@ -4,24 +4,26 @@ function init() {
   console.log('LIVE')
   //* All variables here for global scope
 
+  //* Grid variables
   const grid = document.querySelector('.game-grid') //this is the DOM for our grid
   const width = 10
-
   const cellCount = width * width
   const cells = []
   console.log(cells)
-
   console.log('CELLS-COUNT', cellCount)
   console.log('CELLS', cells)
 
+  //* Bruce Variables
   const bruceClass = 'bruce' //class containing bruce image
   const bruceStartPosition = 0
   let bruceCurrentPosition = 0
 
+  //* Enemy variables
   const shamuClass = 'shamu'
   const shamuStartPosition = 26
   let shamuCurrentPosition
 
+  //? ***********************************
   //! Add Bruce
   function addBruce(position) {
     cells[position].classList.add(bruceClass)
@@ -51,22 +53,9 @@ function init() {
     }
     addBruce(bruceStartPosition) //line 24
     addEnemy(shamuStartPosition)
+    moveEnemy()
   }
-
-  // function swimDirection(event) {
-  //   const key = event.keyCode
-  //   if (key === 39) {     //RIGHT
-  //     cells[bruceCurrentPosition].classList.add('swim-right') // * flips right, but whole div
-  //   } else if (key === 37) { //LEFT
-  //     cells[bruceCurrentPosition].classList.remove('swim-right')
-  //   } else if (key === 38) {
-  //     cells[bruceCurrentPosition].classList.add('swim-up')//UP
-  //   } else if (key === 40) { //DOWN
-  //     cells[bruceCurrentPosition].classList.add('swim-down')
-  //   }
-  // }
-
-
+  //! Move Bruce with keydown
   function moveBruce(event) {
     removeBruce(bruceCurrentPosition) //Remove from current position
     const key = event.keyCode
@@ -89,12 +78,38 @@ function init() {
     console.log('BRUCE CURRENT POSITION', bruceCurrentPosition)
   }
 
+  function moveEnemy(){
+    const enemyTimer = setInterval(()=>{
+      console.log('SHAMU MOVE')
+      
+    },500)
+
+  }
+
 
   // ! Event listeners
   document.addEventListener('keydown', moveBruce)
   // document.addEventListener('keydown', swimDirection)
   createGrid(bruceStartPosition) //line 62 
 
+
+
+
+
   //? BRACKET MUST BE YELLOW BELOW /////
 }
 window.addEventListener('DOMContentLoaded', init)
+
+
+  // function swimDirection(event) {
+  //   const key = event.keyCode
+  //   if (key === 39) {     //RIGHT
+  //     cells[bruceCurrentPosition].classList.add('swim-right') // flips right, but whole div
+  //   } else if (key === 37) { //LEFT
+  //     cells[bruceCurrentPosition].classList.remove('swim-right')
+  //   } else if (key === 38) {
+  //     cells[bruceCurrentPosition].classList.add('swim-up')//UP
+  //   } else if (key === 40) { //DOWN
+  //     cells[bruceCurrentPosition].classList.add('swim-down')
+  //   }
+  // }
