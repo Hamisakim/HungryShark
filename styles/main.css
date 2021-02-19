@@ -4,19 +4,63 @@ body {
   background-color: gray;
 }
 
-#title h3{
+#title h3 {
   margin: 0;
   font-size: xxx-large;
-  display: flex ;
+  display: flex;
   flex-direction: column;
-
 }
 
- /* .starter-page{
-   z-index: 10;
-  size: 100vh;
-  background-image: url('https://i.pinimg.com/originals/1d/15/d8/1d15d8da8b3b6f3a895828ba2663f409.gif');
-}  */
+.game-component {
+  display: none;
+}
+
+.overlay {
+  background-image: url('https://thumbs.gfycat.com/BrilliantExcellentBumblebee-size_restricted.gif');
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .overlay img{
+  z-index: -1;
+  align-self: center;
+  justify-self: center;
+} */
+.start-box{
+  border: 30px groove rgba(31,21,255,0.54);
+  width: 45%;
+  height: 45%;
+  display: flex;
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark fin gif.gif');
+  background-position: center;
+  background-size: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .header {
   height: 30%;
@@ -28,9 +72,11 @@ body {
 .image {
   height: 50%;
 }
-.right-image{
-  transform: scaleX(-1); 
+
+.right-image {
+  transform: scaleX(-1);
 }
+
 #title {
   display: flex;
   flex-flow: column;
@@ -40,7 +86,6 @@ body {
 }
 
 .game-container {
- 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,31 +103,34 @@ body {
 }
 
 .wall {
-background-color: black;
+  background-color: black;
 }
 
-.shamu{
+.shamu {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center; 
+  background-position: center;
 }
-.straight { 
+
+.straight {
   transform: rotate(0deg);
-  transform: scaleX(1); 
+  transform: scaleX(1);
 }
 
-.swim-right{
-  transform: scaleX(-1); 
-}
-.swim-left{
-  transform: scaleX(1); 
+.swim-right {
+  transform: scaleX(-1);
 }
 
-.swim-up{
+.swim-left {
+  transform: scaleX(1);
+}
+
+.swim-up {
   transform: rotate(90deg);
 }
-.swim-down{
+
+.swim-down {
   transform: rotate(-90deg);
 }
 
@@ -99,20 +147,14 @@ h3 {
   text-align: center;
 }
 
-
-
 .game-grid div.bruce {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark gif.gif');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
- 
   /* transform: scaleX(-1); */
-
   cursor: pointer;
 }
-
-
 
   {
   border: black solid 1px;
