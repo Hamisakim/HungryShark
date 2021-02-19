@@ -53,7 +53,16 @@ background-color: black;
   background-position: center; 
 }
 
+.swim-right{
+  transform: scaleX(-1); 
+}
 
+.swim-up{
+  transform: rotate(90deg);
+}
+.swim-down{
+  transform: rotate(-90deg);
+}
 
 h3 {
   display: flex;
@@ -81,16 +90,7 @@ body {
 
   cursor: pointer;
 }
-.swim-right{
-  transform: scaleX(-1); 
-}
 
-.swim-up{
-  transform: rotate(90deg);
-}
-.swim-down{
-  transform: rotate(-90deg);
-}
 
 
   {
