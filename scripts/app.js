@@ -9,6 +9,9 @@ function init() {
   const width = 10
   const cellCount = width * width
   const cells = []
+
+  const foodClass = ''  
+
   console.log(cells)
   console.log('CELLS-COUNT', cellCount)
   console.log('CELLS', cells)
@@ -24,6 +27,25 @@ function init() {
   let shamuCurrentPosition = 26
 
   //? ***********************************
+
+  //! Make a grid
+  function createGrid() { // need parameter??
+    //console.log('CREATING GRID')
+    for (let i = 0; i < cellCount; i++) {
+      const cell = document.createElement('div') //creating div 
+      cell.textContent = i 
+      grid.appendChild(cell)
+      cells.push(cell)
+    }
+    //.innerHTML = '&#x25cf'
+    addBruce(bruceStartPosition) //line 24
+    moveEnemy()
+
+  }
+
+
+
+
   //! Add Bruce
   function addBruce(position) {
     cells[position].classList.add(bruceClass)
@@ -42,20 +64,7 @@ function init() {
     cells[position].classList.remove(shamuClass)
   }
 
-  //! Make a grid
-  function createGrid() { // need parameter??
-    //console.log('CREATING GRID')
-    for (let i = 0; i < cellCount; i++) {
-      const cell = document.createElement('div')
-      cell.textContent = i
-      grid.appendChild(cell)
-      cells.push(cell)
-    }
-    
-    addBruce(bruceStartPosition) //line 24
-    moveEnemy()
 
-  }
   //! Move Bruce with keydown
   function moveBruce(event) {
     removeBruce(bruceCurrentPosition) //Remove from current position
@@ -95,7 +104,7 @@ function init() {
       //up = 2
       //down = 3
 
-      const randomIndex =  Math.floor(Math.random() * 4)
+      const randomIndex = Math.floor(Math.random() * 4)
       console.log('RANDOM INDEX', randomIndex)
 
       if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
@@ -112,7 +121,7 @@ function init() {
       } else {
         console.log('INVALID KEY')
       }
-      
+
       addEnemy(shamuCurrentPosition)
 
     }, 500)
@@ -122,8 +131,8 @@ function init() {
 
   // ! Event listeners
   document.addEventListener('keydown', moveBruce)
-   document.addEventListener('keydown', swimDirection)
-  
+  document.addEventListener('keydown', swimDirection)
+
   //! Functions to happen on page load
   createGrid(bruceStartPosition) //line 62 
   addEnemy(shamuStartPosition)
@@ -141,9 +150,8 @@ function init() {
     } else if (key === 40) { //DOWN
       cells[bruceCurrentPosition].classList.add('swim-down')
     }
-    
   }
-  
+
 
   //? BRACKET MUST BE YELLOW BELOW /////
 }

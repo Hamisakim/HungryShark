@@ -1,7 +1,22 @@
 body {
   height: 100vh;
   font-family: 'Reggae One', cursive;
+  background-color: gray;
 }
+
+#title h3{
+  margin: 0;
+  font-size: xxx-large;
+  display: flex ;
+  flex-direction: column;
+
+}
+
+ .starter-page{
+   z-index: 10;
+  size: 100vh;
+  background-image: url('https://i.pinimg.com/originals/1d/15/d8/1d15d8da8b3b6f3a895828ba2663f409.gif');
+} 
 
 .header {
   height: 30%;
@@ -74,10 +89,11 @@ h3 {
   flex-grow: 1;
   height: 9%;
   width: 9%;
+  text-align: center;
 }
 
 body {
-  background-color: gray;
+
 }
 
 .game-grid div.bruce {
