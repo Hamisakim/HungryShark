@@ -13,7 +13,9 @@ body {
 .image {
   height: 50%;
 }
-
+.right-image{
+  transform: scaleX(-1); 
+}
 #title {
   display: flex;
   flex-flow: column;
@@ -39,6 +41,19 @@ body {
   justify-content: center;
   align-content: center;
 }
+
+.wall {
+background-color: black;
+}
+
+.shamu{
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; 
+}
+
+
 
 h3 {
   display: flex;
