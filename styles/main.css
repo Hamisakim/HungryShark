@@ -73,7 +73,9 @@ body {
 .swim-up{
   transform: rotate(90deg);
 }
-
+.swim-down{
+  transform: rotate(-90deg);
+}
 
 
   {
