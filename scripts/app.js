@@ -21,7 +21,7 @@ function init() {
   //* Enemy variables
   const shamuClass = 'shamu'
   const shamuStartPosition = 26
-  let shamuCurrentPosition
+  let shamuCurrentPosition = 26
 
   //? ***********************************
   //! Add Bruce
@@ -52,8 +52,8 @@ function init() {
       cells.push(cell)
     }
     addBruce(bruceStartPosition) //line 24
-    addEnemy(shamuStartPosition)
-    moveEnemy()
+   
+
   }
   //! Move Bruce with keydown
   function moveBruce(event) {
@@ -76,13 +76,34 @@ function init() {
     }
     addBruce(bruceCurrentPosition) // add to the position after added§
     console.log('BRUCE CURRENT POSITION', bruceCurrentPosition)
+
+    moveEnemy()
   }
 
-  function moveEnemy(){
-    const enemyTimer = setInterval(()=>{
-      console.log('SHAMU MOVE')
+  function moveEnemy() {
+    console.log('SHAMU MOVE FN')
+    console.log('SHAMU POSITION->', shamuCurrentPosition)
+
+    const enemyTimer = setInterval(() => {
+      removeEnemy(shamuStartPosition)
+      removeEnemy(shamuCurrentPosition)
+      //console.log('SHAMU POSITION',shamuCurrentPosition)
+      //4 possible random moves right left up down
+      //right = 0
+      //left = 1
+      //up = 2
+      //down = 3
+
+      const randomIndex = 0 //Math.floor(Math.random() * 4)
+      console.log('RANDOM INDEX', randomIndex)
+
+      if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
+        shamuCurrentPosition++
+      }
       
-    },500)
+      addEnemy(shamuCurrentPosition)
+
+    }, 500)
 
   }
 
@@ -90,8 +111,10 @@ function init() {
   // ! Event listeners
   document.addEventListener('keydown', moveBruce)
   // document.addEventListener('keydown', swimDirection)
+  
+  //! Functions to happen on page load
   createGrid(bruceStartPosition) //line 62 
-
+  addEnemy(shamuStartPosition)
 
 
 
