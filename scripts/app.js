@@ -26,16 +26,18 @@ function init() {
   function addBruce(position) {
     cells[position].classList.add(bruceClass)
   }
-
-  //!Add Shamu
-  function addEnemy(position) {
-    cells[position].classList.add(shamuClass)
-
-
-  }
   //! Remove bruce
   function removeBruce(position) {
     cells[position].classList.remove(bruceClass)
+  }
+
+  //!Add Enemy
+  function addEnemy(position) {
+    cells[position].classList.add(shamuClass)
+  }
+  //! Remove Enemy
+  function removeEnemy(position) {
+    cells[position].classList.remove(shamuClass)
   }
 
   //! Make a grid
@@ -64,13 +66,13 @@ function init() {
   //   }
   // }
 
+
   function moveBruce(event) {
+    removeBruce(bruceCurrentPosition) //Remove from current position
     const key = event.keyCode
-    removeBruce(bruceCurrentPosition)
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
       bruceCurrentPosition++
       console.log('RIGHT')
-      //cells[bruceCurrentPosition++].classList.add('swim-right') //  flips right, but whole div ...
     } else if (key === 37 && bruceCurrentPosition % width !== 0) { //LEFT
       bruceCurrentPosition--
       console.log('LEFT')
@@ -83,7 +85,8 @@ function init() {
     } else {
       console.log('INVALID KEY')
     }
-    addBruce(bruceCurrentPosition)
+    addBruce(bruceCurrentPosition) // add to the position after added§
+    console.log('BRUCE CURRENT POSITION', bruceCurrentPosition)
   }
 
 
