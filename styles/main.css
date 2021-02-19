@@ -65,11 +65,14 @@ body {
   /* transform: scaleX(-1); */
 
   cursor: pointer;
-
-
-
+}
+.swim-right{
+  transform: scaleX(-1); 
 }
 
+.swim-up{
+  transform: rotate(90deg);
+}
 
 
 

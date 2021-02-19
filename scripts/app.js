@@ -9,17 +9,17 @@ function init() {
   const cellCount = width * width
   const cells = []
 
-  console.log('CELLS-COUNT',cellCount)
-  console.log('CELLS',cells)
+  console.log('CELLS-COUNT', cellCount)
+  console.log('CELLS', cells)
 
-  const bruceClass = 'bruce'
+  const bruceClass = 'bruce' //class containing bruce image
   const bruceStartPosition = 0
   let bruceCurrentPosition = 0
+
 
   //! Make a grid
   function createGrid(bruceStartPosition) {
     console.log('CREATING GRID')
-
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       cell.textContent = i
@@ -30,14 +30,59 @@ function init() {
   }
 
   //! Add bruce
-  function addBruce(position) { 
-    cells[position].classList.add(bruceClass) 
+  function addBruce(position) {
+    cells[position].classList.add(bruceClass)
+  }
+  //! remove bruce
+  function removeBruce(position) {
+    cells[position].classList.remove(bruceClass)
   }
 
 
+  function swimDirection(event) {
+    const key = event.keyCode
+    if (key === 39) {     //RIGHT
+      cells[bruceCurrentPosition].classList.add('swim-right') // * flips right, but whole div
+      // } else if (key === 37 ) { //LEFT
+      //   bruceCurrentPosition--
+      // } else if (key === 38) {  //UP
+      //   bruceCurrentPosition -= width
+      // } else if (key === 40) { //DOWN
+      //   bruceCurrentPosition += width
+      // } 
+
+    }
+  }
+
+  function handleKeyDown(event) {
+    const key = event.keyCode
+    removeBruce(bruceCurrentPosition)
+    //swimDirection()
+
+    if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
+      bruceCurrentPosition++
+      //cells[bruceCurrentPosition++].classList.add('swim-right') // * flips right, but whole div
+
+    } else if (key === 37 && bruceCurrentPosition % width !== 0) { //LEFT
+      bruceCurrentPosition--
+    } else if (key === 38 && bruceCurrentPosition >= width) {  //UP
+      bruceCurrentPosition -= width
+    } else if (key === 40 && bruceCurrentPosition + width <= width * width - 1) { //DOWN
+      bruceCurrentPosition += width
+    } else {
+      console.log('INVALID KEY')
+    }
+
+    addBruce(bruceCurrentPosition)
+  }
+
+
+  // ! Event listeners
+
+  document.addEventListener('keydown', handleKeyDown)
+  document.addEventListener('keydown', swimDirection)
   createGrid(bruceStartPosition) //line 62 
 
-
-//? BRACKET MUST BE YELLOW BELOW /////
+  //? BRACKET MUST BE YELLOW BELOW /////
 }
 window.addEventListener('DOMContentLoaded', init)
