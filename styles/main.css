@@ -67,9 +67,16 @@ background-color: black;
   background-size: contain;
   background-position: center; 
 }
+.straight { 
+  transform: rotate(0deg);
+  transform: scaleX(1); 
+}
 
 .swim-right{
   transform: scaleX(-1); 
+}
+.swim-left{
+  transform: scaleX(1); 
 }
 
 .swim-up{
@@ -82,9 +89,6 @@ background-color: black;
 h3 {
   display: flex;
   justify-content: center;
-}
-.straight { 
-  transform: rotate(0deg);
 }
 
 .game-grid div {

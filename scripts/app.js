@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 function init() {
@@ -62,56 +63,101 @@ function init() {
     cells[position].classList.remove(shamuClass)
   }
 
-  function moveBruce(event) {
-    console.log('BRUCE CURRENT',bruceCurrentPosition)
-
+  function straightenCells() {
     cells[bruceCurrentPosition].classList.add('straight')
 
+    cells[bruceCurrentPosition].classList.remove('swim-right')
+    cells[bruceCurrentPosition].classList.remove('swim-left')
+    cells[bruceCurrentPosition].classList.remove('swim-up')
+    cells[bruceCurrentPosition].classList.remove('swim-down')
 
+  }
+  function removeStraight(number) {
+    cells[number].classList.remove('straight')
+  }
+
+
+  function swimDirection(event) {
+    //cells[bruceCurrentPosition].className('')
+    const key = event.keyCode
+    if (key === 39) {     //RIGHT
+      cells[bruceCurrentPosition].classList.add('swim-right')
+      cells[bruceCurrentPosition].classList.remove('swim-left')
+      cells[bruceCurrentPosition].classList.remove('swim-up')
+      cells[bruceCurrentPosition].classList.remove('swim-down')// flips right, but whole div
+    } else if (key === 37) { //LEFT
+      cells[bruceCurrentPosition].classList.add('swim-left')
+      cells[bruceCurrentPosition].classList.remove('swim-right')
+      cells[bruceCurrentPosition].classList.remove('swim-up')
+      cells[bruceCurrentPosition].classList.remove('swim-down')
+    } else if (key === 38) {
+      cells[bruceCurrentPosition].classList.add('swim-up')
+      cells[bruceCurrentPosition].classList.remove('swim-left')
+      cells[bruceCurrentPosition].classList.remove('swim-down')
+      cells[bruceCurrentPosition].classList.remove('swim-right')//UP
+    } else if (key === 40) { //DOWN
+      cells[bruceCurrentPosition].classList.add('swim-down')
+      cells[bruceCurrentPosition].classList.remove('swim-left')
+      cells[bruceCurrentPosition].classList.remove('swim-up')
+      cells[bruceCurrentPosition].classList.remove('swim-right')
+    }
+  }
+
+
+  function moveBruce(event) {
+    console.log('Position A', bruceCurrentPosition)
 
     removeBruce(bruceCurrentPosition)
     //Remove from current position
     const key = event.keyCode
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
+      straightenCells()
+
       bruceCurrentPosition++
+      //console.log('AFTER MOVE POSITION',bruceCurrentPosition)
+      cells[bruceCurrentPosition].classList.remove(shamuClass)
+      // removeStraight(bruceCurrentPosition)
       console.log('RIGHT')
+
+
     } else if (key === 37 && bruceCurrentPosition % width !== 0) { //LEFT
+      straightenCells()
       bruceCurrentPosition--
       console.log('LEFT')
     } else if (key === 38 && bruceCurrentPosition >= width) {  //UP
+      straightenCells()
       bruceCurrentPosition -= width
       console.log('UP')
     } else if (key === 40 && bruceCurrentPosition + width <= width * width - 1) { //DOWN
+      straightenCells()
       bruceCurrentPosition += width
       console.log('DOWN')
     } else {
       console.log('INVALID KEY')
     }
     addBruce(bruceCurrentPosition) // add to the position after added§
-    console.log('BRUCE CURRENT POSITION', bruceCurrentPosition)
+    console.log('POSITION B', bruceCurrentPosition)
   }
 
-  //! Shamu moving randomly
-  function moveEnemy() {
-    console.log('SHAMU MOVE FN')
-    const enemyTimer = setInterval(() => {
-      removeEnemy(shamuStartPosition)
-      removeEnemy(shamuCurrentPosition)
-      const randomIndex = Math.floor(Math.random() * 4)
-      if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
-        shamuCurrentPosition++
-      } else if (randomIndex === 1 && shamuCurrentPosition % width !== 0) { //LEFT
-        shamuCurrentPosition--
-      } else if (randomIndex === 2 && shamuCurrentPosition >= width) {  //UP
-        shamuCurrentPosition -= width
-      } else if (randomIndex === 3 && shamuCurrentPosition + width <= width * width - 1) { //DOWN
-        shamuCurrentPosition += width
-      }
-      addEnemy(shamuCurrentPosition)
 
-    }, 500)
-
-  }
+  // function moveEnemy() { // moving random every 500ms
+  //   console.log('SHAMU MOVE FN')
+  //   const enemyTimer = setInterval(() => {
+  //     removeEnemy(shamuStartPosition)
+  //     removeEnemy(shamuCurrentPosition)
+  //     const randomIndex = Math.floor(Math.random() * 4)
+  //     if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
+  //       shamuCurrentPosition++
+  //     } else if (randomIndex === 1 && shamuCurrentPosition % width !== 0) { //LEFT
+  //       shamuCurrentPosition--
+  //     } else if (randomIndex === 2 && shamuCurrentPosition >= width) {  //UP
+  //       shamuCurrentPosition -= width
+  //     } else if (randomIndex === 3 && shamuCurrentPosition + width <= width * width - 1) { //DOWN
+  //       shamuCurrentPosition += width
+  //     }
+  //     addEnemy(shamuCurrentPosition)
+  //   }, 500)
+  // }
 
 
   // ! Event listeners
@@ -123,19 +169,7 @@ function init() {
   addEnemy(shamuStartPosition)
 
 
-  function swimDirection(event) {
-    //cells[bruceCurrentPosition].className('')
-    const key = event.keyCode
-    if (key === 39) {     //RIGHT
-      cells[bruceCurrentPosition].classList.add('swim-right') // flips right, but whole div
-    } else if (key === 37) { //LEFT
-      cells[bruceCurrentPosition].classList.remove('swim-right')
-    } else if (key === 38) {
-      cells[bruceCurrentPosition].classList.add('swim-up')//UP
-    } else if (key === 40) { //DOWN
-      cells[bruceCurrentPosition].classList.add('swim-down')
-    }
-  }
+
 
 
   //? BRACKET MUST BE YELLOW BELOW /////
