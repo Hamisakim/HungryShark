@@ -2,7 +2,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 function init() {
-  
+
   let score = 0
   const grid = document.querySelector('.game-grid') //this is the DOM for our grid contains cell
   const width = 10
@@ -32,17 +32,17 @@ function init() {
       //console.log('CELLLIST',cell.classList)
       //cell.classList.add('food')
     }
-   
+
     addBruce(bruceStartPosition) //line 24
     moveEnemy()
     addFood()
   }
 
-  function addFood(){
- for (let i = 0; i < square.length; i++) {
-  if  (!square[i].classList.contains('bruce'))
-  square[i].classList.add('food')
-}
+  function addFood() {
+    for (let i = 0; i < square.length; i++) {
+      if (!square[i].classList.contains('bruce'))
+        square[i].classList.add('food')
+    }
   }
 
 
@@ -97,41 +97,27 @@ function init() {
     }
   }
 
-  function eatFood(){
-    console.log('EATING')
-    console.log('SCORE',score)
-    score += 10
-    console.log(document.getElementById('score').innerText)
-    document.getElementById('score').innerText = score
+  function eatFood() {
+    if (cells[bruceCurrentPosition].classList.contains('food')) {
+      score += 10
+      document.getElementById('score').innerText = score
+      square[bruceCurrentPosition].classList.remove('food')
+    }
   }
 
   function moveBruce(event) {
-    //console.log('Position A', bruceCurrentPosition)
     removeBruce(bruceCurrentPosition)
-    //Remove from current position
+    eatFood()
+    straightenCells()
     const key = event.keyCode
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
-      straightenCells()
       bruceCurrentPosition++
-      console.log('BRUCE POSITION',cells[bruceCurrentPosition])
-      if(cells[bruceCurrentPosition].classList.contains('food')) {
-        eatFood()
-      }
-
     } else if (key === 37 && bruceCurrentPosition % width !== 0) { //LEFT
-      straightenCells()
       bruceCurrentPosition--
-      //console.log('LEFT')
     } else if (key === 38 && bruceCurrentPosition >= width) {  //UP
-      straightenCells()
       bruceCurrentPosition -= width
-      //console.log('UP')
     } else if (key === 40 && bruceCurrentPosition + width <= width * width - 1) { //DOWN
-      straightenCells()
       bruceCurrentPosition += width
-      //console.log('DOWN')
-    } else {
-      //console.log('INVALID KEY')
     }
     addBruce(bruceCurrentPosition) // add to the position after added§
     //console.log('POSITION B', bruceCurrentPosition)
@@ -145,12 +131,12 @@ function init() {
       removeEnemy(shamuCurrentPosition)
       const randomIndex = Math.floor(Math.random() * 4)
       if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
-  
+
         cells[shamuCurrentPosition + 1].classList.add('swim-left')
         cells[shamuCurrentPosition].classList.remove('swim-right', 'swim-up', 'swim-down')
         shamuCurrentPosition++
       } else if (randomIndex === 1 && shamuCurrentPosition % width !== 0) { //LEFT
-       
+
         cells[shamuCurrentPosition - 1].classList.add('swim-right')
         cells[shamuCurrentPosition].classList.remove('swim-left', 'swim-up', 'swim-down')
         shamuCurrentPosition--
@@ -188,7 +174,7 @@ function init() {
 
   document.addEventListener('keydown', moveBruce)
   document.addEventListener('keydown', swimDirection)
- //document.getElementById('enter-btn').addEventListener('click', enterGame)
+  //document.getElementById('enter-btn').addEventListener('click', enterGame)
 
 
 
