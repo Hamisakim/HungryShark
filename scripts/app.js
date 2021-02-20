@@ -2,30 +2,22 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 function init() {
-  //* All variables here for global scope
+  
   let score = 0
-  //* Grid variables
   const grid = document.querySelector('.game-grid') //this is the DOM for our grid contains cell
   const width = 10
   const cellCount = width * width
   const cells = []
   const foodClass = 'food'
 
-  // //console.log(cells)
-  // //console.log('CELLS-COUNT', cellCount)
-  // //console.log('CELLS', cells)
-
-  //* Bruce Variables
   const bruceClass = 'bruce' //class containing bruce image
   const bruceStartPosition = 0
   let bruceCurrentPosition = 0
 
-  //* Enemy variables
   const shamuClass = 'shamu'
   const shamuStartPosition = 54
   let shamuCurrentPosition = 54
 
-  //? ***********************************
 
 
   function createGrid() { // need parameter??
@@ -36,8 +28,13 @@ function init() {
       cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
+      console.log('CELLLIST',cell.classList)
+      cell.classList.add('food')
+
+    
+    
     }
-    //.innerHTML = '&#x25cf'
+   
     addBruce(bruceStartPosition) //line 24
     moveEnemy()
   }
@@ -135,12 +132,12 @@ function init() {
       removeEnemy(shamuCurrentPosition)
       const randomIndex = Math.floor(Math.random() * 4)
       if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
-        //console.log('RIGHT')
+  
         cells[shamuCurrentPosition + 1].classList.add('swim-left')
         cells[shamuCurrentPosition].classList.remove('swim-right', 'swim-up', 'swim-down')
         shamuCurrentPosition++
       } else if (randomIndex === 1 && shamuCurrentPosition % width !== 0) { //LEFT
-        //console.log('LEFT')
+       
         cells[shamuCurrentPosition - 1].classList.add('swim-right')
         cells[shamuCurrentPosition].classList.remove('swim-left', 'swim-up', 'swim-down')
         shamuCurrentPosition--

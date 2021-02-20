@@ -150,12 +150,6 @@ body {
   background-color: black;
 }
 
-.shamu {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-}
 
 .straight {
   transform: rotate(0deg);
@@ -182,6 +176,21 @@ h3 {
   display: flex;
   justify-content: center;
 }
+.food{
+ 
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/fish.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.shamu {
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
 
 .game-grid div {
   flex-grow: 1;
