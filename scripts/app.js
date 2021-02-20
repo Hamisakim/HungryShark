@@ -29,6 +29,7 @@ function init() {
 
 
   function createGrid() { // need parameter??
+    console.log('creating')
     ////console.log('CREATING GRID')
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div') //creating div 
@@ -156,16 +157,26 @@ function init() {
         shamuCurrentPosition += width
         cells[shamuCurrentPosition - width].classList.remove('swim-up')
       }
-      //addEnemy(shamuCurrentPosition)
+      addEnemy(shamuCurrentPosition)
     }, 1500)
   }
 
-function enterGame() { 
-  console.log('ENTERING')
- const overlay =  document.querySelector('.overlay')
-console.log(overlay)
-overlay.classList.add('entering')
-}
+  function enterGame() {
+    console.log('ENTERING')
+    const overlay = document.querySelector('.overlay')
+    console.log(overlay)
+    overlay.classList.add('entering')
+
+        const gameComponents = document.querySelector('.game-component')
+        gameComponents.style.opacity ='1'
+    setTimeout(()=>{
+      console.log('timeout')
+      overlay.style.display = 'none'
+    },1000)
+
+
+    overlay.style.display = 'none'
+  }
 
   document.addEventListener('keydown', moveBruce)
   document.addEventListener('keydown', swimDirection)
