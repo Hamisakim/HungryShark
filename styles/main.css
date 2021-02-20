@@ -3,7 +3,7 @@ html {
   }
 
 body {
-  font-family: 'Reggae One', cursive;
+  font-family: 'Press Start 2P', cursive;
   height: 100vh;
   }
 
@@ -112,6 +112,19 @@ body {
  margin-bottom: 10px;
 }
 
+.hearts {
+ height: 50px;
+}
+
+.lives-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#lives-counter{
+  font-size: 125%;
+}
+
 .image {
   height: 50%;
 }
@@ -186,7 +199,7 @@ h3 {
 .shamu {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 85%;
   background-position: center;
 }
 

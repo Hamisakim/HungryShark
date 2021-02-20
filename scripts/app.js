@@ -4,7 +4,7 @@
 function init() {
 
   let score = 0
-  let lives = 3
+  let lifeCount = 3
 
 
   const grid = document.querySelector('.game-grid') //this is the DOM for our grid contains cell
@@ -52,7 +52,7 @@ function init() {
 
   function addBruce(position) {
     cells[position].classList.add(bruceClass)
-    console.log('cells position', cells[position])
+    //console.log('cells position', cells[position])
   }
 
   function removeBruce(position) {
@@ -110,22 +110,41 @@ function init() {
     }
   }
 
-function getKilled(){
-  if (cells[bruceCurrentPosition].classList.contains('enemy')) {
-    lives -= 1
-    document.getElementById('lives').innerText = lives
-   
+  console.log('LIFE COUNT b4', lifeCount)
+
+  function removeHearts() {
+    console.log('remove hearts')
+    console.log('LIFE COUNT', lifeCount)
+    // const hearts = document.getElementById('lives')
+    // hearts.removeChild(hearts.childNodes[lifeCount - 1])
+
+    // if{lifeCount === 2 }
   }
-}
 
+  const checkDeathTimer = setInterval(() => {
+    if (cells[bruceCurrentPosition] === cells[shamuCurrentPosition]) {
+      lifeCount -= 1
+      document.getElementById('lives-counter').innerText = lifeCount
+      //document.getElementById('lives').innerText = lives
+      bruceDeath()
+    }
+  }, 200)
 
+  function bruceDeath() {
+    resetBruce()
+    const hearts = document.getElementById('lives')
+        function resetBruce() {
 
+      cells[bruceCurrentPosition].classList.remove('bruce')
+      bruceCurrentPosition = 0
+
+    }
+  }
 
   function moveBruce(event) {
     removeBruce(bruceCurrentPosition)
     eatFood()
     straightenCells()
-    getKilled()
     const key = event.keyCode
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
       bruceCurrentPosition++
@@ -142,11 +161,10 @@ function getKilled(){
 
 
   function moveEnemy() { // moving random every 500ms
-    //console.log('SHAMU MOVE FN')
     const enemyTimer = setInterval(() => {
       removeEnemy(shamuStartPosition)
       removeEnemy(shamuCurrentPosition)
-      const randomIndex = Math.floor(Math.random() * 4)
+      const randomIndex = 2 //Math.floor(Math.random() * 4)
       if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
 
         cells[shamuCurrentPosition + 1].classList.add('swim-left')
@@ -171,7 +189,7 @@ function getKilled(){
         cells[shamuCurrentPosition - width].classList.remove('swim-up')
       }
       addEnemy(shamuCurrentPosition)
-    }, 1500)
+    }, 1000)
   }
 
   // function enterGame() {
