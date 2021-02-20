@@ -177,10 +177,9 @@ h3 {
   justify-content: center;
 }
 .food{
- 
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/fish.gif');
+   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/fish.gif');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100%;
   background-position: center;
 }
 

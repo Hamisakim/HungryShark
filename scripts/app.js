@@ -8,7 +8,7 @@ function init() {
   const width = 10
   const cellCount = width * width
   const cells = []
-  const foodClass = 'food'
+  const square = document.getElementsByClassName('square')
 
   const bruceClass = 'bruce' //class containing bruce image
   const bruceStartPosition = 0
@@ -25,18 +25,24 @@ function init() {
     ////console.log('CREATING GRID')
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div') //creating div 
+      cell.classList.add('square')  //gives each cell class of square
       cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
-      console.log('CELLLIST',cell.classList)
-      cell.classList.add('food')
-
-    
-    
+      //console.log('CELLLIST',cell.classList)
+      //cell.classList.add('food')
     }
    
     addBruce(bruceStartPosition) //line 24
     moveEnemy()
+    addFood()
+  }
+
+  function addFood(){
+ for (let i = 0; i < square.length; i++) {
+  if  (!square[i].classList.contains('bruce'))
+  square[i].classList.add('food')
+}
   }
 
 
