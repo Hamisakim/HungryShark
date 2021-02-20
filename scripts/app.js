@@ -22,26 +22,25 @@ function init() {
   let shamuCurrentPosition = 54
 
 
-
   function createGrid() { // need parameter??
     console.log('creating')
     ////console.log('CREATING GRID')
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div') //creating div 
       cell.classList.add('square')  //gives each cell class of square
-      cell.textContent = i
+      //cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
       //console.log('CELLLIST',cell.classList)
       //cell.classList.add('food')
     }
-
     addBruce(bruceStartPosition) //line 24
     moveEnemy()
     addFood()
   }
 
   function addFood() {
+    console.log(square.length)
     for (let i = 0; i < square.length; i++) {
       if (!square[i].classList.contains('bruce'))
         square[i].classList.add('food')
@@ -71,14 +70,10 @@ function init() {
   }
 
   function straightenCells() {
-    cells[bruceCurrentPosition].classList.add('straight')
-    cells[bruceCurrentPosition].classList.remove('swim-right')
-    cells[bruceCurrentPosition].classList.remove('swim-left')
-    cells[bruceCurrentPosition].classList.remove('swim-up')
-    cells[bruceCurrentPosition].classList.remove('swim-down')
+    //cells[bruceCurrentPosition].classList.add('straight')
+    cells[bruceCurrentPosition].classList.remove('swim-right','swim-left','swim-up','swim-down')
+
   }
-
-
 
   function swimDirection(event) {
     //cells[bruceCurrentPosition].className('')
@@ -110,16 +105,6 @@ function init() {
     }
   }
 
-  console.log('LIFE COUNT b4', lifeCount)
-
-  function removeHearts() {
-    console.log('remove hearts')
-    console.log('LIFE COUNT', lifeCount)
-    // const hearts = document.getElementById('lives')
-    // hearts.removeChild(hearts.childNodes[lifeCount - 1])
-
-    // if{lifeCount === 2 }
-  }
 
   const checkDeathTimer = setInterval(() => {
     if (cells[bruceCurrentPosition] === cells[shamuCurrentPosition]) {
@@ -128,16 +113,14 @@ function init() {
       //document.getElementById('lives').innerText = lives
       bruceDeath()
     }
-  }, 200)
+  }, 100)
 
   function bruceDeath() {
     resetBruce()
     const hearts = document.getElementById('lives')
-        function resetBruce() {
-
+    function resetBruce() {
       cells[bruceCurrentPosition].classList.remove('bruce')
       bruceCurrentPosition = 0
-
     }
   }
 
@@ -164,7 +147,7 @@ function init() {
     const enemyTimer = setInterval(() => {
       removeEnemy(shamuStartPosition)
       removeEnemy(shamuCurrentPosition)
-      const randomIndex = 2 //Math.floor(Math.random() * 4)
+      const randomIndex = Math.floor(Math.random() * 4)
       if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
 
         cells[shamuCurrentPosition + 1].classList.add('swim-left')
@@ -192,21 +175,35 @@ function init() {
     }, 1000)
   }
 
-  // function enterGame() {
-  //   console.log('ENTERING')
-  //   const overlay = document.querySelector('.overlay')
-  //   console.log(overlay)
-  //   overlay.classList.add('entering')
+  console.log('TEST',document.querySelectorAll('.food').length)
+  
+  const checkWinTimer = setInterval(() => {
+    if (document.querySelectorAll('.food').length === 0) {
+      console.log('All eaten')
+      clearTimeout(checkWinTimer)
+    }
+      
+  }, 500)
 
-  //       const gameComponents = document.querySelector('.game-component')
-  //       gameComponents.style.opacity = '1'
-  //   setTimeout(()=>{
-  //     console.log('timeout')
-  //     overlay.style.display = 'none'
-  //   },1000)
-  //   //overlay.style.display = 'none'
-  // }
 
+
+
+  function enterGame() {
+    console.log('ENTERING')
+    const overlay = document.querySelector('.overlay')
+    console.log(overlay)
+    overlay.classList.add('entering')
+
+        const gameComponents = document.querySelector('.game-component')
+        gameComponents.style.opacity = '1'
+    setTimeout(()=>{
+      console.log('timeout')
+      overlay.style.display = 'none'
+    },1000)
+    //overlay.style.display = 'none'
+  }
+
+  
   document.addEventListener('keydown', moveBruce)
   document.addEventListener('keydown', swimDirection)
   //document.getElementById('enter-btn').addEventListener('click', enterGame)

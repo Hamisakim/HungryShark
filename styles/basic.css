@@ -1,0 +1,220 @@
+html {
+  overflow: hidden;
+}
+
+body {
+font-family: 'Press Start 2P', cursive;
+height: 100vh;
+}
+
+
+
+/* .show-game-components {
+opacity: 1
+}
+.game-component {
+opacity: 0;
+}
+.overlay {
+ height: 100%;
+ display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100000;
+}
+.start-page-image {
+font-family: 'Press Start 2P', cursive;
+width: 100%;
+background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark fin gif.gif');
+background-position: center;
+background-size: cover;
+
+text-align: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.start-box {
+border: 30px groove rgba(31, 21, 255, 0.54);
+width: 80%;
+max-width: 900px;
+height: 50%;
+display: flex;
+background: #009fff;
+}
+.start-page-image button {
+height: 30%;
+width: 50%;
+background-color: rgba(212, 0, 0, 0.753);
+font-family: 'Press Start 2P', cursive;
+font-size: larger;
+box-shadow: 5px 5px 0px 8px rgba(0, 0, 0, 0.6);
+}
+.start-page-image h3 {
+margin: 50px;
+animation: blinker 1.5s infinite;
+color: rgb(255, 255, 2);
+font-size: large;
+}
+@keyframes blinker {
+0% {
+  opacity: 100;
+}
+60% {
+  opacity: 0;
+}
+}
+.entering {
+animation: slide-out-elliptic-top-bck 1s ease-in both;
+}
+@keyframes slide-out-elliptic-top-bck {
+0% {
+  transform: translateY(0) rotateX(0) scale(1);
+  transform-origin: 50% 1400px;
+  opacity: 1;
+}
+100% {
+  transform: translateY(-600px) rotateX(-30deg) scale(0);
+  transform-origin: 50% 100%;
+  opacity: 1;
+}
+} */
+
+.game-window{
+display: flex;
+flex-direction: column;
+align-items: center;
+
+height: 100vh;
+}
+
+#title h3 {
+margin: 0;
+font-size: xx-large;
+display: flex;
+flex-direction: column;
+}
+
+.header {
+height: 30%;
+display: flex;
+justify-content: space-around;
+margin-bottom: 10px;
+}
+
+.hearts {
+height: 50px;
+}
+
+.lives-container{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+#lives-counter{
+font-size: 125%;
+}
+
+.image {
+height: 50%;
+}
+
+.right-image {
+transform: scaleX(-1);
+}
+
+#title {
+display: flex;
+flex-flow: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+.game-container {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 80%;
+width: 80%;
+}
+
+.game-grid {
+  height: 90%;
+width: auto;
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+justify-content: center;
+align-content: center;
+}
+
+.wall {
+background-color: black;
+}
+
+
+.straight {
+transform: rotate(0deg);
+transform: scaleX(1);
+}
+
+.swim-right {
+transform: scaleX(-1);
+}
+
+.swim-left {
+transform: scaleX(1);
+}
+
+.swim-up {
+transform: rotate(90deg);
+}
+
+.swim-down {
+transform: rotate(-90deg);
+}
+
+h3 {
+display: flex;
+justify-content: center;
+}
+.food{
+ background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/fish.gif');
+background-repeat: no-repeat;
+background-size: 100%;
+background-position: center;
+}
+
+.shamu {
+background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
+background-repeat: no-repeat;
+background-size: 85%;
+background-position: center;
+}
+
+
+.game-grid div {
+flex-grow: 1;
+height: 10%;
+width: 9%;
+text-align: center;
+border-style: dotted;
+border-width: 1px; border-color: rgb(160,160,255); 
+}
+
+.game-grid div.bruce {
+background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark gif.gif');
+background-repeat: no-repeat;
+background-size: 85%;
+background-position: center;
+/* transform: scaleX(-1); */
+cursor: pointer;
+}
+
+
+
+/* {
+border: black solid 1px;
+}

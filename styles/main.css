@@ -1,13 +1,11 @@
 html {
-    overflow: hidden;
-  }
+  overflow: hidden;
+}
 
 body {
   font-family: 'Press Start 2P', cursive;
   height: 100vh;
-  }
-
-
+}
 
 /* .show-game-components {
   opacity: 1
@@ -90,11 +88,14 @@ body {
   }
 } */
 
-.game-window{
+.game-window {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  
+  background-image: url('https://i.pinimg.com/736x/43/e6/03/43e60317c7de579238530ad14b3777b9.jpg');
+  background-size: cover;
+  
   height: 100vh;
 }
 
@@ -106,22 +107,29 @@ body {
 }
 
 .header {
-  height: 30%;
+  height: 20%;
+  padding: 50px;
+  margin-top: 20px;
+  color: crimson;
   display: flex;
- justify-content: space-around;
- margin-bottom: 10px;
+  justify-content: space-around;
+
+
+
+  background-color: rgba(17, 42, 30, 0.719);
 }
 
 .hearts {
- height: 50px;
+  height: 50px;
 }
 
-.lives-container{
+.lives-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#lives-counter{
+
+#lives-counter {
   font-size: 125%;
 }
 
@@ -147,22 +155,32 @@ body {
   align-items: center;
   height: 80%;
   width: 80%;
+ 
 }
 
 .game-grid {
-    height: 90%;
-  width: auto;
+  height: 80%;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
+  background-color: rgb(39, 35, 245)
 }
+.square{
+  height: 9%;
+  width: 9%;
 
+  text-align: center;
+
+  border-style: dotted;
+  border-width: 1px;
+  border-color: rgb(160, 160, 255);
+}
 .wall {
   background-color: black;
 }
-
 
 .straight {
   transform: rotate(0deg);
@@ -189,8 +207,9 @@ h3 {
   display: flex;
   justify-content: center;
 }
-.food{
-   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/fish.gif');
+
+.food {
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/fish.gif');
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
@@ -204,14 +223,6 @@ h3 {
 }
 
 
-.game-grid div {
-  flex-grow: 1;
-  height: 10%;
-  width: 9%;
-  text-align: center;
-  border-style: dotted;
-  border-width: 1px; border-color: rgb(160,160,255); 
-}
 
 .game-grid div.bruce {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark gif.gif');
@@ -221,8 +232,6 @@ h3 {
   /* transform: scaleX(-1); */
   cursor: pointer;
 }
-
-
 
 /* {
   border: black solid 1px;
