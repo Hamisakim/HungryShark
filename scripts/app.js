@@ -97,20 +97,27 @@ function init() {
     }
   }
 
+  function eatFood(){
+    console.log('EATING')
+    console.log('SCORE',score)
+    score += 10
+    console.log(document.getElementById('score').innerText)
+    document.getElementById('score').innerText = score
+  }
 
   function moveBruce(event) {
     //console.log('Position A', bruceCurrentPosition)
-
     removeBruce(bruceCurrentPosition)
     //Remove from current position
     const key = event.keyCode
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
       straightenCells()
       bruceCurrentPosition++
-      ////console.log('AFTER MOVE POSITION',bruceCurrentPosition)
-      //cells[bruceCurrentPosition].classList.remove(shamuClass)
-      // removeStraight(bruceCurrentPosition)
-      //console.log('RIGHT')
+      console.log('BRUCE POSITION',cells[bruceCurrentPosition])
+      if(cells[bruceCurrentPosition].classList.contains('food')) {
+        eatFood()
+      }
+
     } else if (key === 37 && bruceCurrentPosition % width !== 0) { //LEFT
       straightenCells()
       bruceCurrentPosition--
