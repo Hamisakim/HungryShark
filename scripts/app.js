@@ -4,6 +4,9 @@
 function init() {
 
   let score = 0
+  let lives = 3
+
+
   const grid = document.querySelector('.game-grid') //this is the DOM for our grid contains cell
   const width = 10
   const cellCount = width * width
@@ -59,10 +62,12 @@ function init() {
 
   function addEnemy(position) {
     cells[position].classList.add(shamuClass)
+    cells[position].classList.add('enemy')
   }
 
   function removeEnemy(position) {
     cells[position].classList.remove(shamuClass)
+    cells[position].classList.remove('enemy')
   }
 
   function straightenCells() {
@@ -105,10 +110,22 @@ function init() {
     }
   }
 
+function getKilled(){
+  if (cells[bruceCurrentPosition].classList.contains('enemy')) {
+    lives -= 1
+    document.getElementById('lives').innerText = lives
+   
+  }
+}
+
+
+
+
   function moveBruce(event) {
     removeBruce(bruceCurrentPosition)
     eatFood()
     straightenCells()
+    getKilled()
     const key = event.keyCode
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
       bruceCurrentPosition++
