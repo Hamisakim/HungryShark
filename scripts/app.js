@@ -11,9 +11,9 @@ function init() {
   const cells = []
   const foodClass = 'food'
 
-  // console.log(cells)
-  // console.log('CELLS-COUNT', cellCount)
-  // console.log('CELLS', cells)
+  // //console.log(cells)
+  // //console.log('CELLS-COUNT', cellCount)
+  // //console.log('CELLS', cells)
 
   //* Bruce Variables
   const bruceClass = 'bruce' //class containing bruce image
@@ -27,9 +27,9 @@ function init() {
 
   //? ***********************************
 
-  //! Make a grid
+
   function createGrid() { // need parameter??
-    //console.log('CREATING GRID')
+    ////console.log('CREATING GRID')
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div') //creating div 
       cell.textContent = i
@@ -45,6 +45,7 @@ function init() {
 
   function addBruce(position) {
     cells[position].classList.add(bruceClass)
+    console.log('cells position', cells[position])
   }
 
   function removeBruce(position) {
@@ -94,7 +95,7 @@ function init() {
 
 
   function moveBruce(event) {
-    console.log('Position A', bruceCurrentPosition)
+    //console.log('Position A', bruceCurrentPosition)
 
     removeBruce(bruceCurrentPosition)
     //Remove from current position
@@ -102,48 +103,48 @@ function init() {
     if (key === 39 && bruceCurrentPosition % width !== width - 1) { //RIGHT
       straightenCells()
       bruceCurrentPosition++
-      //console.log('AFTER MOVE POSITION',bruceCurrentPosition)
+      ////console.log('AFTER MOVE POSITION',bruceCurrentPosition)
       //cells[bruceCurrentPosition].classList.remove(shamuClass)
       // removeStraight(bruceCurrentPosition)
-      console.log('RIGHT')
+      //console.log('RIGHT')
     } else if (key === 37 && bruceCurrentPosition % width !== 0) { //LEFT
       straightenCells()
       bruceCurrentPosition--
-      console.log('LEFT')
+      //console.log('LEFT')
     } else if (key === 38 && bruceCurrentPosition >= width) {  //UP
       straightenCells()
       bruceCurrentPosition -= width
-      console.log('UP')
+      //console.log('UP')
     } else if (key === 40 && bruceCurrentPosition + width <= width * width - 1) { //DOWN
       straightenCells()
       bruceCurrentPosition += width
-      console.log('DOWN')
+      //console.log('DOWN')
     } else {
-      console.log('INVALID KEY')
+      //console.log('INVALID KEY')
     }
     addBruce(bruceCurrentPosition) // add to the position after added§
-    console.log('POSITION B', bruceCurrentPosition)
+    //console.log('POSITION B', bruceCurrentPosition)
   }
 
 
   function moveEnemy() { // moving random every 500ms
-    console.log('SHAMU MOVE FN')
+    //console.log('SHAMU MOVE FN')
     const enemyTimer = setInterval(() => {
       removeEnemy(shamuStartPosition)
       removeEnemy(shamuCurrentPosition)
       const randomIndex = Math.floor(Math.random() * 4)
       if (randomIndex === 0 && shamuCurrentPosition % width !== width - 1) { //Move Right
-        console.log('RIGHT')
+        //console.log('RIGHT')
         cells[shamuCurrentPosition + 1].classList.add('swim-left')
         cells[shamuCurrentPosition].classList.remove('swim-right', 'swim-up', 'swim-down')
         shamuCurrentPosition++
       } else if (randomIndex === 1 && shamuCurrentPosition % width !== 0) { //LEFT
-        console.log('LEFT')
+        //console.log('LEFT')
         cells[shamuCurrentPosition - 1].classList.add('swim-right')
         cells[shamuCurrentPosition].classList.remove('swim-left', 'swim-up', 'swim-down')
         shamuCurrentPosition--
       } else if (randomIndex === 2 && shamuCurrentPosition >= width) {  //UP
-        console.log('UP', 'CURRENT', shamuCurrentPosition, '+width', shamuCurrentPosition - width)
+        //console.log('UP', 'CURRENT', shamuCurrentPosition, '+width', shamuCurrentPosition - width)
         cells[shamuCurrentPosition - width].classList.add('swim-down')
         cells[shamuCurrentPosition].classList.remove('swim-left', 'swim-up', 'swim-right')
         shamuCurrentPosition -= width
@@ -155,16 +156,23 @@ function init() {
         shamuCurrentPosition += width
         cells[shamuCurrentPosition - width].classList.remove('swim-up')
       }
-      addEnemy(shamuCurrentPosition)
+      //addEnemy(shamuCurrentPosition)
     }, 1500)
   }
 
+function enterGame() { 
+  console.log('ENTERING')
+ const overlay =  document.querySelector('.overlay')
+console.log(overlay)
+overlay.classList.add('entering')
+}
 
-  // ! Event listeners
   document.addEventListener('keydown', moveBruce)
   document.addEventListener('keydown', swimDirection)
+  document.getElementById('enter-btn').addEventListener('click', enterGame)
 
-  //! Functions to happen on page load
+
+
   createGrid(bruceStartPosition) //line 62 
   addEnemy(shamuStartPosition)
 

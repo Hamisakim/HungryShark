@@ -56,8 +56,6 @@ font-family: 'Press Start 2P', cursive;
 box-shadow: 5px 5px 0px 8px rgba(0,0,0,0.6);
 }
 
-
-
 .start-page-image h3{
   margin: 50px;
   animation: blinker 1.5s infinite;
@@ -70,6 +68,7 @@ box-shadow: 5px 5px 0px 8px rgba(0,0,0,0.6);
 
 }
 
+.entering{}
 
 /*  ********************************************* */
 
