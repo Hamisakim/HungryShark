@@ -166,7 +166,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  background-color: rgb(39, 35, 245)
+  background-color: rgba(39, 35, 245, 0.7)
 }
 .square{
   height: 9%;

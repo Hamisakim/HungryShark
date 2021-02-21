@@ -21,8 +21,9 @@ function init() {
   const shamuStartPosition = 54
   let shamuCurrentPosition = 54
 
+    console.log('TESTER',cells[7])
 
-  function createGrid() { // need parameter??
+  function createGrid() { // need parameter??˜
     console.log('creating')
     ////console.log('CREATING GRID')
     for (let i = 0; i < cellCount; i++) {
@@ -50,8 +51,9 @@ function init() {
 
 
   function addBruce(position) {
+    
     cells[position].classList.add(bruceClass)
-    //console.log('cells position', cells[position])
+    console.log('cells position', cells[position])
   }
 
   function removeBruce(position) {
@@ -185,23 +187,29 @@ function init() {
       
   }, 500)
 
+  // function winFunction(){
+  //   //console.log('win FN')
+  //   if (document.querySelectorAll('.food').length === 0) {
+  //     console.log('All eaten')
+  //   }
+  // }
 
 
 
-  function enterGame() {
-    console.log('ENTERING')
-    const overlay = document.querySelector('.overlay')
-    console.log(overlay)
-    overlay.classList.add('entering')
+  // function enterGame() {
+  //   console.log('ENTERING')
+  //   const overlay = document.querySelector('.overlay')
+  //   console.log(overlay)
+  //   overlay.classList.add('entering')
 
-        const gameComponents = document.querySelector('.game-component')
-        gameComponents.style.opacity = '1'
-    setTimeout(()=>{
-      console.log('timeout')
-      overlay.style.display = 'none'
-    },1000)
-    //overlay.style.display = 'none'
-  }
+  //       const gameComponents = document.querySelector('.game-component')
+  //       gameComponents.style.opacity = '1'
+  //   setTimeout(()=>{
+  //     console.log('timeout')
+  //     overlay.style.display = 'none'
+  //   },1000)
+  //   //overlay.style.display = 'none'
+  // }
 
   
   document.addEventListener('keydown', moveBruce)
