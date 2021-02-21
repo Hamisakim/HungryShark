@@ -48,7 +48,7 @@ function init() {
     }
   }
 
-
+s
 
   function addBruce(position) {
     
