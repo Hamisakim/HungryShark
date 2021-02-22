@@ -13,6 +13,8 @@ function init() {
     currentPosition: 110
   }
 
+  let score = 0
+  let lifeCount = 3
   const bruceHistory = []
 
   class Enemy {
@@ -44,16 +46,16 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       //cell.classList.add('food')
-      cell.textContent = i
+      //cell.textContent = i
       gameGrid.appendChild(cell)
       cellArray.push(cell)
 
       if ((i % 20 === 0) || (i > 480) || (i < 20) || ((i + 1) % 20 === 0)) {
-        cell.textContent = 'X'
+        //cell.textContent = 'X'
         cell.classList.add('wall')
       }
       else if (walls.includes(i) === true) {
-        cell.textContent = 'X'
+        //cell.textContent = 'X'
         cell.classList.add('wall')
       }
       else if (cage.includes(i) === true) {
@@ -61,6 +63,8 @@ function init() {
       }
       else if (food.includes(i) === true) {
         cell.classList.add('food')
+      } if (i === 260 || i === 279) {
+        cell.classList.remove('wall')
       }
 
 
@@ -87,6 +91,8 @@ function init() {
 
 
   function moveBruce(event) {
+    console.log('MOVING')
+    //eatFood()
     const key = event.keyCode
     cellArray[bruce.currentPosition].classList.remove(bruce.class)
 
@@ -101,10 +107,14 @@ function init() {
 
       bruce.currentPosition += width
     }
+
+    if (cellArray[bruce.currentPosition].classList.contains('food')) {
+      score += 10
+      // *document.getElementById('score').innerText = score
+      cellArray[bruce.currentPosition].classList.remove('food')
+    }
     addBruce(bruce.currentPosition)
     bruceHistory.push(bruce.currentPosition)
-    //console.log(bruceHistory)
-
   }
 
 
@@ -127,6 +137,19 @@ function init() {
       })
     }, 300)
   }
+
+  const checkDeathTimer = setInterval(() => {
+    //console.log('cehceking')
+    console.log
+    if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare') ) {
+      lifeCount -= 1
+      //document.getElementById('lives-counter').innerText = lifeCount
+      //document.getElementById('lives').innerText = lives
+      //bruceDeath()
+      console.log('DEATH')
+    }
+  }, 100)
+
 
 
 

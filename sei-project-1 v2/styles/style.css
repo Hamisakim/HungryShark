@@ -46,7 +46,12 @@ body {
   background-size: 85%;
   background-position: center;
 }
-
+.food {
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/fish.gif');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center; 
+}
 .quint{
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/boat 2.gif');
 }
@@ -63,8 +68,8 @@ body {
   background-size : contain;
 
 }
-/* .wall {
+.wall {
   background-color: grey;
-} */
-.food {}
+}
+
 
