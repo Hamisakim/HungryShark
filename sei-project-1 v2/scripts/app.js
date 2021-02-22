@@ -27,10 +27,10 @@ function init() {
   }
 
   const enemies = [
-    new Enemy('quint', 150),
+    new Enemy('quint', 269),
     new Enemy('shamu', 288),
-    new Enemy('squid', 89),
-    new Enemy('flipper', 190)
+    new Enemy('squid', 250),
+    new Enemy('flipper', 271)
   ]
 
   const cage =
@@ -39,14 +39,18 @@ function init() {
 
   const walls = [29, 30, 42, 44, 45, 46, 47, 49, 50, 52, 53, 54, 55, 57, 62, 64, 65, 66, 67, 69, 70, 72, 73, 74, 75, 77, 82, 84, 85, 86, 87, 89, 90, 92, 93, 94, 95, 97, 102, 117, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 137, 149, 150, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 177, 182, 184, 185, 186, 187, 189, 190, 192, 193, 194, 195, 197, 221, 222, 224, 226, 227, 228, 231, 232, 233, 235, 237, 238, 241, 242, 244, 246, 253, 255, 257, 258, 266, 273, 282, 284, 286, 293, 295, 297, 302, 304, 306, 307, 308, 309, 310, 311, 312, 313, 315, 317, 322, 324, 335, 337, 346, 347, 349, 350, 352, 353, 361, 363, 364, 366, 367, 369, 370, 372, 373, 375, 376, 378, 381, 383, 384, 386, 387, 389, 390, 392, 393, 395, 396, 398, 409, 410, 422, 423, 424, 425, 427, 428, 429, 430, 431, 432, 434, 435, 436, 437, 442, 443, 444, 445, 447, 448, 449, 450, 451, 452, 454, 455, 456, 457, 298, 318, 338, 281, 301, 321, 341, 358]
 
-  const food = [21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 35, 36, 37, 38, 41, 43, 48, 51, 56, 58, 61, 63, 68, 71, 76, 78, 81, 83, 88, 91, 96, 98, 101, 103, 104, 105, 106, 107, 108, 111, 112, 113, 114, 115, 116, 118, 121, 123, 136, 138, 141, 142, 143, 144, 145, 146, 147, 148, 151, 152, 153, 154, 155, 156, 157, 158, 161, 163, 176, 178, 181, 183, 196, 198, 201, 202, 203, 204, 215, 216, 217, 218, 223, 236, 243, 256, 263, 264, 275, 276, 283, 296, 303, 316, 323, 336, 342, 343, 344, 345, 348, 351, 354, 355, 356, 357, 362, 365, 368, 371, 374, 377, 382, 385, 388, 391, 394, 397, 401, 402, 403, 404, 405, 406, 407, 408, 411, 412, 413, 414, 415, 416, 417, 418, 421, 426, 433, 438, 441, 446, 453, 458, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478]
+  const food = [21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 35, 36, 37, 38, 41, 43, 48, 51, 56, 58, 61, 63, 68, 71, 76, 78, 83, 88, 91, 96, 101, 103, 104, 105, 106, 107, 108, 111, 112, 113, 114, 115, 116, 118, 121, 123, 136, 138, 141, 142, 143, 144, 145, 146, 147, 148, 151, 152, 153, 154, 155, 156, 157, 158, 161, 163, 176, 178, 181, 183, 196, 198, 201, 202, 203, 204, 215, 216, 217, 218, 223, 236, 243, 256, 263, 264, 275, 276, 283, 296, 303, 316, 323, 336, 343, 344, 345, 348, 351, 354, 355, 356, 362, 365, 368, 371, 374, 377, 382, 385, 388, 391, 394, 397, 401, 402, 403, 404, 405, 406, 407, 408, 411, 412, 413, 414, 415, 416, 417, 418, 421, 426, 433, 438, 441, 446, 453, 458, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478]
+
+
+  const powerUps = [342, 357, 81, 98]
+
 
 
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       //cell.classList.add('food')
-      //cell.textContent = i
+      cell.textContent = i
       gameGrid.appendChild(cell)
       cellArray.push(cell)
 
@@ -59,13 +63,16 @@ function init() {
         cell.classList.add('wall')
       }
       else if (cage.includes(i) === true) {
-        cell.textContent = 'X'
+        //cell.textContent = 'X'
         cell.classList.add('cage')
       }
       else if (food.includes(i) === true) {
         cell.classList.add('food')
       } if (i === 260 || i === 279) {
         cell.classList.remove('wall')
+      } else if (powerUps.includes(i) === true) {
+        console.log('POWER UP')
+        cell.classList.add('power-up')
       }
 
 
@@ -115,13 +122,18 @@ function init() {
       cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
       bruce.currentPosition += width
     }
-
-    if (cellArray[bruce.currentPosition].classList.contains('food')) {
-      score += 10
+    function eatFood() {
+      if (cellArray[bruce.currentPosition].classList.contains('food')) {
+        score += 10
+        
+      } else if (cellArray[bruce.currentPosition].classList.contains('power-up')) {
+        score += 50
+        //! powerUp()
+      }
+            cellArray[bruce.currentPosition].classList.remove('food','power-up')
       document.getElementById('score').innerText = score
-      cellArray[bruce.currentPosition].classList.remove('food')
     }
-
+    eatFood()
     addBruce(bruce.currentPosition)
     bruceHistory.push(bruce.currentPosition)
   }
@@ -130,7 +142,7 @@ function init() {
   function moveEnemy() {
     const enemyTimer = setInterval(() => {
       enemies.forEach(enemy => {
-        const randomIndex = 1 //Math.floor(Math.random() * 4)
+        const randomIndex = 2 //Math.floor(Math.random() * 4)
         cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
         if ((randomIndex === 0) && (!cellArray[enemy.currentPosition + 1].classList.contains('wall'))) {
           cellArray[enemy.currentPosition + 1].classList.add('swim-right')

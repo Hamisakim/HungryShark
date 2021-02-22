@@ -15,7 +15,7 @@ body {
   display: flex;
   flex-direction: column;
   background-size: cover;
-  background-image: url('https://im4.ezgif.com/tmp/ezgif-4-ce3a56d9ad6c.gif');
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/background.gif');
   margin-bottom: 5%;
 }
 
@@ -23,7 +23,9 @@ body {
   height: 20%;
   display: flex;
   justify-content: space-between;
-  color: rgba(175, 5, 5, 0.877);
+  align-items: center;
+
+  color: rgba(255, 111, 0, 0.975);
   background: rgb(2, 0, 36);
   background: linear-gradient(0deg, rgba(2, 0, 36, 0.6) 0%, rgba(6, 6, 122, 0.4) 30%, rgba(0, 212, 255, 0.4) 100%);
 }
@@ -36,9 +38,12 @@ section {
   align-items: center;
 }
 
-.how-to-btn {
-  display: flex;
-  justify-self: flex-start;
+button{
+height: 20%;
+width: 20%;
+background-color: rgba(212, 0, 0, 0.753);
+box-shadow: 5px 5px 5px 8px rgba(0, 0, 0, 0.6);
+font-family: 'Press Start 2P', cursive;
 }
 
 .title h1 {
@@ -71,14 +76,18 @@ section {
   flex-direction: row;
   background: rgb(174, 238, 230);
   background: radial-gradient(circle, rgba(174, 238, 230, 0.4) 0%, rgba(0, 99, 255, 0.4) 100%);
+
+  border: 13px double #004D94;
+  border-radius: 6px;
+
 }
 
 .game-grid div {
   flex-shrink: 1;
   min-width: 5%;
   min-height: 4%;
-  font-size: 5px;
-  color: grey;
+  font-size: 10px;
+  color: rgb(255, 191, 0);
   text-align: center;
 }
 
@@ -110,6 +119,14 @@ section {
   background-size: 100%;
   background-position: center;
 }
+
+.power-up{
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/power up turtle.gif');
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: center;
+}
+
 
 .quint {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/boat 2.gif');
