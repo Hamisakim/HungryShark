@@ -1,0 +1,66 @@
+body {
+  font-family: 'Press Start 2P', cursive;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+}
+
+.game-container{
+  height: 80vh;
+  width: 80vw;
+}
+.game-grid{
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+}
+.game-grid div{
+  flex-shrink: 1;
+  min-width: 5%;
+  min-height: 4%;
+  font-size: 5px;
+  color: grey;
+  text-align: center;
+}
+
+
+.bruce {
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark gif.gif');
+  background-repeat: no-repeat;
+  background-size: 85%;
+  background-position: center;
+  /* transform: scaleX(-1); */
+  cursor: pointer;
+}
+
+.enemyOnSquare{
+  background-repeat: no-repeat;
+  background-size: 85%;
+  background-position: center;
+}
+
+.shamu {
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
+}
+
+.squid  {
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/squid 2.gif')
+}
+.flipper{
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/dolphin gif.gif');
+  background-size : contain;
+
+}
+/* .wall {
+  background-color: grey;
+} */
+.food {}
+
