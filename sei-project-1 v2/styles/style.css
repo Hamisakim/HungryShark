@@ -33,7 +33,7 @@ body {
 
 
 .bruce {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark gif.gif');
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/shark gif.gif');
   background-repeat: no-repeat;
   background-size: 85%;
   background-position: center;
@@ -48,14 +48,14 @@ body {
 }
 
 .shamu {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/shamu.gif');
 }
 
 .squid  {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/squid 2.gif')
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/squid .gif')
 }
 .flipper{
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/dolphin gif.gif');
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/whale gif.gif');
   background-size : contain;
 
 }

@@ -26,8 +26,8 @@ function init() {
     }
     spawn(startPosition, name) {
       name = this.constructor.name
-       console.log('CLASS NAME', name)
-       console.log('CELL ARRAY ', cellArray[startPosition])
+      console.log('CLASS NAME', name)
+      console.log('CELL ARRAY ', cellArray[startPosition])
     }
   }
 
@@ -47,7 +47,7 @@ function init() {
 
   const bruce = new Player('bruce', 0)
   //console.log(bruce.name)
-  
+
   const shamu = new Enemy('shamu', 100)
 
   bruce.spawn(10)
@@ -70,4 +70,4 @@ window.addEventListener('DOMContentLoaded', init)
 
 
 
-||(i===168)||(i===169)||(i===188)||(i===208)||(i===228)||(i===229)||(i===230)||(i===231)||(i===232)||(i===212)||(i===192)||(i===172)||(i===171)
+  || (i === 167) || (i === 169) || (i === 187) || (i === 207) || (i === 227) || (i === 229) || (i === 230) || (i === 231) || (i === 232) || (i === 212) || (i === 192) || (i === 172) || (i === 171)

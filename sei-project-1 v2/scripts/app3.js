@@ -20,7 +20,7 @@ function init() {
     }
   }
 
-  const enemies = [a
+  const enemies = [
     new Enemy('shamu', 50),
     new Enemy('squid', 20)
   ]
