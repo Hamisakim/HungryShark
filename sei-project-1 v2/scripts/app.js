@@ -23,8 +23,8 @@ function init() {
   }
 
   const enemies = [
-    new Enemy('shamu', 188),
-    new Enemy('squid', 189),
+    new Enemy('shamu', 288),
+    new Enemy('squid', 89),
     new Enemy('flipper', 190)
   ]
 
@@ -62,13 +62,13 @@ function init() {
     cellArray[bruce.currentPosition].classList.remove(bruce.class)
 
     console.log('CURRENT', bruce.currentPosition)
-    if ((key === 39 || key === 68) && (bruce.currentPosition % width !== width - 1) && (!cellArray[bruce.currentPosition + 1].classList.contains('wall'))) {
+    if ((key === 39 || key === 68) && (!cellArray[bruce.currentPosition + 1].classList.contains('wall'))) {
       bruce.currentPosition++
-    } else if ((key === 37 || key === 65) && (bruce.currentPosition % width !== 0) && (!cellArray[bruce.currentPosition - 1].classList.contains('wall'))) { //Left
+    } else if ((key === 37 || key === 65) && (!cellArray[bruce.currentPosition - 1].classList.contains('wall'))) { //Left
       bruce.currentPosition--
-    } else if ((key === 38 || key === 87) && (bruce.currentPosition >= width) && (!cellArray[bruce.currentPosition - width].classList.contains('wall'))) { //UP
+    } else if ((key === 38 || key === 87) && (!cellArray[bruce.currentPosition - width].classList.contains('wall'))) { //UP
       bruce.currentPosition -= width
-    } else if ((key === 40 || key === 83) && (bruce.currentPosition + width <= width * height - 1) && (!cellArray[bruce.currentPosition + width].classList.contains('wall'))) { //down
+    } else if ((key === 40 || key === 83) && (!cellArray[bruce.currentPosition + width].classList.contains('wall'))) { //down
 
       bruce.currentPosition += width
     }
@@ -77,16 +77,23 @@ function init() {
   }
 
 
-
-
   function moveEnemy() {
-    const randomIndex = Math.floor(Math.random() * 4)
+    const enemyTimer = setInterval(() => {
     enemies.forEach(enemy => {
+      const randomIndex = Math.floor(Math.random() * 4)
       cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
-
-
+      if ((randomIndex === 0) && (!cellArray[enemy.currentPosition + 1].classList.contains('wall'))) {
+        enemy.currentPosition++
+      } else if ((randomIndex === 1) && (!cellArray[enemy.currentPosition - 1].classList.contains('wall'))) {
+        enemy.currentPosition--
+      } else if ((randomIndex === 2) && (!cellArray[enemy.currentPosition - width].classList.contains('wall'))) {
+        enemy.currentPosition -= width
+      } else if ((randomIndex === 3) && (!cellArray[enemy.currentPosition + width].classList.contains('wall'))) {
+        enemy.currentPosition += width
+      }
+      cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
     })
-
+  },500)
   }
 
 
