@@ -98,13 +98,20 @@ function init() {
 
     //console.log('CURRENT', bruce.currentPosition)
     if ((key === 39 || key === 68) && (!cellArray[bruce.currentPosition + 1].classList.contains('wall'))) {
+      cellArray[bruce.currentPosition + 1].classList.add('swim-right')
+      cellArray[bruce.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
       bruce.currentPosition++
     } else if ((key === 37 || key === 65) && (!cellArray[bruce.currentPosition - 1].classList.contains('wall')) && (!cellArray[bruce.currentPosition - 1].classList.contains('cage'))) { //Left
+      cellArray[bruce.currentPosition - 1].classList.add('swim-left')
+      cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
       bruce.currentPosition--
     } else if ((key === 38 || key === 87) && (!cellArray[bruce.currentPosition - width].classList.contains('wall'))) { //UP
+      cellArray[bruce.currentPosition - width].classList.add('swim-up')
+      cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
       bruce.currentPosition -= width
     } else if ((key === 40 || key === 83) && (!cellArray[bruce.currentPosition + width].classList.contains('wall')) && (!cellArray[bruce.currentPosition + width].classList.contains('cage'))) { //down
-
+      cellArray[bruce.currentPosition + width].classList.add('swim-down')
+      cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
       bruce.currentPosition += width
     }
 
@@ -113,6 +120,7 @@ function init() {
       // *document.getElementById('score').innerText = score
       cellArray[bruce.currentPosition].classList.remove('food')
     }
+
     addBruce(bruce.currentPosition)
     bruceHistory.push(bruce.currentPosition)
   }
@@ -122,15 +130,24 @@ function init() {
   function moveEnemy() {
     const enemyTimer = setInterval(() => {
       enemies.forEach(enemy => {
-        const randomIndex = Math.floor(Math.random() * 4)
+        const randomIndex =  0 //Math.floor(Math.random() * 4)
         cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
         if ((randomIndex === 0) && (!cellArray[enemy.currentPosition + 1].classList.contains('wall'))) {
+          cellArray[enemy.currentPosition + 1].classList.add('swim-right')
+          cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
           enemy.currentPosition++
         } else if ((randomIndex === 1) && (!cellArray[enemy.currentPosition - 1].classList.contains('wall'))) {
+          cellArray[enemy.currentPosition - 1].classList.add('swim-left')
+          cellArray[enemy.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
           enemy.currentPosition--
         } else if ((randomIndex === 2) && (!cellArray[enemy.currentPosition - width].classList.contains('wall'))) {
+          cellArray[enemy.currentPosition - width].classList.add('swim-up')
+          cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')    
+          
           enemy.currentPosition -= width
         } else if ((randomIndex === 3) && (!cellArray[enemy.currentPosition + width].classList.contains('wall'))) {
+          cellArray[enemy.currentPosition + width].classList.add('swim-down')
+          cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
           enemy.currentPosition += width
         }
         cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
@@ -141,7 +158,7 @@ function init() {
   const checkDeathTimer = setInterval(() => {
     //console.log('cehceking')
     console.log
-    if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare') ) {
+    if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare')) {
       lifeCount -= 1
       //document.getElementById('lives-counter').innerText = lifeCount
       //document.getElementById('lives').innerText = lives

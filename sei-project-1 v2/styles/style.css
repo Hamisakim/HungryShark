@@ -73,3 +73,18 @@ body {
 }
 
 
+.swim-right {
+  transform: scaleX(-1);
+}
+
+.swim-left {
+  transform: scaleX(1);
+}
+
+.swim-up {
+  transform: rotate(90deg);
+}
+
+.swim-down {
+  transform: rotate(-90deg);
+}
