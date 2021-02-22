@@ -9,8 +9,8 @@ function init() {
   const cellArray = []
   const bruce = {
     class: 'bruce',
-    startPosition: 90,
-    currentPosition: 90
+    startPosition: 110,
+    currentPosition: 110
   }
 
   const bruceHistory = []
