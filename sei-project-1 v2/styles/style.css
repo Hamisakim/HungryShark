@@ -1,28 +1,68 @@
 body {
   font-family: 'Press Start 2P', cursive;
   height: 100vh;
+  margin: 0%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
-
 }
 
-.game-container{
-  height: 80vh;
-  width: 80vw;
+.game-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-image: url('https://im4.ezgif.com/tmp/ezgif-4-ce3a56d9ad6c.gif');
+  margin-bottom: 5%;
 }
-.game-grid{
+
+.header {
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: rgba(175, 5, 5, 0.877);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(0deg, rgba(2, 0, 36, 0.6) 0%, rgba(6, 6, 122, 0.4) 30%, rgba(0, 212, 255, 0.4) 100%);
+}
+
+
+
+.title h1 {
+  margin-top: 50px;
+}
+
+.lives-conatainer {
+  display: flex;
+  flex-direction: row;
+  font-size: smaller;
+}
+
+.hearts {
+  height: 50px;
+}
+
+#lives-counter {
+  font-size: 125%;
+  display: flex;
+}
+
+.game-grid {
   height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
-
+  background: rgb(174, 238, 230);
+  background: radial-gradient(circle, rgba(174, 238, 230, 0.4) 0%, rgba(0, 99, 255, 0.4) 100%);
 }
-.game-grid div{
+
+.game-grid div {
   flex-shrink: 1;
   min-width: 5%;
   min-height: 4%;
@@ -30,6 +70,15 @@ body {
   color: grey;
   text-align: center;
 }
+
+.wall {
+  background-size: 350%;
+  background-position: center;
+  background-image: url('https://lh3.googleusercontent.com/proxy/J_cDEKYfyflGXo6zYGm8L7fEjaZHBfRUxWRA_K6yNSunDrJpURLvp9r-Z-RMcmnKKcvhowNezVTWZNXxtFr4NCGCvVB7o3CH');
+  background-color: rgba(9, 63, 1, 0.2);
+}
+
+
 
 
 .bruce {
@@ -41,37 +90,36 @@ body {
   cursor: pointer;
 }
 
-.enemyOnSquare{
+.enemyOnSquare {
   background-repeat: no-repeat;
-  background-size: 85%;
+  background-size: contain;
   background-position: center;
 }
+
 .food {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/fish.gif');
   background-repeat: no-repeat;
   background-size: 100%;
-  background-position: center; 
+  background-position: center;
 }
-.quint{
+
+.quint {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/boat 2.gif');
 }
 
 .shamu {
+  background-size: 85%;
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/shamu.gif');
 }
 
-.squid  {
+.squid {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/squid .gif')
 }
-.flipper{
+
+.flipper {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/whale gif.gif');
-  background-size : contain;
-
+  background-size: contain;
 }
-.wall {
-  background-color: grey;
-}
-
 
 .swim-right {
   transform: scaleX(-1);

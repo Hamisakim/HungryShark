@@ -59,6 +59,7 @@ function init() {
         cell.classList.add('wall')
       }
       else if (cage.includes(i) === true) {
+        cell.textContent = 'X'
         cell.classList.add('cage')
       }
       else if (food.includes(i) === true) {
@@ -92,7 +93,7 @@ function init() {
 
   function moveBruce(event) {
     console.log('MOVING')
-    //eatFood()
+
     const key = event.keyCode
     cellArray[bruce.currentPosition].classList.remove(bruce.class)
 
@@ -117,7 +118,7 @@ function init() {
 
     if (cellArray[bruce.currentPosition].classList.contains('food')) {
       score += 10
-      // *document.getElementById('score').innerText = score
+      document.getElementById('score').innerText = score
       cellArray[bruce.currentPosition].classList.remove('food')
     }
 
@@ -126,11 +127,10 @@ function init() {
   }
 
 
-
   function moveEnemy() {
     const enemyTimer = setInterval(() => {
       enemies.forEach(enemy => {
-        const randomIndex =  0 //Math.floor(Math.random() * 4)
+        const randomIndex = 1 //Math.floor(Math.random() * 4)
         cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
         if ((randomIndex === 0) && (!cellArray[enemy.currentPosition + 1].classList.contains('wall'))) {
           cellArray[enemy.currentPosition + 1].classList.add('swim-right')
@@ -142,8 +142,8 @@ function init() {
           enemy.currentPosition--
         } else if ((randomIndex === 2) && (!cellArray[enemy.currentPosition - width].classList.contains('wall'))) {
           cellArray[enemy.currentPosition - width].classList.add('swim-up')
-          cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')    
-          
+          cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+
           enemy.currentPosition -= width
         } else if ((randomIndex === 3) && (!cellArray[enemy.currentPosition + width].classList.contains('wall'))) {
           cellArray[enemy.currentPosition + width].classList.add('swim-down')
@@ -160,7 +160,7 @@ function init() {
     console.log
     if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare')) {
       lifeCount -= 1
-      //document.getElementById('lives-counter').innerText = lifeCount
+      document.getElementById('lives-counter').innerText = lifeCount
       //document.getElementById('lives').innerText = lives
       //bruceDeath()
       console.log('DEATH')
