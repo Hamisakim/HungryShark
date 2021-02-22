@@ -47,6 +47,10 @@ body {
   background-position: center;
 }
 
+.quint{
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/boat 2.gif');
+}
+
 .shamu {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/shamu.gif');
 }

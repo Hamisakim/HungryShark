@@ -209,14 +209,14 @@ h3 {
 }
 
 .food {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/fish.gif');
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/fish.gif');
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
 }
 
 .shamu {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shamu.gif');
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/shamu.gif');
   background-repeat: no-repeat;
   background-size: 85%;
   background-position: center;
@@ -225,7 +225,7 @@ h3 {
 
 
 .game-grid div.bruce {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/Project 1 assets/shark gif.gif');
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/shark gif.gif');
   background-repeat: no-repeat;
   background-size: 85%;
   background-position: center;
