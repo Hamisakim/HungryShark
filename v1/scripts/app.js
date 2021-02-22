@@ -21,7 +21,7 @@ function init() {
   const shamuStartPosition = 54
   let shamuCurrentPosition = 54
 
-    console.log('TESTER',cells[7])
+  console.log('TESTER', cells[7])
 
   function createGrid() { // need parameter??˜
     console.log('creating')
@@ -48,10 +48,7 @@ function init() {
     }
   }
 
-s
-
   function addBruce(position) {
-    
     cells[position].classList.add(bruceClass)
     console.log('cells position', cells[position])
   }
@@ -73,7 +70,7 @@ s
 
   function straightenCells() {
     //cells[bruceCurrentPosition].classList.add('straight')
-    cells[bruceCurrentPosition].classList.remove('swim-right','swim-left','swim-up','swim-down')
+    cells[bruceCurrentPosition].classList.remove('swim-right', 'swim-left', 'swim-up', 'swim-down')
 
   }
 
@@ -177,14 +174,14 @@ s
     }, 1000)
   }
 
-  console.log('TEST',document.querySelectorAll('.food').length)
-  
+  console.log('TEST', document.querySelectorAll('.food').length)
+
   const checkWinTimer = setInterval(() => {
     if (document.querySelectorAll('.food').length === 0) {
       console.log('All eaten')
       clearTimeout(checkWinTimer)
     }
-      
+
   }, 500)
 
   // function winFunction(){
@@ -211,7 +208,7 @@ s
   //   //overlay.style.display = 'none'
   // }
 
-  
+
   document.addEventListener('keydown', moveBruce)
   document.addEventListener('keydown', swimDirection)
   //document.getElementById('enter-btn').addEventListener('click', enterGame)
