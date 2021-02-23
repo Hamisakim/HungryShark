@@ -166,29 +166,18 @@ button {
 
 
 .edible {
-  animation: shake-horizontal 0.8s ease-in-out infinite both;
+  animation: blink-1 0.6s infinite both;
 }
 
-@keyframes shake-horizontal {
+
+ @keyframes blink-1 {
   0%,
-  100% {
-    transform: translateX(0);
-  }
-  10%,
-  30%,
   50%,
-  70% {
-    transform: translateX(-10px);
+  100% {
+    opacity: 1;
   }
-  20%,
-  40%,
-  60% {
-    transform: translateX(10px);
-  }
-  80% {
-    transform: translateX(8px);
-  }
-  90% {
-    transform: translateX(-8px);
+  25%,
+  75% {
+    opacity: 0;
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 /* eslint-disable no-empty */
 /* eslint-disable indent */
 
@@ -22,8 +23,8 @@ function init() {
     constructor(name, startPosition) {
       this.name = name
       this.startPosition = startPosition
-      this.class = 'enemyOnSquare'
       this.currentPosition = startPosition //this.currentPosition
+      this.class = 'enemyOnSquare'
       this.edible = false
 
     }
@@ -85,6 +86,7 @@ function init() {
   }
   createGrid()
   moveEnemy()
+
   function addEnemies() {
     enemies.forEach(enemy => {
       //console.log('ENEMY', enemy)
@@ -198,24 +200,38 @@ function init() {
 
         cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
       })
-    }, 300)
+    }, 200)
   }
 
-
+  console.log('TEST', enemies)
   function gameChecker() {
     const checkerTimer = setInterval(() => {
       //console.log('cehceking')
-      if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare')) {
+      if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare') && !cellArray[bruce.currentPosition].classList.contains('edible')) {
         lifeCount -= 1
         document.getElementById('lives-counter').innerText = lifeCount
         //bruceDeath()
         console.log('DEATH')
       } else if (cellArray[bruce.currentPosition].classList.contains('edible')) {
+        score += 200
+        console.log(cellArray[bruce.currentPosition].classList)
+       
+        cellArray[bruce.currentPosition].classList.remove('shamu', 'flipper', 'quint', 'squid')
+        enemies.forEach(enemy => {
+          if (enemy.currentPosition === bruce.currentPosition) {
+            console.log('same position')
+            enemy.currentPosition = enemy.startPosition
+          }
+        })
 
+        //cellArray[bruce.currentPosition].classList.remove(enemy.class, enemy.name))
+        // enemies.forEach(enemy => enemy.currentPosition = enemy.startPosition)
+
+
+        //enemies.forEach(enemy => enemy.currentPosition = enemy.startPosition)
       }
 
-
-    }, 100)
+    }, 10)
   }
 
   gameChecker()
@@ -235,7 +251,7 @@ function init() {
     enemies.forEach(enemy => {
       enemy.edible = false
     })
-    cellArray.forEach(cell=> cell.classList.remove('edible'))
+    cellArray.forEach(cell => cell.classList.remove('edible'))
   }
 
   document.addEventListener('keydown', moveBruce)
