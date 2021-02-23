@@ -106,10 +106,28 @@ function init() {
     cellArray[bruce.currentPosition].classList.remove(bruce.class)
     //console.log('CURRENT', bruce.currentPosition)
     if (key === 39 || key === 68) {
-      moveRight(bruce)
+      
+      if ( bruce.currentPosition === 279){
+        console.log('Tunnel')
+      cellArray[260].classList.add('swim-right')
+      cellArray[279].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+      bruce.currentPosition = 260
+    } else {
+      moveRight(bruce)}
     }
-    else if ((key === 37 || key === 65) && (!cellArray[bruce.currentPosition - 1].classList.contains('wall')) && (!cellArray[bruce.currentPosition - 1].classList.contains('cage'))) { //Left
-      moveLeft(bruce)
+    else if ((key === 37 || key === 65)){ //Left
+      console.log(bruce.currentPosition)
+
+      if ( bruce.currentPosition === 260){
+        console.log('Tunnel')
+      cellArray[280].classList.add('swim-left')
+      cellArray[260].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-right')
+      bruce.currentPosition = 279
+    } else {
+      moveLeft(bruce)}
+
+
+      
     } else if ((key === 38 || key === 87) && (!cellArray[bruce.currentPosition - width].classList.contains('wall'))) { //UP
       cellArray[bruce.currentPosition - width].classList.add('swim-up')
       cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
@@ -143,7 +161,7 @@ function init() {
       cellArray[character.currentPosition + 1].classList.add('swim-right')
       cellArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
       character.currentPosition++
-    }
+    } 
   }
 
 
