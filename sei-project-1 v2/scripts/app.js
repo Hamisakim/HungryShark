@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-/* eslint-disable no-unused-vars */
+
 function init() {
 
   const gameGrid = document.querySelector('.game-grid')
@@ -50,7 +50,7 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       //cell.classList.add('food')
-      cell.textContent = i
+      cell.textContent = i //number on
       gameGrid.appendChild(cell)
       cellArray.push(cell)
 
@@ -71,7 +71,6 @@ function init() {
       } if (i === 260 || i === 279) {
         cell.classList.remove('wall')
       } else if (powerUps.includes(i) === true) {
-        console.log('POWER UP')
         cell.classList.add('power-up')
       }
 
@@ -125,12 +124,12 @@ function init() {
     function eatFood() {
       if (cellArray[bruce.currentPosition].classList.contains('food')) {
         score += 10
-        
+
       } else if (cellArray[bruce.currentPosition].classList.contains('power-up')) {
         score += 50
         //! powerUp()
       }
-            cellArray[bruce.currentPosition].classList.remove('food','power-up')
+      cellArray[bruce.currentPosition].classList.remove('food', 'power-up')
       document.getElementById('score').innerText = score
     }
     eatFood()
@@ -139,29 +138,60 @@ function init() {
   }
 
 
+  function moveEnemyRight(enemy) {
+    console.log('MOVE RIGHT FN')
+    if (!cellArray[enemy.currentPosition + 1].classList.contains('wall')) {
+      console.log('MOVE')
+      cellArray[enemy.currentPosition + 1].classList.add('swim-right')
+      cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+      enemy.currentPosition++
+    }
+  }
+
+
+  function moveEnemyLeft(enemy) {
+    if (!cellArray[enemy.currentPosition - 1].classList.contains('wall')) {
+      cellArray[enemy.currentPosition - 1].classList.add('swim-left')
+      cellArray[enemy.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
+      enemy.currentPosition--
+    }
+  }
+
+
+  function moveEnemyUp(enemy) {
+    if (!cellArray[enemy.currentPosition - width].classList.contains('wall')) {
+      cellArray[enemy.currentPosition - width].classList.add('swim-up')
+      cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+      enemy.currentPosition -= width
+    }
+  }
+
+
+  function moveEnemyDown(enemy) {
+    if (!cellArray[enemy.currentPosition + width].classList.contains('wall')) {
+      cellArray[enemy.currentPosition + width].classList.add('swim-down')
+      cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+      enemy.currentPosition += width
+    }
+  }
   function moveEnemy() {
+    // eslint-disable-next-line no-unused-vars
     const enemyTimer = setInterval(() => {
       enemies.forEach(enemy => {
-        const randomIndex = 2 //Math.floor(Math.random() * 4)
+        const randomIndex = 3 //Math.floor(Math.random() * 4)
         cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
-        if ((randomIndex === 0) && (!cellArray[enemy.currentPosition + 1].classList.contains('wall'))) {
-          cellArray[enemy.currentPosition + 1].classList.add('swim-right')
-          cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
-          enemy.currentPosition++
-        } else if ((randomIndex === 1) && (!cellArray[enemy.currentPosition - 1].classList.contains('wall'))) {
-          cellArray[enemy.currentPosition - 1].classList.add('swim-left')
-          cellArray[enemy.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
-          enemy.currentPosition--
-        } else if ((randomIndex === 2) && (!cellArray[enemy.currentPosition - width].classList.contains('wall'))) {
-          cellArray[enemy.currentPosition - width].classList.add('swim-up')
-          cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
 
-          enemy.currentPosition -= width
-        } else if ((randomIndex === 3) && (!cellArray[enemy.currentPosition + width].classList.contains('wall'))) {
-          cellArray[enemy.currentPosition + width].classList.add('swim-down')
-          cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
-          enemy.currentPosition += width
+        if (randomIndex === 0) {
+          moveEnemyRight(enemy)
+        } else if (randomIndex === 1) {
+          moveEnemyLeft(enemy)
+        } else if (randomIndex === 2) {
+          moveEnemyUp(enemy)
         }
+        else if (randomIndex === 3) {
+          moveEnemyDown(enemy)
+        }
+
         cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
       })
     }, 300)
