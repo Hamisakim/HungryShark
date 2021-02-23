@@ -193,13 +193,19 @@ button {
   background-image: url('https://lh3.googleusercontent.com/proxy/J_cDEKYfyflGXo6zYGm8L7fEjaZHBfRUxWRA_K6yNSunDrJpURLvp9r-Z-RMcmnKKcvhowNezVTWZNXxtFr4NCGCvVB7o3CH');
   background-color: rgba(9, 63, 1, 0.2);
 }
+
+.cage-wall{
+  border-top:solid rgba(255, 89, 0, 0.6);
+}
+
+
+
 .power-up {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/power up turtle.gif');
   background-repeat: no-repeat;
   background-size: 90%;
   background-position: center;
 }
-
 
 .food {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/fish.gif');

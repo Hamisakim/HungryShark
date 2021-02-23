@@ -31,9 +31,9 @@ function init() {
   }
 
   const enemies = [
-    new Enemy('quint', 269),
-    new Enemy('shamu', 288),
-    new Enemy('squid', 250),
+    new Enemy('quint', 143),
+    new Enemy('shamu', 203),
+    new Enemy('squid', 31),
     new Enemy('flipper', 107)
   ]
 
@@ -46,7 +46,7 @@ function init() {
   const food = [21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 35, 36, 37, 38, 41, 43, 48, 51, 56, 58, 61, 63, 68, 71, 76, 78, 83, 88, 91, 96, 101, 103, 104, 105, 106, 107, 108, 111, 112, 113, 114, 115, 116, 118, 121, 123, 136, 138, 141, 142, 143, 144, 145, 146, 147, 148, 151, 152, 153, 154, 155, 156, 157, 158, 161, 163, 176, 178, 181, 183, 196, 198, 201, 202, 203, 204, 215, 216, 217, 218, 223, 236, 243, 256, 263, 264, 275, 276, 283, 296, 303, 316, 323, 336, 343, 344, 345, 348, 351, 354, 355, 356, 362, 365, 368, 371, 374, 377, 382, 385, 388, 391, 394, 397, 401, 402, 403, 404, 405, 406, 407, 408, 411, 412, 413, 414, 415, 416, 417, 418, 421, 426, 433, 438, 441, 446, 453, 458, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478]
 
 
-  const powerUps = [342, 357, 81, 98]
+  const powerUps = [110,342, 357, 81, 98]
 
 
 
@@ -54,10 +54,9 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       //cell.classList.add('food')
-      // cell.textContent = i //!number on
+     //! cell.textContent = i //!number on
       gameGrid.appendChild(cell)
       cellArray.push(cell)
-
       if ((i % 20 === 0) || (i > 480) || (i < 20) || ((i + 1) % 20 === 0)) {
         //cell.textContent = 'X'
         cell.classList.add('wall')
@@ -74,9 +73,10 @@ function init() {
         cell.classList.add('food')
       } if (i === 260 || i === 279) {
         cell.classList.remove('wall')
-      } else if (powerUps.includes(i) === true) {
+      }  if (powerUps.includes(i) === true) {
         cell.classList.add('power-up')
-      }
+      } if (i === 229 || i === 230) {
+        cell.classList.add('cage-wall')}
 
 
     }
@@ -84,8 +84,7 @@ function init() {
     addEnemies()
 
   }
-  createGrid()
-  moveEnemy()
+ 
 
   function addEnemies() {
     enemies.forEach(enemy => {
@@ -99,8 +98,6 @@ function init() {
     cellArray[position].classList.add(bruce.class)
     // console.log('cellArray position', cellArray[position])
   }
-
-
 
   function moveBruce(event) {
     console.log('MOVING')
@@ -136,9 +133,6 @@ function init() {
     addBruce(bruce.currentPosition)
     bruceHistory.push(bruce.currentPosition)
   }
-
-
-
 
 
   function moveRight(character) {
@@ -184,7 +178,7 @@ function init() {
     const enemyTimer = setInterval(() => {
       enemies.forEach(enemy => {
         //console.log('****',enemy)
-        const randomIndex = Math.floor(Math.random() * 4)
+        const randomIndex = 1 //Math.floor(Math.random() * 4)
         cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
 
         if (randomIndex === 0) {
@@ -206,8 +200,7 @@ function init() {
   console.log('TEST', enemies)
   function gameChecker() {
     const checkerTimer = setInterval(() => {
-      //console.log('cehceking')
-      if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare') && !cellArray[bruce.currentPosition].classList.contains('edible')) {
+      if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare') && (!cellArray[bruce.currentPosition].classList.contains('edible'))) {
         lifeCount -= 1
         document.getElementById('lives-counter').innerText = lifeCount
         //bruceDeath()
@@ -216,7 +209,7 @@ function init() {
         score += 200
         console.log(cellArray[bruce.currentPosition].classList)
        
-        cellArray[bruce.currentPosition].classList.remove('shamu', 'flipper', 'quint', 'squid')
+        cellArray[bruce.currentPosition].classList.remove('shamu', 'flipper', 'quint', 'squid','edible')
         enemies.forEach(enemy => {
           if (enemy.currentPosition === bruce.currentPosition) {
             console.log('same position')
@@ -231,7 +224,7 @@ function init() {
         //enemies.forEach(enemy => enemy.currentPosition = enemy.startPosition)
       }
 
-    }, 10)
+    }, 100)
   }
 
   gameChecker()
@@ -241,7 +234,7 @@ function init() {
     enemies.forEach(enemy => enemy.edible = true)
     enemies.forEach(enemy => enemy.class = 'edible')
     console.log('PWER UP')
-    setTimeout(enemyNormalState, 10000)
+    setTimeout(enemyNormalState, 20000)
   }
 
 
@@ -254,23 +247,32 @@ function init() {
     cellArray.forEach(cell => cell.classList.remove('edible'))
   }
 
-  document.addEventListener('keydown', moveBruce)
-
-  document.onkeydown = KD
-  function KD(event) {
-    const key = event.keyCode
-    if (key === 37 || key === 38 || key === 39 || key === 40) {
-      event.returnValue = false
+  const checkWinTimer = setInterval(() => {
+    if (document.querySelectorAll('.food').length === 0) {
+      console.log('All eaten')
+      clearTimeout(checkWinTimer)
     }
-  }
+  }, 500)
+
+  createGrid()
+  moveEnemy()
 
 function enterGame(){
   console.log('entering')
     const overlay = document.querySelector('.overlay')
     overlay.classList.add('entering')  
+   
 }
+document.addEventListener('keydown', moveBruce)
+//document.getElementById('enter-btn').addEventListener('click', enterGame)
 
-document.getElementById('enter-btn').addEventListener('click', enterGame)
+document.onkeydown = KD
+function KD(event) {
+  const key = event.keyCode
+  if (key === 37 || key === 38 || key === 39 || key === 40) {
+    event.returnValue = false
+  }
+}
 
   //? BRACKET MUST BE YELLOW BELOW /////
 }
