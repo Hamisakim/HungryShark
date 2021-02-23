@@ -25,7 +25,7 @@ function moveEnemyLeft() {
   }
 
 
-  function moveEnemyDown(enemy){
+  function moveEnemy(enemy){
 if (!cellArray[enemy.currentPosition + width].classList.contains('wall')) {
     cellArray[enemy.currentPosition + width].classList.add('swim-down')
     cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')

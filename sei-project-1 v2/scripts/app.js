@@ -50,7 +50,7 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       //cell.classList.add('food')
-      cell.textContent = i //number on
+     // cell.textContent = i //!number on
       gameGrid.appendChild(cell)
       cellArray.push(cell)
 
@@ -99,19 +99,17 @@ function init() {
 
   function moveBruce(event) {
     console.log('MOVING')
-
     const key = event.keyCode
     cellArray[bruce.currentPosition].classList.remove(bruce.class)
-
     //console.log('CURRENT', bruce.currentPosition)
-    if ((key === 39 || key === 68) && (!cellArray[bruce.currentPosition + 1].classList.contains('wall'))) {
-      cellArray[bruce.currentPosition + 1].classList.add('swim-right')
-      cellArray[bruce.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
-      bruce.currentPosition++
-    } else if ((key === 37 || key === 65) && (!cellArray[bruce.currentPosition - 1].classList.contains('wall')) && (!cellArray[bruce.currentPosition - 1].classList.contains('cage'))) { //Left
-      cellArray[bruce.currentPosition - 1].classList.add('swim-left')
-      cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
-      bruce.currentPosition--
+    if (key === 39 || key === 68) {
+     moveRight(bruce)
+    } 
+    
+    
+    
+    else if ((key === 37 || key === 65) && (!cellArray[bruce.currentPosition - 1].classList.contains('wall')) && (!cellArray[bruce.currentPosition - 1].classList.contains('cage'))) { //Left
+      moveLeft(bruce)
     } else if ((key === 38 || key === 87) && (!cellArray[bruce.currentPosition - width].classList.contains('wall'))) { //UP
       cellArray[bruce.currentPosition - width].classList.add('swim-up')
       cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
@@ -138,42 +136,44 @@ function init() {
   }
 
 
-  function moveEnemyRight(enemy) {
+  function moveRight(character) {
     console.log('MOVE RIGHT FN')
-    if (!cellArray[enemy.currentPosition + 1].classList.contains('wall')) {
+    if (!cellArray[character.currentPosition + 1].classList.contains('wall')) {
       console.log('MOVE')
-      cellArray[enemy.currentPosition + 1].classList.add('swim-right')
-      cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
-      enemy.currentPosition++
+      cellArray[character.currentPosition + 1].classList.add('swim-right')
+      cellArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+      character.currentPosition++
     }
   }
 
 
-  function moveEnemyLeft(enemy) {
-    if (!cellArray[enemy.currentPosition - 1].classList.contains('wall')) {
-      cellArray[enemy.currentPosition - 1].classList.add('swim-left')
-      cellArray[enemy.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
-      enemy.currentPosition--
+  function moveLeft(character) {
+    if (!cellArray[character.currentPosition - 1].classList.contains('wall')) {
+      cellArray[character.currentPosition - 1].classList.add('swim-left')
+      cellArray[character.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
+      character.currentPosition--
     }
   }
 
 
-  function moveEnemyUp(enemy) {
-    if (!cellArray[enemy.currentPosition - width].classList.contains('wall')) {
-      cellArray[enemy.currentPosition - width].classList.add('swim-up')
-      cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
-      enemy.currentPosition -= width
+  function moveUp(character) {
+    if (!cellArray[character.currentPosition - width].classList.contains('wall',)) {
+      cellArray[character.currentPosition - width].classList.add('swim-up')
+      cellArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+      character.currentPosition -= width
     }
   }
 
 
-  function moveEnemyDown(enemy) {
-    if (!cellArray[enemy.currentPosition + width].classList.contains('wall')) {
-      cellArray[enemy.currentPosition + width].classList.add('swim-down')
-      cellArray[enemy.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
-      enemy.currentPosition += width
+  function moveDown(character) {
+    if (!cellArray[character.currentPosition + width].classList.contains('wall')) {
+      cellArray[character.currentPosition + width].classList.add('swim-down')
+      cellArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+      character.currentPosition += width
     }
   }
+
+
   function moveEnemy() {
     // eslint-disable-next-line no-unused-vars
     const enemyTimer = setInterval(() => {
@@ -182,14 +182,14 @@ function init() {
         cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
 
         if (randomIndex === 0) {
-          moveEnemyRight(enemy)
+          moveRight(enemy)
         } else if (randomIndex === 1) {
-          moveEnemyLeft(enemy)
+          moveLeft(enemy)
         } else if (randomIndex === 2) {
-          moveEnemyUp(enemy)
+          moveUp(enemy)
         }
         else if (randomIndex === 3) {
-          moveEnemyDown(enemy)
+          moveDown(enemy)
         }
 
         cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
@@ -199,7 +199,7 @@ function init() {
 
   const checkDeathTimer = setInterval(() => {
     //console.log('cehceking')
-    console.log
+
     if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare')) {
       lifeCount -= 1
       document.getElementById('lives-counter').innerText = lifeCount
