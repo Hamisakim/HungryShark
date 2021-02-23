@@ -264,6 +264,14 @@ function init() {
     }
   }
 
+function enterGame(){
+  console.log('entering')
+    const overlay = document.querySelector('.overlay')
+    overlay.classList.add('entering')  
+}
+
+document.getElementById('enter-btn').addEventListener('click', enterGame)
+
   //? BRACKET MUST BE YELLOW BELOW /////
 }
 window.addEventListener('DOMContentLoaded', init)
