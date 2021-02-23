@@ -44,6 +44,9 @@ button {
   box-shadow: 5px 5px 5px 8px rgba(0, 0, 0, 0.6);
   font-family: 'Press Start 2P', cursive;
 }
+.how-to-btn {
+  font-size: 100%;
+}
 
 .title h1 {
   margin-top: 50px;
@@ -94,6 +97,21 @@ button {
   background-image: url('https://lh3.googleusercontent.com/proxy/J_cDEKYfyflGXo6zYGm8L7fEjaZHBfRUxWRA_K6yNSunDrJpURLvp9r-Z-RMcmnKKcvhowNezVTWZNXxtFr4NCGCvVB7o3CH');
   background-color: rgba(9, 63, 1, 0.2);
 }
+.power-up {
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/power up turtle.gif');
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: center;
+}
+
+
+.food {
+  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/fish.gif');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
 
 .bruce {
   background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/shark gif.gif');
@@ -101,7 +119,7 @@ button {
   background-size: 87%;
   background-position: center;
   /* transform: scaleX(-1); */
-  cursor: pointer;
+  
 }
 
 .enemyOnSquare {
@@ -146,16 +164,31 @@ button {
   transform: rotate(-90deg);
 }
 
-.food {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/fish.gif');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
+
+.edible {
+  animation: shake-horizontal 0.8s ease-in-out infinite both;
 }
 
-.power-up {
-  background-image: url('/Users/sami/Development/PROJECTS/sei-project-one/v1/Project 1 assets/power up turtle.gif');
-  background-repeat: no-repeat;
-  background-size: 90%;
-  background-position: center;
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateX(10px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+  90% {
+    transform: translateX(-8px);
+  }
 }
