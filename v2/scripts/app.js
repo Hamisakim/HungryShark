@@ -25,18 +25,26 @@ function init() {
       this.class = 'enemyOnSquare'
       this.edible = false
       this.targetCell = targetCell
-      this.moveHistory = [] 
+      this.moveHistory = []
 
     }
   }
 
   const enemies = [ //name startPosition targetCell
-    new Enemy('quint', 143, 160),
-    new Enemy('shamu', 203),
+    new Enemy('quint', 143),
+    new Enemy('shamu', 203, bruce.currentPosition),
     new Enemy('squid', 31),
     new Enemy('flipper', 116)
   ]
 
+const quint = enemies[0]
+const shamu = enemies[1]
+const squid = enemies[2]
+const flipper = enemies[3]
+
+
+console.log(squid.name)
+  console.log(enemies.filter)
 
   const cage =
     [229, 230, 267, 268, 269, 270, 271, 272, 287, 287, 288, 288, 289, 289, 290, 290, 291, 291, 292, 292]
@@ -55,22 +63,19 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       //cell.classList.add('food')
-      //! cell.textContent = i //!number on
+      cell.textContent = i //!number on
       gameGrid.appendChild(cell)
       cellArray.push(cell)
       if ((i % 20 === 0) || (i > 480) || (i < 20) || ((i + 1) % 20 === 0)) {
 
         cell.classList.add('wall')
-      }
-      else if (walls.includes(i) === true) {
+      } else if (walls.includes(i) === true) {
 
         cell.classList.add('wall')
-      }
-      else if (cage.includes(i) === true) {
+      } else if (cage.includes(i) === true) {
 
         cell.classList.add('cage')
-      }
-      else if (food.includes(i) === true) {
+      } else if (food.includes(i) === true) {
         cell.classList.add('food')
       } if (i === 260 || i === 279) {
         cell.classList.remove('wall')
@@ -103,7 +108,7 @@ function init() {
   }
 
   function moveBruce(event) {
-    console.log('MOVING')
+    //console.log('MOVING')
     const key = event.keyCode
     cellArray[bruce.currentPosition].classList.remove(bruce.class)
     //console.log('CURRENT', bruce.currentPosition)
@@ -116,8 +121,7 @@ function init() {
       } else {
         moveRight(bruce)
       }
-    }
-    else if (key === 37 || key === 65) { //Left
+    } else if (key === 37 || key === 65) { //Left
       //console.log(bruce.currentPosition)
       if (bruce.currentPosition === 260) {
         console.log('Tunnel')
@@ -149,19 +153,70 @@ function init() {
     bruceHistory.push(bruce.currentPosition)
   }
 
+  //!-------Move Enemy------------------------------------
+  // function moveEnemy() {
+  //   const enemyTimer = setInterval(() => {
+      
+  //     // const possibleDirections = [1,-1,-width, +width] // RIGHT LEFT UP DOWN 
+  //      const randomIndex = Math.floor(Math.random() * 4 )
+  //     // let direction = possibleDirections[randomIndex]
 
+  //     console.log('TYPE OF',typeof direction)
 
+  //     // if (cellArray[enemies.currentPosition]){
+  //     //   console.log(cellArray[enemies.currentPosition )
+  //     // }
+  //     enemies.forEach(enemy => { //? FOR each enemy 
+  //       enemy.moveHistory.push(enemy.currentPosition)
+  //       cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
+  //       const lastPosition = enemy.moveHistory[enemy.moveHistory.length - 1] //get last position 
+  //       console.log('CURRENT POSITION', enemy.name, enemy.currentPosition)
+  //       console.log('LAST POSITION', enemy.name,lastPosition)
+  //       //let randomIndex = Math.floor(Math.random() * 4) //!********
+  //       console.log(randomIndex)
 
+  //       if ((randomIndex === 0) && (enemy.currentPosition + 1  !== lastPosition)) {   //!RIGHT
+  //         console.log('****',enemy.name, enemy.currentPosition + 1, lastPosition)
+                  
+  //                   console.log('RIGHT')
+  //         //console.log('RANDOM NEW',randomIndex)
+  //        moveRight(enemy) 
+    
+  //       } else if (((randomIndex === 1)) && (enemy.currentPosition - 1 !== lastPosition)) {
+  //         moveLeft(enemy)
+  //         console.log('RIGHT')
+
+  //       } else if ( randomIndex === 2 && enemy.currentPosition - width !== lastPosition){
+  //         moveUp(enemy)
+  //         console.log('up')
+       
+  //       } else if ( randomIndex === 3 && enemy.currentPosition + width !== lastPosition){
+  //       moveDown(enemy)
+  //       console.log('down')
+  //       }
+
+  //       cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
+
+  //      // console.log('MOST RECENT POSITION', lastPosition)
+ 
+  //     })
+  //   }, 500)
+  // }
+  //!-----------------------------------
+  console.log('TEST', enemies)
+  console.log('TYPE OF', typeof enemies)
+
+  
   function moveEnemy() {
 
     const enemyTimer = setInterval(() => {
 
       enemies.forEach(enemy => {
-     
-        const randomIndex = 1 //Math.floor(Math.random() * 4)
+
+        let randomIndex = Math.floor(Math.random() * 4)
         cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
 
-        if ((randomIndex === 0) && ) {
+        if ((randomIndex === 0)  ) {
           moveRight(enemy)
         } else if (randomIndex === 1) {
           moveLeft(enemy)
@@ -172,12 +227,12 @@ function init() {
         }
         cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
         enemy.moveHistory.push(enemy.currentPosition)
-        
-        console.log(enemy.moveHistory)
-        
+
+        //console.log(enemy.name,enemy.moveHistory)
+
         atIntersection(enemy)
       })
-      
+
     }, 500)
   }
 
@@ -190,7 +245,7 @@ function init() {
       (cellArray[enemy.currentPosition + width].classList.contains('intersection'))
     ) {
       console.log('AT INTERSECTION')
-     }
+    }
   }
 
 
@@ -236,7 +291,7 @@ function init() {
 
 
 
-  console.log('TEST', enemies)
+
 
   function gameChecker() {
     const checkerTimer = setInterval(() => {
