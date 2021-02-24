@@ -1,6 +1,5 @@
 /* eslint-disable indent */
 
-
 function init() {
 
   const gameGrid = document.querySelector('.game-grid')
@@ -22,10 +21,11 @@ function init() {
     constructor(name, startPosition, targetCell) {
       this.name = name
       this.startPosition = startPosition
-      this.currentPosition = startPosition 
+      this.currentPosition = startPosition
       this.class = 'enemyOnSquare'
       this.edible = false
       this.targetCell = targetCell
+      this.moveHistory = [] 
 
     }
   }
@@ -59,15 +59,15 @@ function init() {
       gameGrid.appendChild(cell)
       cellArray.push(cell)
       if ((i % 20 === 0) || (i > 480) || (i < 20) || ((i + 1) % 20 === 0)) {
-       
+
         cell.classList.add('wall')
       }
       else if (walls.includes(i) === true) {
-      
+
         cell.classList.add('wall')
       }
       else if (cage.includes(i) === true) {
-       
+
         cell.classList.add('cage')
       }
       else if (food.includes(i) === true) {
@@ -130,8 +130,8 @@ function init() {
     } else if (key === 38 || key === 87) { //UP
       moveUp(bruce)
 
-    } else if (key === 40 || key === 83){
-    moveDown(bruce)
+    } else if (key === 40 || key === 83) {
+      moveDown(bruce)
     }
     function eatFood() {
       if (cellArray[bruce.currentPosition].classList.contains('food')) {
@@ -153,39 +153,53 @@ function init() {
 
 
   function moveEnemy() {
-    // eslint-disable-next-line no-unused-vars
+
     const enemyTimer = setInterval(() => {
+
       enemies.forEach(enemy => {
-        //console.log('****',enemy)
+     
         const randomIndex = 1 //Math.floor(Math.random() * 4)
         cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
-        if (randomIndex === 0) {
+
+        if ((randomIndex === 0) && ) {
           moveRight(enemy)
         } else if (randomIndex === 1) {
           moveLeft(enemy)
         } else if (randomIndex === 2) {
           moveUp(enemy)
-        }
-        else if (randomIndex === 3) {
+        } else if (randomIndex === 3) {
           moveDown(enemy)
         }
-
         cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
+        enemy.moveHistory.push(enemy.currentPosition)
+        
+        console.log(enemy.moveHistory)
+        
+        atIntersection(enemy)
       })
+      
     }, 500)
+  }
+
+
+  function atIntersection(enemy) {
+    if (
+      (cellArray[enemy.currentPosition + 1].classList.contains('intersection')) ||
+      (cellArray[enemy.currentPosition - 1].classList.contains('intersection')) ||
+      (cellArray[enemy.currentPosition - width].classList.contains('intersection')) ||
+      (cellArray[enemy.currentPosition + width].classList.contains('intersection'))
+    ) {
+      console.log('AT INTERSECTION')
+     }
   }
 
 
 
 
-
-
-
-
   function moveRight(character) {
- 
+
     if (!cellArray[character.currentPosition + 1].classList.contains('wall')) {
-   
+
       cellArray[character.currentPosition + 1].classList.add('swim-right')
       cellArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
       character.currentPosition++
@@ -223,6 +237,7 @@ function init() {
 
 
   console.log('TEST', enemies)
+
   function gameChecker() {
     const checkerTimer = setInterval(() => {
       if (cellArray[bruce.currentPosition].classList.contains('enemyOnSquare') && (!cellArray[bruce.currentPosition].classList.contains('edible'))) {

@@ -27,7 +27,10 @@ function moveEnemy() {
   const possibleDirections = [1,-1,-width, +width] // RIGHT LEFT UP DOWN 
   let randomIndex = Math.floor(Math.random() * 4 ) 
   let direction = possibleDirections[randomIndex]
-  if (cellArray.enemies.currentPosition)
+  if (cellArray[enemies.currentPosition]){
+    console.log(cellArray[enemies.currentPosition )
+  }
 
 
 //? ***************************** 
+
