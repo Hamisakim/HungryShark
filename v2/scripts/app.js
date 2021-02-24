@@ -1,6 +1,5 @@
-/* eslint-disable brace-style */
-/* eslint-disable no-empty */
 /* eslint-disable indent */
+
 
 function init() {
 
@@ -20,22 +19,24 @@ function init() {
   const bruceHistory = []
 
   class Enemy {
-    constructor(name, startPosition) {
+    constructor(name, startPosition, targetCell) {
       this.name = name
       this.startPosition = startPosition
-      this.currentPosition = startPosition //this.currentPosition
+      this.currentPosition = startPosition 
       this.class = 'enemyOnSquare'
       this.edible = false
+      this.targetCell = targetCell
 
     }
   }
 
-  const enemies = [
-    new Enemy('quint', 143),
+  const enemies = [ //name startPosition targetCell
+    new Enemy('quint', 143, 160),
     new Enemy('shamu', 203),
     new Enemy('squid', 31),
     new Enemy('flipper', 116)
   ]
+
 
   const cage =
     [229, 230, 267, 268, 269, 270, 271, 272, 287, 287, 288, 288, 289, 289, 290, 290, 291, 291, 292, 292]
@@ -58,15 +59,15 @@ function init() {
       gameGrid.appendChild(cell)
       cellArray.push(cell)
       if ((i % 20 === 0) || (i > 480) || (i < 20) || ((i + 1) % 20 === 0)) {
-        //cell.textContent = 'X'
+       
         cell.classList.add('wall')
       }
       else if (walls.includes(i) === true) {
-        //cell.textContent = 'X'
+      
         cell.classList.add('wall')
       }
       else if (cage.includes(i) === true) {
-        //cell.textContent = 'X'
+       
         cell.classList.add('cage')
       }
       else if (food.includes(i) === true) {
@@ -91,6 +92,7 @@ function init() {
     enemies.forEach(enemy => {
       //console.log('ENEMY', enemy)
       cellArray[enemy.startPosition].classList.add(enemy.class, enemy.name)
+      console.log('TARGET CELL', enemy.targetCell)
       //cellArray[enemy.startPosition].classList.add()
     })
   }
@@ -106,36 +108,30 @@ function init() {
     cellArray[bruce.currentPosition].classList.remove(bruce.class)
     //console.log('CURRENT', bruce.currentPosition)
     if (key === 39 || key === 68) {
-      
-      if ( bruce.currentPosition === 279){
+      if (bruce.currentPosition === 279) {
         console.log('Tunnel')
-      cellArray[260].classList.add('swim-right')
-      cellArray[279].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
-      bruce.currentPosition = 260
-    } else {
-      moveRight(bruce)}
+        cellArray[260].classList.add('swim-right')
+        cellArray[279].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
+        bruce.currentPosition = 260
+      } else {
+        moveRight(bruce)
+      }
     }
-    else if ((key === 37 || key === 65)){ //Left
-      console.log(bruce.currentPosition)
-
-      if ( bruce.currentPosition === 260){
+    else if (key === 37 || key === 65) { //Left
+      //console.log(bruce.currentPosition)
+      if (bruce.currentPosition === 260) {
         console.log('Tunnel')
-      cellArray[280].classList.add('swim-left')
-      cellArray[260].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-right')
-      bruce.currentPosition = 279
-    } else {
-      moveLeft(bruce)}
+        cellArray[280].classList.add('swim-left')
+        cellArray[260].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-right')
+        bruce.currentPosition = 279
+      } else {
+        moveLeft(bruce)
+      }
+    } else if (key === 38 || key === 87) { //UP
+      moveUp(bruce)
 
-
-      
-    } else if ((key === 38 || key === 87) && (!cellArray[bruce.currentPosition - width].classList.contains('wall'))) { //UP
-      cellArray[bruce.currentPosition - width].classList.add('swim-up')
-      cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
-      bruce.currentPosition -= width
-    } else if ((key === 40 || key === 83) && (!cellArray[bruce.currentPosition + width].classList.contains('wall')) && (!cellArray[bruce.currentPosition + width].classList.contains('cage'))) { //down
-      cellArray[bruce.currentPosition + width].classList.add('swim-down')
-      cellArray[bruce.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
-      bruce.currentPosition += width
+    } else if (key === 40 || key === 83){
+    moveDown(bruce)
     }
     function eatFood() {
       if (cellArray[bruce.currentPosition].classList.contains('food')) {
@@ -154,14 +150,46 @@ function init() {
   }
 
 
+
+
+  function moveEnemy() {
+    // eslint-disable-next-line no-unused-vars
+    const enemyTimer = setInterval(() => {
+      enemies.forEach(enemy => {
+        //console.log('****',enemy)
+        const randomIndex = 1 //Math.floor(Math.random() * 4)
+        cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
+        if (randomIndex === 0) {
+          moveRight(enemy)
+        } else if (randomIndex === 1) {
+          moveLeft(enemy)
+        } else if (randomIndex === 2) {
+          moveUp(enemy)
+        }
+        else if (randomIndex === 3) {
+          moveDown(enemy)
+        }
+
+        cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
+      })
+    }, 500)
+  }
+
+
+
+
+
+
+
+
   function moveRight(character) {
-    //console.log('MOVE RIGHT FN')
+ 
     if (!cellArray[character.currentPosition + 1].classList.contains('wall')) {
-      //console.log('MOVE')
+   
       cellArray[character.currentPosition + 1].classList.add('swim-right')
       cellArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
       character.currentPosition++
-    } 
+    }
   }
 
 
@@ -192,29 +220,7 @@ function init() {
   }
 
 
-  function moveEnemy() {
-    // eslint-disable-next-line no-unused-vars
-    const enemyTimer = setInterval(() => {
-      enemies.forEach(enemy => {
-        //console.log('****',enemy)
-        const randomIndex = 1 //Math.floor(Math.random() * 4)
-        cellArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
 
-        if (randomIndex === 0) {
-          moveRight(enemy)
-        } else if (randomIndex === 1) {
-          moveLeft(enemy)
-        } else if (randomIndex === 2) {
-          moveUp(enemy)
-        }
-        else if (randomIndex === 3) {
-          moveDown(enemy)
-        }
-
-        cellArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
-      })
-    }, 500)
-  }
 
   console.log('TEST', enemies)
   function gameChecker() {
@@ -226,23 +232,16 @@ function init() {
         console.log('DEATH')
       } else if (cellArray[bruce.currentPosition].classList.contains('edible')) {
         score += 200
-        console.log(cellArray[bruce.currentPosition].classList)
+        //* console.log(cellArray[bruce.currentPosition].classList)
 
-        cellArray[bruce.currentPosition].classList.remove('shamu', 'flipper', 'quint', 'squid', 'edible','enemyOnSquare')
+        cellArray[bruce.currentPosition].classList.remove('shamu', 'flipper', 'quint', 'squid', 'edible', 'enemyOnSquare')
         enemies.forEach(enemy => {
           if (enemy.currentPosition === bruce.currentPosition) {
             console.log('same position')
             enemy.currentPosition = enemy.startPosition
           }
         })
-
-        //cellArray[bruce.currentPosition].classList.remove(enemy.class, enemy.name))
-        // enemies.forEach(enemy => enemy.currentPosition = enemy.startPosition)
-
-
-        //enemies.forEach(enemy => enemy.currentPosition = enemy.startPosition)
       }
-
     }, 100)
   }
 
