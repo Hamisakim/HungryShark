@@ -245,47 +245,70 @@ function init() {
     enemies.forEach(enemy => {
       positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
     })
-    
+
     const checkerTimer = setInterval(() => {
-      console.log('m')
       enemies.forEach(enemy => {
         positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
       })
-      
+
       const randomIndex = 0 ///Math.floor(Math.random() * 4)
-     
+
       function moveShamu() {
-        console.log('moveShamu')
-        console.log(shamu.currentPosition)
-        console.log('TEST', positionArray[shamu.currentPosition].classList.contains('intersection'))
+        // console.log('moveShamu')
+        // console.log(shamu.currentPosition)
+        // console.log('TEST', positionArray[shamu.currentPosition].classList.contains('intersection'))
         if (randomIndex === 0 && positionArray[shamu.currentPosition].classList.contains('intersection')) {
-          console.log('IF STATEMENT WITH INTERSECTION')
+          // console.log('IF STATEMENT WITH INTERSECTION')
           moveRight(shamu)
-          return atIntersection(shamu) 
+          return atIntersection(shamu)
         } else {
           moveRight(shamu)
 
         }
       }
       moveShamu()
-        enemies.forEach(enemy => {
-          positionArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
-          //       enemy.moveHistory.push(enemy.currentPosition)
-        })
-        
+      enemies.forEach(enemy => {
+        positionArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
+        //enemy.moveHistory.push(enemy.currentPosition)
+      })
+
     }, 500)
   }
-
 
   function atIntersection(enemy) {
     //console.log(enemy.name)
     console.log('INTER FN')
-
-    if (positionArray[enemy.currentPosition+1]
-
-
-   
+   // console.log('BRUCE POSITION', bruce.currentPosition)
+    // findC(enemy.currentPosition, bruce.currentPosition)
     
+    // for (positionArray[enemy.currentPosition + 1]) {
+
+      const distanceAbove = findC(enemy.currentPosition + 1, bruce.currentPosition)
+      console.log('DISTANCE ABOVE',distanceAbove)
+
+
+      const distanceBelow =findC(enemy.currentPosition - 1, bruce.currentPosition)
+      console.log('DISTANCE BELOW',distanceBelow)
+
+    // }
+
+
+  }
+
+  function findC(enemyPosition, brucePosition) {
+    //console.log('FIND C')
+    const positionDiff = (enemyPosition - brucePosition)
+   // console.log(positionDiff)
+
+    const yDistance = Math.round(positionDiff / 20)
+    //console.log('Y DISTANCE', yDistance) // -6 move -6*20 position for height 
+
+    const xDistance = -1 * (positionDiff - yDistance * 20)
+    //console.log('X DISTANCE', xDistance)
+    const c2 = Math.pow(xDistance, 2) + Math.pow(yDistance, 2)
+    const c = Math.sqrt(c2)
+    //console.log('C', c)
+    return c
   }
 
   function moveRight(character) {
