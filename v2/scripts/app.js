@@ -1,5 +1,4 @@
-/* eslint-disable keyword-spacing */
-/* eslint-disable indent */
+
 function init() {
 
   const gameGrid = document.querySelector('.game-grid')
@@ -48,7 +47,7 @@ function init() {
   //---------------------MAP DESIGN ARRAYS-------------------
   const cage =
     [229, 230, 267, 268, 269, 270, 271, 272, 287, 287, 288, 288, 289, 289, 290, 290, 291, 291, 292, 292]
-  const walls = [29, 30, 42, 44, 45, 46, 47, 49, 50, 52, 53, 54, 55, 57, 62, 64, 65, 66, 67, 69, 70, 72, 73, 74, 75, 77, 82, 84, 85, 86, 87, 89, 90, 92, 93, 94, 95, 97, 102, 117, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 137, 149, 150, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 177, 182, 184, 185, 186, 187, 189, 190, 192, 193, 194, 195, 197, 221, 222, 224, 226, 227, 228, 231, 232, 233, 235, 237, 238, 241, 242, 244, 246, 253, 255, 257, 258, 266, 273, 282, 284, 286, 293, 295, 297, 302, 304, 306, 307, 308, 309, 310, 311, 312, 313, 315, 317, 322, 324, 335, 337, 346, 347, 349, 350, 352, 353, 361, 363, 364, 366, 367, 369, 370, 372, 373, 375, 376, 378, 381, 383, 384, 386, 387, 389, 390, 392, 393, 395, 396, 398, 409, 410, 422, 423, 424, 425, 427, 428, 429, 430, 431, 432, 434, 435, 436, 437, 442, 443, 444, 445, 447, 448, 449, 450, 451, 452, 454, 455, 456, 457, 298, 318, 338, 281, 301, 321, 341, 358]
+  const walls = [247, 267, 287, 252, 272, 292, 29, 30, 42, 44, 45, 46, 47, 49, 50, 52, 53, 54, 55, 57, 62, 64, 65, 66, 67, 69, 70, 72, 73, 74, 75, 77, 82, 84, 85, 86, 87, 89, 90, 92, 93, 94, 95, 97, 102, 117, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 137, 149, 150, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 177, 182, 184, 185, 186, 187, 189, 190, 192, 193, 194, 195, 197, 221, 222, 224, 226, 227, 228, 231, 232, 233, 235, 237, 238, 241, 242, 244, 246, 253, 255, 257, 258, 266, 273, 282, 284, 286, 293, 295, 297, 302, 304, 306, 307, 308, 309, 310, 311, 312, 313, 315, 317, 322, 324, 335, 337, 346, 347, 349, 350, 352, 353, 361, 363, 364, 366, 367, 369, 370, 372, 373, 375, 376, 378, 381, 383, 384, 386, 387, 389, 390, 392, 393, 395, 396, 398, 409, 410, 422, 423, 424, 425, 427, 428, 429, 430, 431, 432, 434, 435, 436, 437, 442, 443, 444, 445, 447, 448, 449, 450, 451, 452, 454, 455, 456, 457, 298, 318, 338, 281, 301, 321, 341, 358]
 
   const food = [21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 35, 36, 37, 38, 41, 43, 48, 51, 56, 58, 61, 63, 68, 71, 76, 78, 83, 88, 91, 96, 101, 103, 104, 105, 106, 107, 108, 111, 112, 113, 114, 115, 116, 118, 121, 123, 136, 138, 141, 142, 143, 144, 145, 146, 147, 148, 151, 152, 153, 154, 155, 156, 157, 158, 161, 163, 176, 178, 181, 183, 196, 198, 201, 202, 203, 204, 215, 216, 217, 218, 223, 236, 243, 256, 263, 264, 275, 276, 283, 296, 303, 316, 323, 336, 343, 344, 345, 348, 351, 354, 355, 356, 362, 365, 368, 371, 374, 377, 382, 385, 388, 391, 394, 397, 401, 402, 403, 404, 405, 406, 407, 408, 411, 412, 413, 414, 415, 416, 417, 418, 421, 426, 433, 438, 441, 446, 453, 458, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478]
 
@@ -57,12 +56,14 @@ function init() {
   //! add back 203 216 218 103 in intersections
   const intersection =
     [23, 36, 103, 108, 111, 116, 141, 143, 156, 158, 203, 205, 208, 211, 214, 216, 263, 265, 265, 274, 276, 325, 328, 331, 334, 343, 356, 402, 402, 405, 405, 406, 406, 413, 414, 417, 466, 473, 556]
-  //-----------------------------------------------------------------------
+
+
+  //!------------------------------CREATE GRID -----------------------------------------
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       //cell.classList.add('food')
-      cell.textContent = i //!number on
+      //cell.textContent = i //!number on
       gameGrid.appendChild(cell)
       positionArray.push(cell)
       if ((i % 20 === 0) || (i > 480) || (i < 20) || ((i + 1) % 20 === 0)) {
@@ -93,7 +94,6 @@ function init() {
     addEnemies()
 
   }
-
 
   function addEnemies() {
     enemies.forEach(enemy => {
@@ -161,164 +161,126 @@ function init() {
     // console.log(bruceDirectionHistory)
   }
 
-  function moveEnemy() { //! this one pls
-    const movementTimer = setInterval(() => {
-      enemies.forEach(enemy => { //?just removes class
-        positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
-      })
-      function smartMoveEnemy(enemyName) {
-        const positionContainIntersection = positionArray[enemyName.currentPosition].classList.contains('intersection')
-        const wallToRight = positionArray[enemyName.currentPosition + 1].classList.contains('wall')
-        const wallToLeft = positionArray[enemyName.currentPosition - 1].classList.contains('wall')
-        const wallBelow = positionArray[enemyName.currentPosition + width].classList.contains('wall')
-        const wallAbove = positionArray[enemyName.currentPosition - width].classList.contains('wall')
+  //function moveEnemy() { //! this one pls
+  const movementTimer = setInterval(() => {
+    enemies.forEach(enemy => { //?just removes class
+      positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
+    })
+    function smartMoveEnemy(enemyName) {
+      const positionContainIntersection = positionArray[enemyName.currentPosition].classList.contains('intersection')
+      const wallToRight = positionArray[enemyName.currentPosition + 1].classList.contains('wall')
+      const wallToLeft = positionArray[enemyName.currentPosition - 1].classList.contains('wall')
+      const wallBelow = positionArray[enemyName.currentPosition + width].classList.contains('wall')
+      const wallAbove = positionArray[enemyName.currentPosition - width].classList.contains('wall')
 
-        let randomIndex = Math.floor(Math.random() * 4) //!INDEX //! AT 2 ->  4
+      let randomIndex = Math.floor(Math.random() * 4) //!INDEX //! AT 2 ->  4
 
-        //? 0 Right, 1 Left, 2 up, 3 down,
-        //! find direction function
+      //? 0 Right, 1 Left, 2 up, 3 down,
+      //! find direction function
 
-        if (randomIndex === 0 && positionContainIntersection) { //? need to go RIGHT! 
-          enemyName.moveHistory.push(enemyName.currentPosition)
-          atIntersection(enemyName)
-        } else if (randomIndex === 0 && !positionContainIntersection && !wallToRight && enemyName.currentPosition + 1 !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
-          enemyName.moveHistory.push(enemyName.currentPosition)
+      if (randomIndex === 0 && positionContainIntersection) { //? need to go RIGHT! 
+        enemyName.moveHistory.push(enemyName.currentPosition)
+        atIntersection(enemyName)
+      } else if (randomIndex === 0 && !positionContainIntersection && !wallToRight && enemyName.currentPosition + 1 !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
+        enemyName.moveHistory.push(enemyName.currentPosition)
 
-          moveRight(enemyName)
-        } else if (randomIndex === 0 && (!positionContainIntersection && wallToRight) || enemyName.currentPosition + 1 === enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
-          randomIndex = Math.ceil(Math.random() * 3)  //! MAKE RANDOM INDEX ONLY 1-3 since can't do 0
+        moveRight(enemyName)
+      } else if (randomIndex === 0 && (!positionContainIntersection && wallToRight) || enemyName.currentPosition + 1 === enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
+        randomIndex = Math.ceil(Math.random() * 3)  //! MAKE RANDOM INDEX ONLY 1-3 since can't do 0
 
-        } if (randomIndex === 1 && positionContainIntersection) { //! moving left
-          enemyName.moveHistory.push(enemyName.currentPosition)
-          atIntersection(enemyName)
-        } else if (randomIndex === 1 && !positionContainIntersection && !wallToLeft && enemyName.currentPosition - 1 !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
+      } if (randomIndex === 1 && positionContainIntersection) { //! moving left
+        enemyName.moveHistory.push(enemyName.currentPosition)
+        atIntersection(enemyName)
+      } else if (randomIndex === 1 && !positionContainIntersection && !wallToLeft && enemyName.currentPosition - 1 !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
 
-          enemyName.moveHistory.push(enemyName.currentPosition)
-          moveLeft(enemyName)
-        } else if (randomIndex === 1 && (!positionContainIntersection && wallToLeft) || enemyName.currentPosition - 1 === enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
-          randomIndex = Math.floor(Math.random() * 4)
+        enemyName.moveHistory.push(enemyName.currentPosition)
+        moveLeft(enemyName)
+      } else if (randomIndex === 1 && (!positionContainIntersection && wallToLeft) || enemyName.currentPosition - 1 === enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
+        randomIndex = Math.floor(Math.random() * 4)
 
-        } if (randomIndex === 2 && positionContainIntersection) {
-          enemyName.moveHistory.push(enemyName.currentPosition)
-          atIntersection(enemyName)
-        } else if (randomIndex === 2 && !positionContainIntersection && !wallAbove && enemyName.currentPosition - width !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
-          enemyName.moveHistory.push(enemyName.currentPosition)
-          moveUp(enemyName)
-        } else if (randomIndex === 2 && !positionContainIntersection && wallAbove) {
-          randomIndex = Math.floor(Math.random() * 4)
-        }
-        if (randomIndex === 3 && positionContainIntersection) {
-          enemyName.moveHistory.push(enemyName.currentPosition)
-          atIntersection(enemyName)
-        } else if (randomIndex === 3 && !positionContainIntersection && !wallBelow && enemyName.currentPosition + width !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
-          enemyName.moveHistory.push(enemyName.currentPosition)
-          moveDown(enemyName)
-        } else if (randomIndex === 3 && !positionContainIntersection && wallBelow) {
-          randomIndex = Math.floor(Math.random() * 4)
-        }
-        positionArray[enemyName.currentPosition].classList.add(enemyName.class, enemyName.name)
+      } if (randomIndex === 2 && positionContainIntersection) {
+        enemyName.moveHistory.push(enemyName.currentPosition)
+        atIntersection(enemyName)
+      } else if (randomIndex === 2 && !positionContainIntersection && !wallAbove && enemyName.currentPosition - width !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
+        enemyName.moveHistory.push(enemyName.currentPosition)
+        moveUp(enemyName)
+      } else if (randomIndex === 2 && !positionContainIntersection && wallAbove) {
+        randomIndex = Math.floor(Math.random() * 4)
+      }
+      if (randomIndex === 3 && positionContainIntersection) {
+        enemyName.moveHistory.push(enemyName.currentPosition)
+        atIntersection(enemyName)
+      } else if (randomIndex === 3 && !positionContainIntersection && !wallBelow && enemyName.currentPosition + width !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
+        enemyName.moveHistory.push(enemyName.currentPosition)
+        moveDown(enemyName)
+      } else if (randomIndex === 3 && !positionContainIntersection && wallBelow) {
+        randomIndex = Math.floor(Math.random() * 4)
+      }
+      positionArray[enemyName.currentPosition].classList.add(enemyName.class, enemyName.name)
+    }
 
+    smartMoveEnemy(shamu)
+    smartMoveEnemy(quint)
+    smartMoveEnemy(flipper)
+    smartMoveEnemy(squid)
+
+    shamu.targetCell = bruce.currentPosition
+    flipper.targetCell = flipperTargetFN()
+    squid.targetCell = squidTargetFN()
+
+    function flipperTargetFN() {
+      let flipperTargetResult = bruce.currentPosition
+      bruce.startPosition
+      if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === 1) {
+        flipperTargetResult = bruce.currentPosition + 4
+      } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -1) {
+        flipperTargetResult = bruce.currentPosition - 4
+      } else if (bruceDirectionHistory[bruceDirectionHistory - 1] === -width) {
+        flipperTargetResult = bruce.currentPosition - 4 * width
+      } else if (bruceDirectionHistory[bruceDirectionHistory - 1] === + width) {
+        flipperTargetResult = bruce.currentPosition + 4 * width
+      }
+      // console.log(flipperTargetResult)
+      return flipperTargetResult
+    }
+
+    function squidTargetFN() {
+
+
+      let twoInfront = bruce.currentPosition
+      if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === 1) {
+        twoInfront = bruce.currentPosition + 2
+      } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -1) {
+        twoInfront = bruce.currentPosition - 2
+      } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -width) {
+        twoInfront = bruce.currentPosition - width * 2
+      } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === +width) {
+        twoInfront = bruce.currentPosition + width * 2
       }
 
-      smartMoveEnemy(shamu)
-      smartMoveEnemy(quint)
-      smartMoveEnemy(flipper)
-      smartMoveEnemy(squid)
 
-      shamu.targetCell = bruce.currentPosition
-      flipper.targetCell = flipperTargetFN()
 
-      function flipperTargetFN() {
-        let flipperTargetResult = bruce.currentPosition
-        bruce.startPosition
-        if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === 1) {
-          flipperTargetResult = bruce.currentPosition + 4
-        } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -1) {
-          flipperTargetResult = bruce.currentPosition - 4
-        } else if (bruceDirectionHistory[bruceDirectionHistory - 1] === -width) {
-          flipperTargetResult = bruce.currentPosition - 4 * width
-        } else if (bruceDirectionHistory[bruceDirectionHistory - 1] === + width) {
-          flipperTargetResult = bruce.currentPosition + 4 * width
-        }
-        // console.log(flipperTargetResult)
-        return flipperTargetResult
+      const vectorLength = findC(shamu.currentPosition, twoInfront)
+      const doubleVectorLength = 2 * vectorLength //doubleC
+
+      const getAngle = (shamuCurrentPosition, twoInfront) => {
+        const positionDiff = shamuCurrentPosition - twoInfront
+        const oppositeLength = Math.round(positionDiff / 20)
+        console.log('POSITION DIFF->>', positionDiff, 'HEIGHT', oppositeLength)
+        const sinTheta = oppositeLength / vectorLength
+        const theta = Math.asin(sinTheta)
+        return theta
       }
+      const theta = getAngle(shamu.currentPosition, twoInfront)
+      const targetY = -10 * (Math.round(Math.sin(theta) * doubleVectorLength)) //! *20 to get to postions
+      const targetX = Math.round((Math.cos(theta) * doubleVectorLength)) / 2
+      const targetXConverted = targetX + (targetY)
+      const targetCell = shamu.currentPosition + targetXConverted
+      return targetCell
+    }
 
-
-      // function squidTargetFN() {
-      //   let squidTargetResult = bruce.currentPosition
-      //   let twoInfront = bruce.currentPosition
-
-      //   if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === 1) {
-      //     twoInfront = bruce.currentPosition + 2
-      //   } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -1) {
-      //     twoInfront = bruce.currentPosition - 2
-      //   } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -width) {
-      //     twoInfront = bruce.currentPosition - width * 2
-      //   } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === +width) {
-      //     twoInfront = bruce.currentPosition - width * 2
-      //   }
-      //   const vector = 2 * findC(shamu.currentPosition, twoInfront)
-      //   console.log('SQUID',vector)      
-      // }
-
-      function squidTargetFN() {
-        console.log('SQUID FN')
-        const squidTargetResult = bruce.currentPosition
-        let twoInfront = bruce.currentPosition
-        if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === 1) {
-          twoInfront = bruce.currentPosition + 2
-        } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -1) {
-          twoInfront = bruce.currentPosition - 2
-        } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -width) {
-          twoInfront = bruce.currentPosition - width * 2
-        } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === +width) {
-          twoInfront = bruce.currentPosition + width * 2
-        }
-
-        console.log('SHAMU POSITION',shamu.currentPosition)
-        console.log('Target->>',twoInfront)
-
-        
-        const vectorLength = findC(shamu.currentPosition, twoInfront)
-        const doubleVectorLength = 2 * vectorLength //doubleC
-        console.log('VECTOR LENGTH', vectorLength)
-
-        //? shamuCurrentPosition = shamu.currentPosition
-        const getAngle = (shamuCurrentPosition, twoInfront) => {
-          const positionDiff = shamuCurrentPosition - twoInfront
-          const oppositeLength = Math.round(positionDiff / 20)
-          console.log('POSITION DIFF->>', positionDiff, 'HEIGHT', oppositeLength)
-          const sinTheta = oppositeLength / vectorLength
-          const theta = Math.asin(sinTheta) // (Math.PI / 180)
-          //console.log('THETA', theta)
-          return theta
-
-        }
-        
-        const theta = getAngle(shamu.currentPosition, twoInfront)
-       
-        const targetY = -10 * (Math.round(Math.sin(theta) * doubleVectorLength )) //! *20 to get to postions
-        console.log('TARGET Y', targetY) // difference of this many positons 
-        // console.log(shamu.CurrentPosition)
- 
-        
-        const targetX = Math.round((Math.cos(theta) * doubleVectorLength)) / 2
-
-        const targetXConverted = targetX + (targetY)
-        console.log('SCALE X', targetX)
-        
-        console.log('TARGET X CONVERTED', targetXConverted)
-   
-        const targetCell = shamu.currentPosition + targetXConverted
-        console.log('SQUID TARGET',targetCell)
-        return targetCell 
-      }
-
-      squidTargetFN()
-
-    }, 5000)
-  }
+  }, 200)
+  // }
 
   function atIntersection(enemy) {
 
@@ -367,9 +329,7 @@ function init() {
   function findC(enemyPosition, targetCell) {
     const positionDiff = (enemyPosition - targetCell)
     const yDistance = Math.round(positionDiff / 20)
-
     const xDistance = -1 * (positionDiff - yDistance * 20)
-    
     const c2 = Math.pow(xDistance, 2) + Math.pow(yDistance, 2)
     const c = Math.sqrt(c2)
     return c
@@ -469,11 +429,12 @@ function init() {
     if (document.querySelectorAll('.food').length === 0) {
       console.log('All eaten')
       clearTimeout(checkWinTimer)
+      clearTimeout(movementTimer)
     }
   }, 500)
 
   createGrid()
-  moveEnemy()
+  // moveEnemy()
 
   function enterGame() {
     console.log('entering')

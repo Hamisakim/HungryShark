@@ -268,7 +268,7 @@ button {
 
 
 .edible {
-  animation: blink-1 0.6s infinite both;
+  background-color: red;
 }
 
 
@@ -284,6 +284,6 @@ button {
   }
 }
 
-.intersection {
+/* .intersection {
   background-color: rgba(153, 0, 255, 0.6);
-}
+} */
