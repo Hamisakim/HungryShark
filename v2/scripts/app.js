@@ -32,7 +32,7 @@ function init() {
 
   const enemies = [ //name startPosition targetCell
     new Enemy('quint', 143),
-    new Enemy('shamu', 203, bruce.currentPosition),
+    new Enemy('shamu', 208, bruce.currentPosition),
     new Enemy('squid', 31),
     new Enemy('flipper', 116)
   ]
@@ -57,8 +57,10 @@ function init() {
 
 
   const powerUps = [110, 342, 357, 81, 98]
+  //! add back 203 216 in intersections
+  const intersection =
+    [23, 36, 103, 108, 108, 116, 141, 143, 148, 156, 158, 201, 218, 263, 265, 265, 274, 276, 343, 356, 402, 402, 405, 405, 406, 406, 408, 413, 414, 417, 556]
 
-  const intersection = [402, 141, 201, 265, 405, 406, 406, 265, 405, 23, 103, 143, 203, 263, 343, 108, 148, 408, 108, 256, 556, 413, 0, 274, 414, 36, 116, 156, 216, 276, 356, 417, 158, 218]
 
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
@@ -78,8 +80,6 @@ function init() {
         cell.classList.add('cage')
       } else if (food.includes(i) === true) {
         cell.classList.add('food')
-      } if (intersection.includes(i) === true) {
-        cell.classList.add('intersection')
       }
       if (i === 260 || i === 279) {
         cell.classList.remove('wall')
@@ -87,6 +87,8 @@ function init() {
         cell.classList.add('power-up')
       } if (i === 229 || i === 230) {
         cell.classList.add('cage-wall')
+      } if (intersection.includes(i) === true) {
+        cell.classList.add('intersection')
       }
 
 
@@ -242,31 +244,38 @@ function init() {
 
 
   function moveEnemy() { //! this one pls
-    enemies.forEach(enemy => {
-      positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
-    })
 
     const checkerTimer = setInterval(() => {
+
+      const wallToRight = positionArray[character.currentPosition + 1].classList.contains('wall')
+      if (wallToRight === false) {
+
       enemies.forEach(enemy => {
         positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
       })
 
-      const randomIndex = 0 ///Math.floor(Math.random() * 4)
+      const randomIndex = Math.floor(Math.random() * 4)
 
+      
       function moveShamu() {
         // console.log('moveShamu')
         // console.log(shamu.currentPosition)
         // console.log('TEST', positionArray[shamu.currentPosition].classList.contains('intersection'))
-        if (randomIndex === 0 && positionArray[shamu.currentPosition].classList.contains('intersection')) {
-          // console.log('IF STATEMENT WITH INTERSECTION')
-          moveRight(shamu)
-          return atIntersection(shamu)
-        } else {
-          moveRight(shamu)
+        const positionContainIntersection = positionArray[shamu.currentPosition].classList.contains('intersection')
 
+        if (randomIndex === 0 && positionContainIntersection === true) {
+          atIntersection(shamu)
+        } else if (randomIndex === 0 && positionContainIntersection === false) {
+          moveRight(shamu)
+        } else if (randomIndex === 1 && positionContainIntersection === true) {
+          atIntersection(shamu)
+        } else if (randomIndex === 1 && positionContainIntersection === false) {
+          moveLeft(shamu)
         }
       }
+
       moveShamu()
+      //?moveQuint()
       enemies.forEach(enemy => {
         positionArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
         //enemy.moveHistory.push(enemy.currentPosition)
@@ -277,18 +286,30 @@ function init() {
 
   function atIntersection(enemy) {
     //console.log(enemy.name)
-    console.log('INTER FN')
-   // console.log('BRUCE POSITION', bruce.currentPosition)
+    //console.log('INTER FN')
+    // console.log('BRUCE POSITION', bruce.currentPosition)
     // findC(enemy.currentPosition, bruce.currentPosition)
-    
+
     // for (positionArray[enemy.currentPosition + 1]) {
+    const distanceSquareAbove = findC(enemy.currentPosition - width, bruce.currentPosition)
+    //console.log('DISTANCE ABOVE',distanceSquareAbove)
 
-      const distanceAbove = findC(enemy.currentPosition + 1, bruce.currentPosition)
-      console.log('DISTANCE ABOVE',distanceAbove)
+    const distanceSquareBelow = findC(enemy.currentPosition + width, bruce.currentPosition)
+    // console.log('DISTANCE BELOW',distanceSquareBelow)
 
+    // const distanceLeft = findC(enemy.currentPosition -1, bruce.currentPosition)
+    // console.log('DISTANCE BELOW',distanceBelow)
 
-      const distanceBelow =findC(enemy.currentPosition - 1, bruce.currentPosition)
-      console.log('DISTANCE BELOW',distanceBelow)
+    // const distanceRight = findC(enemy.currentPosition +1, bruce.currentPosition)
+    // console.log('DISTANCE BELOW',distanceBelow)
+
+    if (distanceSquareAbove < distanceSquareBelow) {
+      console.log('CHOOSING UP')
+      moveUp(shamu)
+    } else {
+      moveDown(shamu)
+      console.log('MOVE DWN')
+    }
 
     // }
 
@@ -298,26 +319,26 @@ function init() {
   function findC(enemyPosition, brucePosition) {
     //console.log('FIND C')
     const positionDiff = (enemyPosition - brucePosition)
-   // console.log(positionDiff)
+    //console.log(positionDiff)
 
     const yDistance = Math.round(positionDiff / 20)
-    //console.log('Y DISTANCE', yDistance) // -6 move -6*20 position for height 
+    // console.log('Y DISTANCE', yDistance) // -6 move -6*20 position for height 
 
     const xDistance = -1 * (positionDiff - yDistance * 20)
     //console.log('X DISTANCE', xDistance)
     const c2 = Math.pow(xDistance, 2) + Math.pow(yDistance, 2)
     const c = Math.sqrt(c2)
-    //console.log('C', c)
+    //     if (yDistance < 0){
+    //    c *=   -1
+    // }
+    // console.log('C', c)
     return c
+
   }
 
   function moveRight(character) {
-    //console.group('MOVING')
-    // console.log('CHARCURRENT', character.currentPosition)
-    //console.log('char', character)
-
-    if (!positionArray[character.currentPosition + 1].classList.contains('wall')) {
-
+    const wallToRight = positionArray[character.currentPosition + 1].classList.contains('wall')
+    if (wallToRight === false) {
       positionArray[character.currentPosition + 1].classList.add('swim-right')
       positionArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
       character.currentPosition++
