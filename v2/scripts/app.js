@@ -7,6 +7,7 @@ function init() {
   const height = 25
   const cellCount = width * height
   const positionArray = []
+
   const bruce = {
     class: 'bruce',
     startPosition: 110,
@@ -16,7 +17,7 @@ function init() {
   let score = 0
   let lifeCount = 3
   const bruceHistory = []
-  const bruceDirectionHistory =[]
+  const bruceDirectionHistory = [bruce.startPosition]
 
   class Enemy {
     constructor(name, startPosition, targetCell) {
@@ -32,7 +33,7 @@ function init() {
   }
 
   const enemies = [ //name startPosition targetCell
-    new Enemy('quint', 229, ),
+    new Enemy('quint', 229,),
     new Enemy('shamu', 210, bruce.currentPosition),
     new Enemy('squid', 269),
     new Enemy('flipper', 270)
@@ -44,7 +45,7 @@ function init() {
   const shamu = enemies[1]
   const squid = enemies[2]
   const flipper = enemies[3]
-//---------------------MAP DESIGN ARRAYS-------------------
+  //---------------------MAP DESIGN ARRAYS-------------------
   const cage =
     [229, 230, 267, 268, 269, 270, 271, 272, 287, 287, 288, 288, 289, 289, 290, 290, 291, 291, 292, 292]
   const walls = [29, 30, 42, 44, 45, 46, 47, 49, 50, 52, 53, 54, 55, 57, 62, 64, 65, 66, 67, 69, 70, 72, 73, 74, 75, 77, 82, 84, 85, 86, 87, 89, 90, 92, 93, 94, 95, 97, 102, 117, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 137, 149, 150, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 177, 182, 184, 185, 186, 187, 189, 190, 192, 193, 194, 195, 197, 221, 222, 224, 226, 227, 228, 231, 232, 233, 235, 237, 238, 241, 242, 244, 246, 253, 255, 257, 258, 266, 273, 282, 284, 286, 293, 295, 297, 302, 304, 306, 307, 308, 309, 310, 311, 312, 313, 315, 317, 322, 324, 335, 337, 346, 347, 349, 350, 352, 353, 361, 363, 364, 366, 367, 369, 370, 372, 373, 375, 376, 378, 381, 383, 384, 386, 387, 389, 390, 392, 393, 395, 396, 398, 409, 410, 422, 423, 424, 425, 427, 428, 429, 430, 431, 432, 434, 435, 436, 437, 442, 443, 444, 445, 447, 448, 449, 450, 451, 452, 454, 455, 456, 457, 298, 318, 338, 281, 301, 321, 341, 358]
@@ -56,7 +57,7 @@ function init() {
   //! add back 203 216 218 103 in intersections
   const intersection =
     [23, 36, 103, 108, 111, 116, 141, 143, 156, 158, 203, 205, 208, 211, 214, 216, 263, 265, 265, 274, 276, 325, 328, 331, 334, 343, 356, 402, 402, 405, 405, 406, 406, 413, 414, 417, 466, 473, 556]
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
@@ -125,6 +126,7 @@ function init() {
       }
     } else if (key === 37 || key === 65) { //Left
       //console.log(bruce.currentPosition)
+      bruceDirectionHistory.push(-1)
       if (bruce.currentPosition === 260) {
         console.log('Tunnel')
         positionArray[280].classList.add('swim-left')
@@ -134,9 +136,11 @@ function init() {
         moveLeft(bruce)
       }
     } else if (key === 38 || key === 87) { //UP
+      bruceDirectionHistory.push(-width)
       moveUp(bruce)
 
     } else if (key === 40 || key === 83) {
+      bruceDirectionHistory.push(+width)
       moveDown(bruce)
     }
     function eatFood() {
@@ -159,7 +163,7 @@ function init() {
 
   function moveEnemy() { //! this one pls
     const movementTimer = setInterval(() => {
-      enemies.forEach(enemy => {
+      enemies.forEach(enemy => { //?just removes class
         positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
       })
       function smartMoveEnemy(enemyName) {
@@ -168,32 +172,32 @@ function init() {
         const wallToLeft = positionArray[enemyName.currentPosition - 1].classList.contains('wall')
         const wallBelow = positionArray[enemyName.currentPosition + width].classList.contains('wall')
         const wallAbove = positionArray[enemyName.currentPosition - width].classList.contains('wall')
-  
+
         let randomIndex = Math.floor(Math.random() * 4) //!INDEX //! AT 2 ->  4
-  
+
         //? 0 Right, 1 Left, 2 up, 3 down,
         //! find direction function
-  
+
         if (randomIndex === 0 && positionContainIntersection) { //? need to go RIGHT! 
           enemyName.moveHistory.push(enemyName.currentPosition)
           atIntersection(enemyName)
         } else if (randomIndex === 0 && !positionContainIntersection && !wallToRight && enemyName.currentPosition + 1 !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
           enemyName.moveHistory.push(enemyName.currentPosition)
-  
+
           moveRight(enemyName)
         } else if (randomIndex === 0 && (!positionContainIntersection && wallToRight) || enemyName.currentPosition + 1 === enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
           randomIndex = Math.ceil(Math.random() * 3)  //! MAKE RANDOM INDEX ONLY 1-3 since can't do 0
-  
+
         } if (randomIndex === 1 && positionContainIntersection) { //! moving left
           enemyName.moveHistory.push(enemyName.currentPosition)
           atIntersection(enemyName)
         } else if (randomIndex === 1 && !positionContainIntersection && !wallToLeft && enemyName.currentPosition - 1 !== enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
-  
+
           enemyName.moveHistory.push(enemyName.currentPosition)
           moveLeft(enemyName)
         } else if (randomIndex === 1 && (!positionContainIntersection && wallToLeft) || enemyName.currentPosition - 1 === enemyName.moveHistory[enemyName.moveHistory.length - 1]) {
           randomIndex = Math.floor(Math.random() * 4)
-  
+
         } if (randomIndex === 2 && positionContainIntersection) {
           enemyName.moveHistory.push(enemyName.currentPosition)
           atIntersection(enemyName)
@@ -213,8 +217,8 @@ function init() {
           randomIndex = Math.floor(Math.random() * 4)
         }
         positionArray[enemyName.currentPosition].classList.add(enemyName.class, enemyName.name)
-  
-      } 
+
+      }
 
       smartMoveEnemy(shamu)
       smartMoveEnemy(quint)
@@ -222,9 +226,24 @@ function init() {
       smartMoveEnemy(squid)
 
       shamu.targetCell = bruce.currentPosition
+      flipper.targetCell = flipperTargetFN()
 
-      //quint.targetCell 
-    
+      function flipperTargetFN() {
+        let flipperTargetResult = bruce.currentPosition
+        bruce.startPosition
+        if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === 1) {
+          flipperTargetResult = bruce.currentPosition + 4
+        } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -1) {
+          flipperTargetResult = bruce.currentPosition - 4
+        } else if (bruceDirectionHistory[bruceDirectionHistory - 1] === -width) {
+          flipperTargetResult = bruce.currentPosition - 4 * width
+        } else if (bruceDirectionHistory[bruceDirectionHistory - 1] === + width) {
+          flipperTargetResult = bruce.currentPosition + 4 * width
+        }
+        console.log(flipperTargetResult)
+        return flipperTargetResult
+      }
+
 
 
 
@@ -232,7 +251,7 @@ function init() {
   }
 
   function atIntersection(enemy) {
-   
+
 
     //console.log(enemy.name, enemy.targetCell)
 
@@ -240,12 +259,12 @@ function init() {
     const distanceSquareBelow = findC(enemy.currentPosition + width, enemy.targetCell)
     const distanceSquareRight = findC(enemy.currentPosition + 1, enemy.targetCell)
     const distanceSquareLeft = findC(enemy.currentPosition - width, enemy.targetCell)
-  
+
     const wallToRight = positionArray[enemy.currentPosition + 1].classList.contains('wall')
     const wallToLeft = positionArray[enemy.currentPosition - 1].classList.contains('wall')
     const wallBelow = positionArray[enemy.currentPosition + width].classList.contains('wall')
     const wallAbove = positionArray[enemy.currentPosition - width].classList.contains('wall')
-  
+
     if (distanceSquareAbove < distanceSquareBelow) {
       if (!wallAbove) {
         console.log('CHOOSING UP')
@@ -259,12 +278,12 @@ function init() {
     } else if (distanceSquareBelow < distanceSquareAbove) {
       if (!wallBelow) {
         moveDown(enemy)
-        console.log('MOVE DWN')
+        console.log('CHOOSING DOWN')
       } else if (!wallToLeft) {
         moveLeft(enemy)
       } else if (!wallToRight)
         moveRight(enemy)
-  
+
     } else if (distanceSquareAbove === distanceSquareBelow) {
       console.log('DISTANCE SAME')
       if (distanceSquareRight < distanceSquareLeft && !wallToRight) {
@@ -285,7 +304,7 @@ function init() {
   }
 
   function moveRight(character) {
-   // console.log('RIGHT')
+    // console.log('RIGHT')
     const wallToRight = positionArray[character.currentPosition + 1].classList.contains('wall')
     if (wallToRight === false) {
       positionArray[character.currentPosition + 1].classList.add('swim-right')
@@ -318,7 +337,7 @@ function init() {
 
 
   function moveDown(character) {
-   // console.log('DOWN')
+    // console.log('DOWN')
     if (!positionArray[character.currentPosition + width].classList.contains('wall') && !positionArray[character.currentPosition + width].classList.contains('cage-wall')) {
       positionArray[character.currentPosition + width].classList.add('swim-down')
       positionArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
