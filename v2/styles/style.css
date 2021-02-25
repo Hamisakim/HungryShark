@@ -283,3 +283,7 @@ button {
     opacity: 0;
   }
 }
+
+.intersection {
+  background-color: rgba(153, 0, 255, 0.6);
+}
