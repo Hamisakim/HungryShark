@@ -1,3 +1,5 @@
+/* eslint-disable keyword-spacing */
+/* eslint-disable brace-style */
 /* eslint-disable indent */
 
 function init() {
@@ -25,7 +27,7 @@ function init() {
       this.class = 'enemyOnSquare'
       this.edible = false
       this.targetCell = targetCell
-      this.moveHistory = []
+      this.moveHistory = [0,]
 
     }
   }
@@ -57,9 +59,9 @@ function init() {
 
 
   const powerUps = [110, 342, 357, 81, 98]
-  //! add back 203 216 in intersections
+  //! add back 203 216 218 in intersections
   const intersection =
-    [23, 36, 103, 108, 108, 116, 141, 143, 148, 156, 158, 201, 218, 263, 265, 265, 274, 276, 343, 356, 402, 402, 405, 405, 406, 406, 408, 413, 414, 417, 556]
+    [23, 36, 103, 108, 108, 116, 141, 143, 148, 156, 158, 201, 263, 265, 265, 274, 276, 343, 356, 402, 402, 405, 405, 406, 406, 408, 413, 414, 417, 556]
 
 
   function createGrid() {
@@ -247,62 +249,86 @@ function init() {
 
     const checkerTimer = setInterval(() => {
 
-      const wallToRight = positionArray[character.currentPosition + 1].classList.contains('wall')
-      if (wallToRight === false) {
+
+      //const wallToRight = positionArray[character.currentPosition + 1].classList.contains('wall')
+
 
       enemies.forEach(enemy => {
         positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
       })
 
-      const randomIndex = Math.floor(Math.random() * 4)
 
-      
+
+
       function moveShamu() {
+
         // console.log('moveShamu')
         // console.log(shamu.currentPosition)
         // console.log('TEST', positionArray[shamu.currentPosition].classList.contains('intersection'))
         const positionContainIntersection = positionArray[shamu.currentPosition].classList.contains('intersection')
+        const wallToRight = positionArray[shamu.currentPosition + 1].classList.contains('wall')
+        const wallToLeft = positionArray[shamu.currentPosition - 1].classList.contains('wall')
+        const wallBelow = positionArray[shamu.currentPosition + width].classList.contains('wall')
+        const wallAbove = positionArray[shamu.currentPosition - width].classList.contains('wall')
 
-        if (randomIndex === 0 && positionContainIntersection === true) {
-          atIntersection(shamu)
-        } else if (randomIndex === 0 && positionContainIntersection === false) {
+        //let currentPosition = shamu.currentPosition
+        let randomIndex = Math.floor(Math.random() * 4) //!INDEX 
+
+        //console.log(wallToRight)
+
+        //? 0 Right, 1 Left, 2 up, 3 down,
+        //! find direction function
+
+        console.log('RANDOM INDEX->', randomIndex)
+        
+        
+
+        if (randomIndex === 0 && positionContainIntersection) { //? need to go RIGHT! 
+          atIntersection(shamu) //decides which way to go - up or down... 
+        } else if (randomIndex === 0 && !positionContainIntersection && !wallToRight && !shamu.currentPosition + 1 === shamu.moveHistory[shamu.moveHistory.length + 1]) {
           moveRight(shamu)
-        } else if (randomIndex === 1 && positionContainIntersection === true) {
+        } else if (randomIndex === 0 && !positionContainIntersection && wallToRight) {
+          randomIndex = Math.floor(Math.random() * 4)  //! CHanging randomIndex if wall to right is true
+        } if (randomIndex === 1 && positionContainIntersection) {
           atIntersection(shamu)
-        } else if (randomIndex === 1 && positionContainIntersection === false) {
+        } else if (randomIndex === 1 && !positionContainIntersection && !wallToLeft && !shamu.currentPosition - 1 === shamu.moveHistory[shamu.moveHistory.length - 1]) {
           moveLeft(shamu)
+        } else if (randomIndex === 1 && !positionContainIntersection && wallToRight) {
+          randomIndex //Math.floor(Math.random() * 4)  
+        } if (randomIndex === 2 && positionContainIntersection) {
+          atIntersection(shamu)
+        } else if (randomIndex === 2 && !positionContainIntersection && !wallAbove && !shamu.currentPosition - width === shamu.moveHistory[shamu.moveHistory.length - 1]) {
+          moveUp(shamu)
+        } else if (randomIndex === 2 && !positionContainIntersection && wallAbove) {
+          randomIndex = Math.floor(Math.random() * 4)
+        } if (randomIndex === 3 && positionContainIntersection) {
+          atIntersection(shamu)
+        } else if (randomIndex === 3 && !positionContainIntersection && !wallBelow && !shamu.currentPosition + width === shamu.moveHistory[shamu.moveHistory.length - 1]) {
+          moveDown(shamu)
+        } else if (randomIndex === 3 && !positionContainIntersection && wallBelow) {
+          randomIndex = Math.floor(Math.random() * 4)
         }
-      }
+        console.log('NEW INDEX',randomIndex)
 
+        console.log('Current Position',shamu.currentPosition) 
+        console.log('LAST POSITION',shamu.moveHistory[shamu.moveHistory.length - 1])
+
+        
+      } //! PURPLE
+ 
       moveShamu()
       //?moveQuint()
       enemies.forEach(enemy => {
         positionArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
-        //enemy.moveHistory.push(enemy.currentPosition)
+        enemy.moveHistory.push(enemy.currentPosition)
       })
 
     }, 500)
   }
 
   function atIntersection(enemy) {
-    //console.log(enemy.name)
-    //console.log('INTER FN')
-    // console.log('BRUCE POSITION', bruce.currentPosition)
-    // findC(enemy.currentPosition, bruce.currentPosition)
-
-    // for (positionArray[enemy.currentPosition + 1]) {
     const distanceSquareAbove = findC(enemy.currentPosition - width, bruce.currentPosition)
-    //console.log('DISTANCE ABOVE',distanceSquareAbove)
-
     const distanceSquareBelow = findC(enemy.currentPosition + width, bruce.currentPosition)
-    // console.log('DISTANCE BELOW',distanceSquareBelow)
-
-    // const distanceLeft = findC(enemy.currentPosition -1, bruce.currentPosition)
-    // console.log('DISTANCE BELOW',distanceBelow)
-
-    // const distanceRight = findC(enemy.currentPosition +1, bruce.currentPosition)
-    // console.log('DISTANCE BELOW',distanceBelow)
-
     if (distanceSquareAbove < distanceSquareBelow) {
       console.log('CHOOSING UP')
       moveUp(shamu)
