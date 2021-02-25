@@ -27,7 +27,7 @@ function init() {
       this.class = 'enemyOnSquare'
       this.edible = false
       this.targetCell = targetCell
-      this.moveHistory = [0,0,0,0,0]
+      this.moveHistory = [0, 0, 0, 0, 0]
 
     }
   }
@@ -272,7 +272,7 @@ function init() {
         const wallAbove = positionArray[shamu.currentPosition - width].classList.contains('wall')
 
         //let currentPosition = shamu.currentPosition
-        let randomIndex = Math.floor(Math.random() * 2) //!INDEX //! AT 2 ->  4
+        let randomIndex = Math.floor(Math.random() * 4) //!INDEX //! AT 2 ->  4
 
         //console.log(wallToRight)
 
@@ -281,47 +281,52 @@ function init() {
 
         // console.log('RANDOM INDEX->', randomIndex)
 
-          console.log('CURRENT POSITION', shamu.currentPosition)
-        console.log('LAST POSITION',  shamu.moveHistory[shamu.moveHistory.length - 1])
+        //   console.log('CURRENT POSITION', shamu.currentPosition)
+        // console.log('LAST POSITION',  shamu.moveHistory[shamu.moveHistory.length - 1])
 
         if (randomIndex === 0 && positionContainIntersection) { //? need to go RIGHT! 
+          shamu.moveHistory.push(shamu.currentPosition)
           atIntersection(shamu) //decides which way to go - up or down... 
           // && !positionContainIntersection 
-        } else if (randomIndex === 0 && !wallToRight && shamu.currentPosition + 1 !== shamu.moveHistory[shamu.moveHistory.length - 1]) {
-          //shamu.moveHistory.push(shamu.currentPosition - 1)
+        } else if (randomIndex === 0 && !positionContainIntersection && !wallToRight && shamu.currentPosition + 1 !== shamu.moveHistory[shamu.moveHistory.length - 1]) {
+          shamu.moveHistory.push(shamu.currentPosition)
           console.log('right initiated')
           moveRight(shamu)
         } else if (randomIndex === 0 && (!positionContainIntersection && wallToRight) || shamu.currentPosition + 1 === shamu.moveHistory[shamu.moveHistory.length - 1]) {
-          randomIndex = Math.floor(Math.random() * 2)  //! CHanging randomIndex if wall to right is true
-
+          randomIndex = Math.floor(Math.random() * 2)  //! CHanging randomIndex if wall to right is tru
 
         } if (randomIndex === 1 && positionContainIntersection) { //! moving left
+          shamu.moveHistory.push(shamu.currentPosition)
           atIntersection(shamu)
         } else if (randomIndex === 1 && !positionContainIntersection && !wallToLeft && shamu.currentPosition - 1 !== shamu.moveHistory[shamu.moveHistory.length - 1]) {
           console.log('left initiated')
-          //shamu.moveHistory.push(shamu.currentPosition + 1)
+          shamu.moveHistory.push(shamu.currentPosition)
           moveLeft(shamu)
-        } else if (randomIndex === 1 &&  (!positionContainIntersection && wallToRight) || shamu.currentPosition - 1 === shamu.moveHistory[shamu.moveHistory.length - 1]) {
-          randomIndex  = Math.floor(Math.random() * 4) //Math.floor(Math.random() * 4)  
+        } else if (randomIndex === 1 && (!positionContainIntersection && wallToLeft) || shamu.currentPosition - 1 === shamu.moveHistory[shamu.moveHistory.length - 1]) {
+          randomIndex = Math.floor(Math.random() * 4)
 
         } if (randomIndex === 2 && positionContainIntersection) {
+          shamu.moveHistory.push(shamu.currentPosition)
           atIntersection(shamu)
         } else if (randomIndex === 2 && !positionContainIntersection && !wallAbove && shamu.currentPosition - width !== shamu.moveHistory[shamu.moveHistory.length - 1]) {
+          shamu.moveHistory.push(shamu.currentPosition)
           moveUp(shamu)
         } else if (randomIndex === 2 && !positionContainIntersection && wallAbove) {
           randomIndex = Math.floor(Math.random() * 4)
         }
         if (randomIndex === 3 && positionContainIntersection) {
+          shamu.moveHistory.push(shamu.currentPosition)
           atIntersection(shamu)
         } else if (randomIndex === 3 && !positionContainIntersection && !wallBelow && shamu.currentPosition + width !== shamu.moveHistory[shamu.moveHistory.length - 1]) {
+          shamu.moveHistory.push(shamu.currentPosition)
           moveDown(shamu)
         } else if (randomIndex === 3 && !positionContainIntersection && wallBelow) {
           randomIndex = Math.floor(Math.random() * 4)
         }
         //console.log('NEW INDEX',randomIndex)
 
-         console.log('Current Position', shamu.currentPosition)
-         
+        //console.log('Current Position', shamu.currentPosition)
+
 
         enemies.forEach(enemy => {
           positionArray[enemy.currentPosition].classList.add(enemy.class, enemy.name)
@@ -334,20 +339,52 @@ function init() {
       //?moveQuint()
 
 
-    }, 500)
+    }, 100)
   }
 
   function atIntersection(enemy) {
     const distanceSquareAbove = findC(enemy.currentPosition - width, bruce.currentPosition)
     const distanceSquareBelow = findC(enemy.currentPosition + width, bruce.currentPosition)
+
+    const wallToRight = positionArray[enemy.currentPosition + 1].classList.contains('wall')
+    const wallToLeft = positionArray[enemy.currentPosition - 1].classList.contains('wall')
+    const wallBelow = positionArray[enemy.currentPosition + width].classList.contains('wall')
+    const wallAbove = positionArray[enemy.currentPosition - width].classList.contains('wall')
+
+
     if (distanceSquareAbove < distanceSquareBelow) {
-      console.log('CHOOSING UP')
-      moveUp(shamu)
-    } else {
-      moveDown(shamu)
-      console.log('MOVE DWN')
+      if (!wallAbove) {
+        console.log('CHOOSING UP')
+        moveUp(enemy)
+      } else if (!wallToLeft) {
+        console.log('UP UNAVAILABLE ')
+        moveLeft(enemy)
+      } else if (!wallBelow) {
+        moveDown(enemy)
+      }
     }
-    moveEnemy(enemy)
+    else if (distanceSquareAbove > distanceSquareBelow) {
+      if (!wallBelow) {
+        moveDown(enemy)
+        console.log('MOVE DWN')
+      }
+      else if (!wallToLeft) {
+        moveLeft(enemy)
+      } else if()
+    }
+    else if (distanceSquareAbove === distanceSquareBelow) {
+      console.log('SAME DISTANCE')
+      if (!wallAbove) {
+        console.log('CHOOSING UP')
+        moveUp(enemy)
+      } else {
+        console.log('UP UNAVAILABLE ')
+        moveLeft(enemy)
+      }
+    }
+
+
+    // moveEnemy(enemy)
     // }
 
 
@@ -381,7 +418,7 @@ function init() {
       positionArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
       character.currentPosition++
     }
-      character.moveHistory.push(character.currentPosition - 1 ) //!!!!!!!!!!!!!!!! -1
+    //character.moveHistory.push(character.currentPosition - 1 ) //!!!!!!!!!!!!!!!! -1
   }
 
 
@@ -392,7 +429,7 @@ function init() {
       positionArray[character.currentPosition].classList.remove('swim-right', 'swim-up', 'swim-down', 'swim-left')
       character.currentPosition--
     }
-    character.moveHistory.push(character.currentPosition + 1 )
+    // character.moveHistory.push(character.currentPosition + 1 )
   }
 
 
