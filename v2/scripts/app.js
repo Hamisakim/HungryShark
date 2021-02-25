@@ -16,6 +16,7 @@ function init() {
   let score = 0
   let lifeCount = 3
   const bruceHistory = []
+  const bruceDirectionHistory =[]
 
   class Enemy {
     constructor(name, startPosition, targetCell) {
@@ -31,11 +32,13 @@ function init() {
   }
 
   const enemies = [ //name startPosition targetCell
-    new Enemy('quint', 229),
+    new Enemy('quint', 229, ),
     new Enemy('shamu', 210, bruce.currentPosition),
     new Enemy('squid', 269),
     new Enemy('flipper', 270)
   ]
+
+  console.log()
 
   const quint = enemies[0]
   const shamu = enemies[1]
@@ -111,6 +114,7 @@ function init() {
     positionArray[bruce.currentPosition].classList.remove(bruce.class)
     //console.log('CURRENT', bruce.currentPosition)
     if (key === 39 || key === 68) {
+      bruceDirectionHistory.push(+1)
       if (bruce.currentPosition === 279) {
         console.log('Tunnel')
         positionArray[260].classList.add('swim-right')
@@ -149,10 +153,12 @@ function init() {
     eatFood()
     addBruce(bruce.currentPosition)
     bruceHistory.push(bruce.currentPosition)
+
+    console.log(bruceDirectionHistory)
   }
 
   function moveEnemy() { //! this one pls
-    const checkerTimer = setInterval(() => {
+    const movementTimer = setInterval(() => {
       enemies.forEach(enemy => {
         positionArray[enemy.currentPosition].classList.remove(enemy.class, enemy.name)
       })
@@ -215,11 +221,21 @@ function init() {
       smartMoveEnemy(flipper)
       smartMoveEnemy(squid)
 
+      shamu.targetCell = bruce.currentPosition
+
+      //quint.targetCell 
+    
+
+
 
     }, 200)
   }
 
   function atIntersection(enemy) {
+   
+
+    //console.log(enemy.name, enemy.targetCell)
+
     const distanceSquareAbove = findC(enemy.currentPosition - width, enemy.targetCell)
     const distanceSquareBelow = findC(enemy.currentPosition + width, enemy.targetCell)
     const distanceSquareRight = findC(enemy.currentPosition + 1, enemy.targetCell)
@@ -250,7 +266,7 @@ function init() {
         moveRight(enemy)
   
     } else if (distanceSquareAbove === distanceSquareBelow) {
-      console.log('DISTANCE')
+      console.log('DISTANCE SAME')
       if (distanceSquareRight < distanceSquareLeft && !wallToRight) {
         moveRight(enemy)
       } else if (distanceSquareLeft < distanceSquareRight && !wallToLeft) {
@@ -259,8 +275,8 @@ function init() {
     }
   }
 
-  function findC(enemyPosition, brucePosition) {
-    const positionDiff = (enemyPosition - brucePosition)
+  function findC(enemyPosition, targetCell) {
+    const positionDiff = (enemyPosition - targetCell)
     const yDistance = Math.round(positionDiff / 20)
     const xDistance = -1 * (positionDiff - yDistance * 20)
     const c2 = Math.pow(xDistance, 2) + Math.pow(yDistance, 2)
@@ -269,7 +285,7 @@ function init() {
   }
 
   function moveRight(character) {
-    console.log('RIGHT')
+   // console.log('RIGHT')
     const wallToRight = positionArray[character.currentPosition + 1].classList.contains('wall')
     if (wallToRight === false) {
       positionArray[character.currentPosition + 1].classList.add('swim-right')
@@ -292,7 +308,7 @@ function init() {
 
 
   function moveUp(character) {
-    console.log('UP')
+    //console.log('UP')
     if (!positionArray[character.currentPosition - width].classList.contains('wall')) {
       positionArray[character.currentPosition - width].classList.add('swim-up')
       positionArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
@@ -302,7 +318,7 @@ function init() {
 
 
   function moveDown(character) {
-    console.log('DOWN')
+   // console.log('DOWN')
     if (!positionArray[character.currentPosition + width].classList.contains('wall') && !positionArray[character.currentPosition + width].classList.contains('cage-wall')) {
       positionArray[character.currentPosition + width].classList.add('swim-down')
       positionArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
