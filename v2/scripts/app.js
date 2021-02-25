@@ -10,8 +10,8 @@ function init() {
 
   const bruce = {
     class: 'bruce',
-    startPosition: 110,
-    currentPosition: 110
+    startPosition: 113,
+    currentPosition: 113
   }
 
   let score = 0
@@ -158,7 +158,7 @@ function init() {
     addBruce(bruce.currentPosition)
     bruceHistory.push(bruce.currentPosition)
 
-    console.log(bruceDirectionHistory)
+    // console.log(bruceDirectionHistory)
   }
 
   function moveEnemy() { //! this one pls
@@ -240,14 +240,84 @@ function init() {
         } else if (bruceDirectionHistory[bruceDirectionHistory - 1] === + width) {
           flipperTargetResult = bruce.currentPosition + 4 * width
         }
-        console.log(flipperTargetResult)
+        // console.log(flipperTargetResult)
         return flipperTargetResult
       }
 
 
+      // function squidTargetFN() {
+      //   let squidTargetResult = bruce.currentPosition
+      //   let twoInfront = bruce.currentPosition
 
+      //   if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === 1) {
+      //     twoInfront = bruce.currentPosition + 2
+      //   } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -1) {
+      //     twoInfront = bruce.currentPosition - 2
+      //   } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -width) {
+      //     twoInfront = bruce.currentPosition - width * 2
+      //   } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === +width) {
+      //     twoInfront = bruce.currentPosition - width * 2
+      //   }
+      //   const vector = 2 * findC(shamu.currentPosition, twoInfront)
+      //   console.log('SQUID',vector)      
+      // }
 
-    }, 200)
+      function squidTargetFN() {
+        console.log('SQUID FN')
+        const squidTargetResult = bruce.currentPosition
+        let twoInfront = bruce.currentPosition
+        if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === 1) {
+          twoInfront = bruce.currentPosition + 2
+        } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -1) {
+          twoInfront = bruce.currentPosition - 2
+        } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === -width) {
+          twoInfront = bruce.currentPosition - width * 2
+        } else if (bruceDirectionHistory[bruceDirectionHistory.length - 1] === +width) {
+          twoInfront = bruce.currentPosition + width * 2
+        }
+
+        console.log('SHAMU POSITION',shamu.currentPosition)
+        console.log('Target->>',twoInfront)
+
+        
+        const vectorLength = findC(shamu.currentPosition, twoInfront)
+        const doubleVectorLength = 2 * vectorLength //doubleC
+        console.log('VECTOR LENGTH', vectorLength)
+
+        //? shamuCurrentPosition = shamu.currentPosition
+        const getAngle = (shamuCurrentPosition, twoInfront) => {
+          const positionDiff = shamuCurrentPosition - twoInfront
+          const oppositeLength = Math.round(positionDiff / 20)
+          console.log('POSITION DIFF->>', positionDiff, 'HEIGHT', oppositeLength)
+          const sinTheta = oppositeLength / vectorLength
+          const theta = Math.asin(sinTheta) // (Math.PI / 180)
+          //console.log('THETA', theta)
+          return theta
+
+        }
+        
+        const theta = getAngle(shamu.currentPosition, twoInfront)
+       
+        const targetY = -10 * (Math.round(Math.sin(theta) * doubleVectorLength )) //! *20 to get to postions
+        console.log('TARGET Y', targetY) // difference of this many positons 
+        // console.log(shamu.CurrentPosition)
+ 
+        
+        const targetX = Math.round((Math.cos(theta) * doubleVectorLength)) / 2
+
+        const targetXConverted = targetX + (targetY)
+        console.log('SCALE X', targetX)
+        
+        console.log('TARGET X CONVERTED', targetXConverted)
+   
+        const targetCell = shamu.currentPosition + targetXConverted
+        console.log('SQUID TARGET',targetCell)
+        return targetCell 
+      }
+
+      squidTargetFN()
+
+    }, 5000)
   }
 
   function atIntersection(enemy) {
@@ -297,7 +367,9 @@ function init() {
   function findC(enemyPosition, targetCell) {
     const positionDiff = (enemyPosition - targetCell)
     const yDistance = Math.round(positionDiff / 20)
+
     const xDistance = -1 * (positionDiff - yDistance * 20)
+    
     const c2 = Math.pow(xDistance, 2) + Math.pow(yDistance, 2)
     const c = Math.sqrt(c2)
     return c
