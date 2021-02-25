@@ -1,5 +1,5 @@
 /* eslint-disable keyword-spacing */
-/* eslint-disable brace-style */
+
 /* eslint-disable indent */
 
 function init() {
@@ -59,9 +59,10 @@ function init() {
 
 
   const powerUps = [110, 342, 357, 81, 98]
-  //! add back 203 216 218 in intersections
+
+  //! add back 203 216 218 103 in intersections
   const intersection =
-    [23, 36, 103, 108, 108, 116, 141, 143, 148, 156, 158, 201, 263, 265, 265, 274, 276, 343, 356, 402, 402, 405, 405, 406, 406, 408, 413, 414, 417, 556]
+    [23, 36,103, 108, 111, 116, 141, 143, 148, 156, 158, 201, 203,216, 263, 265, 265, 274, 276, 343, 356, 402, 402, 405, 405, 406, 406, 408, 413, 414, 417, 556]
 
 
   function createGrid() {
@@ -261,10 +262,6 @@ function init() {
 
 
       function moveShamu() {
-
-        // console.log('moveShamu')
-        // console.log(shamu.currentPosition)
-        // console.log('TEST', positionArray[shamu.currentPosition].classList.contains('intersection'))
         const positionContainIntersection = positionArray[shamu.currentPosition].classList.contains('intersection')
         const wallToRight = positionArray[shamu.currentPosition + 1].classList.contains('wall')
         const wallToLeft = positionArray[shamu.currentPosition - 1].classList.contains('wall')
@@ -273,7 +270,6 @@ function init() {
 
         //let currentPosition = shamu.currentPosition
         let randomIndex = Math.floor(Math.random() * 4) //!INDEX //! AT 2 ->  4
-
         //console.log(wallToRight)
 
         //? 0 Right, 1 Left, 2 up, 3 down,
@@ -339,18 +335,19 @@ function init() {
       //?moveQuint()
 
 
-    }, 100)
+    }, 300)
   }
 
   function atIntersection(enemy) {
     const distanceSquareAbove = findC(enemy.currentPosition - width, bruce.currentPosition)
     const distanceSquareBelow = findC(enemy.currentPosition + width, bruce.currentPosition)
+     const distanceSquareRight = findC(enemy.currentPosition + 1, bruce.currentPosition)
+     const distanceSquareLeft = findC(enemy.currentPosition - width, bruce.currentPosition)
 
     const wallToRight = positionArray[enemy.currentPosition + 1].classList.contains('wall')
     const wallToLeft = positionArray[enemy.currentPosition - 1].classList.contains('wall')
     const wallBelow = positionArray[enemy.currentPosition + width].classList.contains('wall')
     const wallAbove = positionArray[enemy.currentPosition - width].classList.contains('wall')
-
 
     if (distanceSquareAbove < distanceSquareBelow) {
       if (!wallAbove) {
@@ -363,30 +360,31 @@ function init() {
         moveDown(enemy)
       }
     }
-    else if (distanceSquareAbove > distanceSquareBelow) {
+    else if (distanceSquareBelow < distanceSquareAbove) {
       if (!wallBelow) {
         moveDown(enemy)
         console.log('MOVE DWN')
-      }
-      else if (!wallToLeft) {
+      } else if (!wallToLeft) {
         moveLeft(enemy)
-      } else if()
-    }
-    else if (distanceSquareAbove === distanceSquareBelow) {
-      console.log('SAME DISTANCE')
-      if (!wallAbove) {
-        console.log('CHOOSING UP')
-        moveUp(enemy)
+      } else if (!wallToRight)
+        moveRight(enemy)
+    } else if (distanceSquareAbove === distanceSquareBelow) {
+      if (distanceSquareRight < distanceSquareLeft && !wallToRight){
+        moveRight(enemy)
       } else {
-        console.log('UP UNAVAILABLE ')
         moveLeft(enemy)
       }
+      // console.log('SAME DISTANCE')
+      // if (!wallAbove) {
+      //   console.log('CHOOSING UP')
+      //   moveUp(enemy)
+      // } else if (!wallToLeft) {
+      //   console.log('UP UNAVAILABLE ')
+      //   moveLeft(enemy)
+      // } else if (!wallBelow) {
+      //   moveDown(enemy)
+      // }
     }
-
-
-    // moveEnemy(enemy)
-    // }
-
 
   }
 
@@ -435,7 +433,7 @@ function init() {
 
   function moveUp(character) {
     console.log('UP')
-    if (!positionArray[character.currentPosition - width].classList.contains('wall',)) {
+    if (!positionArray[character.currentPosition - width].classList.contains('wall','cage-wall')) {
       positionArray[character.currentPosition - width].classList.add('swim-up')
       positionArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
       character.currentPosition -= width
@@ -445,7 +443,7 @@ function init() {
 
   function moveDown(character) {
     console.log('DOWN')
-    if (!positionArray[character.currentPosition + width].classList.contains('wall')) {
+    if (!positionArray[character.currentPosition + width].classList.contains('wall','cage-wall')) {
       positionArray[character.currentPosition + width].classList.add('swim-down')
       positionArray[character.currentPosition].classList.remove('swim-left', 'swim-up', 'swim-down', 'swim-right')
       character.currentPosition += width
