@@ -317,7 +317,7 @@ function init() {
         return targetCell
       }
 
-    }, 150)
+    }, 180)
     // }
     //!-------------------------------------------------------------
     //!! ------ MOVE DIRECTION FUNCTIONS----------------------------
@@ -512,7 +512,6 @@ function init() {
     //console.log('entering')
     const overlay = document.querySelector('.overlay')
     overlay.classList.add('entering')
-
     const audio1 = document.getElementById('enter-audio')
     audio1.play()
   }

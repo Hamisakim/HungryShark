@@ -186,6 +186,7 @@ button {
 }
 
 .wall {
+  opacity: 0.9;
   background-size: 350%;
   background-position: center;
    background-image: url('../assets/seaweed.png');/
