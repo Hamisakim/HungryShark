@@ -13,9 +13,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png"
     href="https://slack-imgs.com/?c=1&o1=gu&url=https%3A%2F%2Fa.slack-edge.com%2Fproduction-standard-emoji-assets%2F13.0%2Fapple-small%2F1f988%402x.png" />
-  <title> VERSION 2</title>
+  <title>HUNGRY SHARK</title>
 </head>
 
+<audio  id='enter-audio' src='./assets/Finding Nemo_ Shark Scene [60fps,IMAX] Dory and Marlin meeting Shark  Scene (128 kbps)-[AudioTrimmer.com].mp3' ></audio>
+
+<audio id= 'game-audio' src="./assets/The Little Mermaid - Under the Sea (from The Little Mermaid) (Official Video).mp3" ></audio>
 
 <body>
   <div class="overlay">
@@ -30,10 +33,14 @@
 
 
   <div class='win-overlay'>
+    <img id="win=left-img" src="./assets/dancing shark.gif" >
     <div class='win-message'>
-      <h2> WELL DONE YOU WIN! YOUR SCORE WAS :<span id='score2'>00</span> </h2>
+      <h2> <span id=lose> DONE YOU WIN! </span> <br> <br> YOUR SCORE WAS    <span id='score2'>00</span> </h2>
+      <button class='reset-btn'>CLICK TO PLAY AGAIN</button>
     </div>
+    <img id="win=left-img" src="./assets/Dancing babyshark png.gif" >
   </div>
+
 
   <div class='game-container'>
     <header class='header'>
@@ -43,7 +50,8 @@
         <h2>SCORE:<span id='score'>00</span> </h2>
         <div class='lives-container'>
 
-          <img class="hearts" src="../sei-project-one/assets/heart.gif">
+          <img class="hearts" src="./assets/heart.gif"
+          src="">
           <span id='lives-counter'>3</span>
         </div>
 

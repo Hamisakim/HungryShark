@@ -1,6 +1,9 @@
 /* eslint-disable keyword-spacing */
 function init() {
   function gameLoad() {
+
+
+
     const gameGrid = document.querySelector('.game-grid')
     const width = 20
     const height = 25
@@ -48,7 +51,7 @@ function init() {
       [229, 230, 267, 268, 269, 270, 271, 272, 287, 287, 288, 288, 289, 289, 290, 290, 291, 291, 292, 292]
     const walls = [247, 267, 287, 252, 272, 292, 29, 30, 42, 44, 45, 46, 47, 49, 50, 52, 53, 54, 55, 57, 62, 64, 65, 66, 67, 69, 70, 72, 73, 74, 75, 77, 82, 84, 85, 86, 87, 89, 90, 92, 93, 94, 95, 97, 102, 117, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 137, 149, 150, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 177, 182, 184, 185, 186, 187, 189, 190, 192, 193, 194, 195, 197, 221, 222, 224, 226, 227, 228, 231, 232, 233, 235, 237, 238, 241, 242, 244, 246, 253, 255, 257, 258, 266, 273, 282, 284, 286, 293, 295, 297, 302, 304, 306, 307, 308, 309, 310, 311, 312, 313, 315, 317, 322, 324, 335, 337, 346, 347, 349, 350, 352, 353, 361, 363, 364, 366, 367, 369, 370, 372, 373, 375, 376, 378, 381, 383, 384, 386, 387, 389, 390, 392, 393, 395, 396, 398, 409, 410, 422, 423, 424, 425, 427, 428, 429, 430, 431, 432, 434, 435, 436, 437, 442, 443, 444, 445, 447, 448, 449, 450, 451, 452, 454, 455, 456, 457, 298, 318, 338, 281, 301, 321, 341, 358]
 
-    const food = [21]
+    const food =  [ 21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 35, 36, 37, 38, 41, 43, 48, 51, 56, 58, 61, 63, 68, 71, 76, 78, 83, 88, 91, 96, 101, 103, 104, 105, 106, 107, 108, 111, 112, 113, 114, 115, 116, 118, 121, 123, 136, 138, 141, 142, 143, 144, 145, 146, 147, 148, 151, 152, 153, 154, 155, 156, 157, 158, 161, 163, 176, 178, 181, 183, 196, 198, 201, 202, 203, 204, 215, 216, 217, 218, 223, 236, 243, 256, 263, 264, 275, 276, 283, 296, 303, 316, 323, 336, 343, 344, 345, 348, 351, 354, 355, 356, 362, 365, 368, 371, 374, 377, 382, 385, 388, 391, 394, 397, 401, 402, 403, 404, 405, 406, 407, 408, 411, 412, 413, 414, 415, 416, 417, 418, 421, 426, 433, 438, 441, 446, 453, 458, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478]
     const powerUps = [110, 342, 357, 81, 98]
 
     //! add back 203 216 218 103 in intersections
@@ -61,7 +64,7 @@ function init() {
       for (let i = 0; i < cellCount; i++) {
         const cell = document.createElement('div')
         //cell.classList.add('food')
-        cell.textContent = i //!number on
+        //cell.textContent = i //!number on
         gameGrid.appendChild(cell)
         positionArray.push(cell)
         if ((i % 20 === 0) || (i > 480) || (i < 20) || ((i + 1) % 20 === 0)) {
@@ -259,16 +262,7 @@ function init() {
         quint.targetCell = Math.floor(Math.random() * 500)
       }
 
-
-      //shamu.targetCell = bruce.currentPosition
-      // flipper.targetCell = flipperTargetFN()
-      // squid.targetCell = squidTargetFN()
       quint.targetCell = Math.floor(Math.random() * 500)
-
-      console.log('SHAMU TARGET', shamu.targetCell)
-      console.log('FLIPPER TARGET', flipper.targetCell)
-      console.log('SQUID TARGET', squid.targetCell)
-      console.log('QUINT TARGET', quint.targetCell)
 
 
       function flipperTargetFN() {
@@ -413,7 +407,6 @@ function init() {
 
 
 
-
     function powerUp() {
       enemies.forEach(enemy => enemy.edible = true)
       enemies.forEach(enemy => enemy.class = 'edible')
@@ -432,10 +425,11 @@ function init() {
     function gameChecker() {
       const checkerTimer = setInterval(() => {
         if (lifeCount === 0) {
-          bruceDeath()
+          gameOver()
         }
         if (lifeCount > 0 && positionArray[bruce.currentPosition].classList.contains('enemyOnSquare') && (!positionArray[bruce.currentPosition].classList.contains('edible'))) {
           lifeCount -= 1
+          bruceDeath()
           document.getElementById('lives-counter').innerText = lifeCount
         } else if (positionArray[bruce.currentPosition].classList.contains('edible')) {
           score += 200
@@ -448,18 +442,24 @@ function init() {
             }
           })
         }
-      }, 100)
+      }, 80)
     }
 
     function bruceDeath() {
-      console.log('LOSE')
-      clearTimeout(checkWinTimer)
-      clearTimeout(movementTimer)
+      console.log('BRUCE DEATH', bruce.currentPosition)
+      positionArray[bruce.currentPosition].classList.remove('bruce')
       bruce.currentPosition = bruce.startPosition
-
+      positionArray[bruce.startPosition].classList.add('bruce')
     }
 
-
+    function gameOver() {
+      console.log('GAME OVER')
+      clearTimeout(checkWinTimer)
+      clearTimeout(movementTimer)
+      document.getElementById('lose').innerText = 'OH NO YOU LOSE :( '
+      document.querySelector('.win-overlay').style.opacity = '1'
+      
+    }
 
     gameChecker()
 
@@ -475,14 +475,35 @@ function init() {
 
     function winFunction() {
       console.log('WIN')
-      // document.getElementsByClassName('win-overlay').setAttribute('opacity', '1')
       document.querySelector('.win-overlay').style.opacity = '1'
-      // const winOverlay =  document.getElementsByClassName('win-overlay')
-      // winOverlay.style.opacity = '1'
+      //document.querySelector('.game-container').style.display = '
+
     }
 
     createGrid()
     document.addEventListener('keydown', moveBruce)
+
+    document.querySelector('.mute-btn').addEventListener('click', musicToggle)
+    const muted = document.getElementById('game-audio').muted
+    console.log('TEST', muted)
+    const audio2 = document.getElementById('game-audio')
+    audio2.play()
+    function musicToggle() {
+      if (muted === false) {
+        document.getElementById('game-audio').muted = true
+      } else if (muted === true) {
+        document.getElementById('game-audio').muted = false
+        audio2.play()
+      }
+    }
+
+
+  }//! gameLoad bracket Purple
+
+
+
+  function howTo() {
+    alert('Eat all the fish to win.\nEat the sea turtles for extra points and to gain feeding frenzy power.\nAvoid the enemies!')
   }
 
   function enterGame() {
@@ -490,10 +511,19 @@ function init() {
     //console.log('entering')
     const overlay = document.querySelector('.overlay')
     overlay.classList.add('entering')
+
+    const audio1 = document.getElementById('enter-audio')
+    audio1.play()
   }
 
+  function resetGame() {
+    location.reload()
+  }
+
+  document.querySelector('.how-to-btn').addEventListener('click', howTo)
   document.getElementById('enter-btn').addEventListener('click', enterGame)
 
+  document.querySelector('.reset-btn').addEventListener('click', resetGame)
   document.onkeydown = KD
   function KD(event) {
     const key = event.keyCode
