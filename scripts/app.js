@@ -504,7 +504,7 @@ function init() {
 
 
   function howTo() {
-    alert('Eat all the fish to win.\nEat the sea turtles for extra points and to gain feeding frenzy power.\nAvoid the enemies!')
+    alert('Use WASD or arroy keys to move Bruce the shark.\nEat all the fish to win.\nEat the sea turtles for extra points and to gain feeding frenzy power.\nAvoid the enemies!\n\n AND HAVE FUN :D:D ')
   }
 
   function enterGame() {
