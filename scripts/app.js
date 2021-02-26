@@ -411,7 +411,7 @@ function init() {
       enemies.forEach(enemy => enemy.edible = true)
       enemies.forEach(enemy => enemy.class = 'edible')
 
-      setTimeout(enemyNormalState, 20000)
+      setTimeout(enemyNormalState, 10000)
     }
 
 
