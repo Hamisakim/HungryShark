@@ -67,8 +67,10 @@ function createGrid() {
 
 For the map design, I used a spreadsheet to visualise the grid easier. 
 Here we can see how the green spaces are useable squares for the characters. The yellow is the pen for the enemy characters 
-![](Screenshot%202021-05-10%20at%2012.20.28.png)
-![](Screenshot%202021-05-10%20at%2012.25.15.png)
+
+![Screenshot 2021-05-10 at 12 20 28](https://user-images.githubusercontent.com/76621344/117825121-f3b3fe80-b266-11eb-8945-4fbca46dee97.png)
+![Screenshot 2021-05-10 at 12 25 15](https://user-images.githubusercontent.com/76621344/117825128-f44c9500-b266-11eb-852b-d3922fe6b771.png)
+
 
 
 # Movement 
