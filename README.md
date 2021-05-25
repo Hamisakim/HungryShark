@@ -1,5 +1,5 @@
 # Hungry Shark ReadMe
-Hungry Shark - A Pac-Man spinoff (unofficial)
+Hungry Shark - A Pac-Man spinoff (unofficial).
 The first solo project during my study at General Assembly's Software Engineering Immersive. 
 # Deployment
 The game is deployed and playable [here](https://hamisakim.github.io/sei-project-one/) 
