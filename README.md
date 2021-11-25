@@ -15,6 +15,7 @@ The game ends when there is no more food or the player has run out of lives.
 * One week to plan and create a game in vanilla JavaScript, HTML, and CSS 
 * The player should be able to clear at least one board.
 * The player's score should be displayed at the end of the game
+
 Technologies:
 * JavaScript (ES6)
 * HTML 5
